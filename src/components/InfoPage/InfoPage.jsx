@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Box from '@mui/material/Box';
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 
 // This is one of our simplest components
 // It doesn't have local state
@@ -13,41 +13,105 @@ function InfoPage() {
 
   const dispatch = useDispatch()
 
+  // leagueData is populated from the database with the registered users/players
+  // it is an array of objects that contains: id, name, 
   const leagueData = useSelector((store) => store.leagueData);
 
   //sends a dispatch to GET_LEAGUE_DATA upon page load
   useEffect (() => {
     console.log('info page loaded')
       dispatch({ type: 'GET_LEAGUE_DATA'})
-  },);
+  },[dispatch]);
 
   const columns = [
+    // field references a key in a row object
+    // headerName is what is desplaye don the dom
+    // width is the set width but it can be adjusted by the user
     {
-      field: 'firstName',
-      headerName: 'First name',
+      field: 'name',
+      headerName: 'Name',
       width: 150,
       editable: true,
     },
     {
-      field: 'lastName',
-      headerName: 'Last name',
+      field: 'email',
+      headerName: 'Email',
       width: 150,
       editable: true,
     },
     {
-      field: 'age',
-      headerName: 'Age',
-      type: 'number',
+      field: 'phone_number',
+      headerName: 'Phone number',
       width: 110,
       editable: true,
     },
     {
-      field: 'fullName',
-      headerName: 'Full name',
-      description: 'This column has a value getter and is not sortable.',
-      sortable: false,
+      field: 'birthday',
+      headerName: 'Birthday',
+      width: 110,
+      editable: true,
+    },
+    {
+      field: 'fielding',
+      headerName: 'Fielding',
+      width: 110,
+      editable: true,
+    },
+    {
+      field: 'hitting',
+      headerName: 'Hitting',
+      width: 110,
+      editable: true,
+    },
+    {
+      field: 'league',
+      headerName: 'League',
+      width: 110,
+      editable: true,
+    },
+    {
+      field: 'registration_type',
+      headerName: 'registionType',
+      width: 110,
+      editable: true,
+    },
+    {
+      field: 'small_group_input',
+      headerName: 'Group input',
+      width: 110,
+      editable: true,
+    },
+    {
+      field: 'team_name_input',
+      headerName: 'Team input',
+      width: 110,
+      editable: true,
+    },
+    {
+      field: 'team',
+      headerName: 'Team',
+      width: 110,
+      editable: true,
+    },
+    {
+      field: 'positions',
+      headerName: 'Position',
+      width: 110,
+      editable: true,
+    },
+    {
+      field: 'pitcher',
+      headerName: 'Pitcher',
+      type: 'boolean',
       width: 160,
-      valueGetter: (value, row) => `${row.firstName || ''} ${row.lastName || ''}`,
+      editable: true,
+    },
+    {
+      field: 'captain',
+      headerName: 'Captain',
+      type: 'boolean',
+      width: 160,
+      editable: true,
     },
   ];
   
@@ -57,29 +121,23 @@ function InfoPage() {
   return (
     <div className="container">
       <p>Info Page</p>
-      <Box sx={{ height: 400, width: '100%' }}>
+      <Box sx={{ height: 700, width: '100%' }}>
       <DataGrid
-        // rows={rows}
+        slots={{ toolbar: GridToolbar }} 
+        rows={leagueData}
         columns={columns}
         initialState={{
           pagination: {
             paginationModel: {
-              pageSize: 5,
+              pageSize: 15,
             },
           },
         }}
-        pageSizeOptions={[5]}
+        pageSizeOptions={[5, 10, 15]}
         checkboxSelection
         disableRowSelectionOnClick
       />
     </Box>
-      <ul>
-        {leagueData.map((person) => {
-          return (
-            <li>{person.name}</li>
-          )
-        })}
-      </ul>
     </div>
   );
 }
