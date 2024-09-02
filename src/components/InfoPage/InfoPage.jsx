@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 // This is one of our simplest components
 // It doesn't have local state
@@ -10,6 +10,8 @@ import { useDispatch } from 'react-redux';
 function InfoPage() {
 
   const dispatch = useDispatch()
+
+  const leagueData = useSelector((store) => store.leagueData);
 
   //sends a dispatch to GET_LEAGUE_DATA upon page load
   useEffect (() => {
@@ -21,6 +23,13 @@ function InfoPage() {
   return (
     <div className="container">
       <p>Info Page</p>
+      <ul>
+        {leagueData.map((person) => {
+          return (
+            <li>{person.name}</li>
+          )
+        })}
+      </ul>
     </div>
   );
 }
