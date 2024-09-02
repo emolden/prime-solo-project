@@ -11,6 +11,7 @@ function InfoPage() {
 
   const dispatch = useDispatch()
 
+  //sends a dispatch to GET_LEAGUE_DATA upon page load
   useEffect (() => {
     console.log('info page loaded')
       dispatch({ type: 'GET_LEAGUE_DATA'})

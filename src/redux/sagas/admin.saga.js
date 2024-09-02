@@ -1,6 +1,7 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
+//leagueData sends a GET request to the admin route
 function* leagueData (action) {
     console.log('in leagueData saga function')
     try{
