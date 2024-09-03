@@ -1,8 +1,15 @@
 import React from 'react';
-import { useEffect } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Box from '@mui/material/Box';
-import { DataGrid, GridToolbar } from '@mui/x-data-grid';
+import { 
+  DataGrid, 
+  GridToolbar,
+  GridCellEditStopReasons,
+} from '@mui/x-data-grid';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
+
 
 // This is one of our simplest components
 // It doesn't have local state
@@ -12,6 +19,12 @@ import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 function InfoPage() {
 
   const dispatch = useDispatch()
+
+  
+
+  const [snackbar, setSnackbar] = useState(null);
+
+  const handleCloseSnackbar = () => setSnackbar(null);
 
   // leagueData is populated from the database with the registered users/players
   // it is an array of objects that contains: id, name, 
@@ -23,6 +36,44 @@ function InfoPage() {
       dispatch({ type: 'GET_LEAGUE_DATA'})
   },[dispatch]);
 
+  const useFakeMutation = () => {
+    console.log('in useFakeMutation function')
+    return useCallback(
+      (user) =>
+        new Promise((resolve, reject) => {
+          setTimeout(() => {
+            if (user.name?.trim() === '') {
+              reject(new Error('Error while saving user: name cannot be empty.'));
+            } else {
+              resolve({ ...user, name: user.name?.toUpperCase() });
+            }
+          }, 200);
+        }),
+      [],
+    );
+  };
+  const mutateRow = useFakeMutation();
+
+  const processRowUpdate = useCallback(
+    
+    async (newRow) => {
+      console.log( 'in processRowUPdate function and newRow is: ', newRow);
+      dispatch({ type: 'UPDATE_PLAYER_DATA', paylaod: newRow});
+      const response = await mutateRow(newRow);
+      setSnackbar({ children: 'User successfully saved', severity: 'success' });
+      return response;
+    },
+    [mutateRow],
+  );
+
+  const handleProcessRowUpdateError = React.useCallback((error) => {
+    console.log('in handleProcessRowUpdateError function and error is: ', error);
+    setSnackbar({ children: error.message, severity: 'error' });
+  }, []);
+
+
+  
+
   const columns = [
     // field references a key in a row object
     // headerName is what is desplaye don the dom
@@ -31,30 +82,27 @@ function InfoPage() {
       field: 'name',
       headerName: 'Name',
       width: 150,
-      editable: true,
     },
     {
       field: 'email',
       headerName: 'Email',
       width: 150,
-      editable: true,
     },
     {
       field: 'phone_number',
       headerName: 'Phone number',
       width: 110,
-      editable: true,
     },
     {
       field: 'birthday',
       headerName: 'Birthday',
       width: 110,
-      editable: true,
     },
     {
       field: 'fielding',
       headerName: 'Fielding',
       width: 110,
+      type: 'number',
       editable: true,
     },
     {
@@ -124,8 +172,11 @@ function InfoPage() {
       <Box sx={{ height: 700, width: '100%' }}>
       <DataGrid
         slots={{ toolbar: GridToolbar }} 
+        editMode="row"
         rows={leagueData}
         columns={columns}
+        processRowUpdate={processRowUpdate}
+        onProcessRowUpdateError={handleProcessRowUpdateError}
         initialState={{
           pagination: {
             paginationModel: {
@@ -137,6 +188,16 @@ function InfoPage() {
         checkboxSelection
         disableRowSelectionOnClick
       />
+      {!!snackbar && (
+        <Snackbar
+          open
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+          onClose={handleCloseSnackbar}
+          autoHideDuration={6000}
+        >
+          <Alert {...snackbar} onClose={handleCloseSnackbar} />
+        </Snackbar>
+      )}
     </Box>
     </div>
   );
