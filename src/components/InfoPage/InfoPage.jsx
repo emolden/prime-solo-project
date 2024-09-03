@@ -58,15 +58,15 @@ function InfoPage() {
     
     async (newRow) => {
       console.log( 'in processRowUPdate function and newRow is: ', newRow);
-      dispatch({ type: 'UPDATE_PLAYER_DATA', paylaod: newRow});
       const response = await mutateRow(newRow);
+      dispatch({ type: 'UPDATE_PLAYER_DATA', paylaod: newRow});
       setSnackbar({ children: 'User successfully saved', severity: 'success' });
       return response;
     },
     [mutateRow],
   );
 
-  const handleProcessRowUpdateError = React.useCallback((error) => {
+  const handleProcessRowUpdateError = useCallback((error) => {
     console.log('in handleProcessRowUpdateError function and error is: ', error);
     setSnackbar({ children: error.message, severity: 'error' });
   }, []);
@@ -103,37 +103,31 @@ function InfoPage() {
       headerName: 'Fielding',
       width: 110,
       type: 'number',
-      editable: true,
     },
     {
       field: 'hitting',
       headerName: 'Hitting',
       width: 110,
-      editable: true,
     },
     {
       field: 'league',
       headerName: 'League',
       width: 110,
-      editable: true,
     },
     {
       field: 'registration_type',
       headerName: 'registionType',
       width: 110,
-      editable: true,
     },
     {
       field: 'small_group_input',
       headerName: 'Group input',
       width: 110,
-      editable: true,
     },
     {
       field: 'team_name_input',
       headerName: 'Team input',
       width: 110,
-      editable: true,
     },
     {
       field: 'team',
@@ -145,14 +139,12 @@ function InfoPage() {
       field: 'positions',
       headerName: 'Position',
       width: 110,
-      editable: true,
     },
     {
       field: 'pitcher',
       headerName: 'Pitcher',
       type: 'boolean',
       width: 160,
-      editable: true,
     },
     {
       field: 'captain',
