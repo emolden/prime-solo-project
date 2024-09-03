@@ -12,9 +12,14 @@ function* leagueData (action) {
         console.log('leagueData had an error: ', error)
     }
 }
-
+// updatePlayerData sends a PUT request to the admin route
 function* updatePlayerData (action) {
     console.log('in updatePlayerData saga and the payload is: ', action.payload)
+    try {
+        yield axios.put(`/api/admin`, action.payload)
+    } catch (error) {
+        console.log('updatePlayerData had an error: ', error);
+    }
 }
 
 function* adminSaga() {

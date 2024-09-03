@@ -15,7 +15,8 @@ router.get('/', (req, res) => {
 
     sqlText = `
       SELECT 
-		"user"."id" AS "id",
+		"user_league_team"."id" AS "id",
+		"user"."id" AS "user_id",
 		"user"."name" AS "name",
 		"user"."email" AS "email",
 		"user"."phone_number" AS "phone_number",
@@ -56,6 +57,10 @@ router.get('/', (req, res) => {
             console.log('Error in get', dbErr)
             res.sendStatus(500)
         })
+});
+
+router.put('/', (req, res) => {
+    console.log('in the PUT route of /api/admin', req.body);
 });
 
   module.exports = router;
