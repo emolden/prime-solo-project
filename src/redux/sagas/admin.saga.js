@@ -13,8 +13,13 @@ function* leagueData (action) {
     }
 }
 
+function* updatePlayerData (action) {
+    console.log('in updatePlayerData saga and the payload is: ', action.payload)
+}
+
 function* adminSaga() {
     yield takeLatest('GET_LEAGUE_DATA', leagueData);
+    yield takeLatest('UPDATE_PLAYER_DATA', updatePlayerData);
   }
 
   export default adminSaga;

@@ -58,8 +58,10 @@ function InfoPage() {
     
     async (newRow) => {
       console.log( 'in processRowUPdate function and newRow is: ', newRow);
+      //sends the updated row as a payload as a dispatch
+      dispatch({ type: 'UPDATE_PLAYER_DATA', payload: newRow});
       const response = await mutateRow(newRow);
-      dispatch({ type: 'UPDATE_PLAYER_DATA', paylaod: newRow});
+      
       setSnackbar({ children: 'User successfully saved', severity: 'success' });
       return response;
     },
