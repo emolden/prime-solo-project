@@ -67,7 +67,7 @@ function InfoPage() {
   const processRowUpdate = useCallback(
     
     async (newRow) => {
-      console.log( 'in processRowUPdate function and newRow and teamData reducer are: ', newRow, teamData);
+      console.log( 'in processRowUPdate function and newRow and teamData reducer are: ', newRow);
       // let teamId = findTeamId(teamData, newRow)
 
       
@@ -184,11 +184,7 @@ function InfoPage() {
     <div className="container">
       <p>Info Page</p>
       <ul>
-        {teamData.map((team) => {
-          return (
-            <li>{team.name}</li>
-          )
-        } )}
+        
       </ul>
       <Box sx={{ height: 700, width: '100%' }}>
       <DataGrid

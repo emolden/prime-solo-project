@@ -83,7 +83,7 @@ router.get('/leaguedata', async (req, res) => {
 });
 
 router.get('/playerteam', (req, res) => {
-	console.log('in get /api/admin/playerteam and req.params is: ', req.params)
+	console.log('in get /api/admin/playerteam and req.params is: ', req.query)
 })
 
 router.put('/', (req, res) => {

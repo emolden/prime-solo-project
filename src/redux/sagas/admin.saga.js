@@ -17,8 +17,9 @@ function* leagueData (action) {
 function* changePlayerTeam (action) {
     console.log('in updatePlayerData saga and the payload is: ', action.payload)
     // make a get request to the server looking for a row in user_team table
+    //yield axios.get(`/api/giphy?q=${action.payload}`);
     try {
-       const response = yield axios.get(`/api/adim/playerteam`, {params: {userId: action.payload.user_id, teamName: action.paylaod.team}})
+       const response = yield axios.get(`/api/admin/playerteam`, {params: {userId: action.payload.user_id, teamName: action.payload.team}})
     }
     // try {
     //     yield axios.put(`/api/admin`, action.payload)
