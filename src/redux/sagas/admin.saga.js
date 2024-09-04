@@ -7,7 +7,8 @@ function* leagueData (action) {
     try{
         const response = yield axios.get(`/api/admin`);
         // console.log('response data from GET /api/admin in the leagueData saga is: ', response);
-        yield put({ type: 'SET_LEAGUE_DATA', payload: response.data });
+        yield put({ type: 'SET_LEAGUE_DATA', payload: response.data.leagueData });
+        yield put({ type: 'SET_TEAM_DATA', payload: response.data.teamData})
     }catch(error) {
         console.log('leagueData had an error: ', error)
     }
