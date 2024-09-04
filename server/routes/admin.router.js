@@ -22,6 +22,7 @@ router.get('/leaguedata', async (req, res) => {
     const leagueDataQueryText = `
      SELECT 
 	"user_league"."id" AS "id",
+	"user_league"."league_id" AS "league_id",
 	"user"."id" AS "user_id",
 	"user"."name" AS "name",
 	"user"."email" AS "email",
@@ -82,8 +83,28 @@ router.get('/leaguedata', async (req, res) => {
         }
 });
 
-router.get('/playerteam', (req, res) => {
+router.get('/playerteam', async (req, res) => {
 	console.log('in get /api/admin/playerteam and req.params is: ', req.query)
+
+	//
+	const queryText = `
+	SELECT *
+		FROM "user_team"
+		JOIN "teams"
+			ON "user_team"."team_id" = "teams"."id"
+		WHERE "user_team"."user_id" = $1 AND "teams"."league_id" = $2;
+	`;
+
+	const queryValues = [req.query.userId, req.query.league]
+
+	pool.query(queryText, queryValues)
+		.then((result) => {
+			res.send(result.rows)
+		})
+		.catch((dberr) => {
+			console.log('error in /api/admin/palyerteam: ', dberr);
+		})
+
 })
 
 router.put('/', (req, res) => {
