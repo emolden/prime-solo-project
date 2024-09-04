@@ -10,8 +10,8 @@ const router = express.Router();
 
 //GET route requests the league data from the database
 //route sends an array of objects back to the leagueData saga
-router.get('/', async (req, res) => {
-    console.log('in the GET route of /api/admin');
+router.get('/leaguedata', async (req, res) => {
+    console.log('in the GET route of /api/admin/leaguedata');
 	let connection;
 
 	try {
@@ -81,6 +81,10 @@ router.get('/', async (req, res) => {
             res.sendStatus(500)
         }
 });
+
+router.get('/playerteam', (req, res) => {
+	console.log('in get /api/admin/playerteam and req.params is: ', req.params)
+})
 
 router.put('/', (req, res) => {
     console.log('in the PUT route of /api/admin', req.body);
