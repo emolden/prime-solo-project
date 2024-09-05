@@ -15,10 +15,16 @@ function* leagueData (action) {
 }
 // updatePlayerData sends a PUT request to the admin route
 function* changePlayerTeam (action) {
-    console.log('in updatePlayerData saga and the payload is: ', action.payload)
+    // console.log('in updatePlayerData saga and the payload is: ', action.payload)
     let playerChangeInfo = action.payload;
     //Check the playerChangeInfo.user_team_id to see if the user is already associated with a 
     //team. 
+    if (playerChangeInfo.user_team_id === null) {
+        console.log('in changePlayerteam and playerChangeInfo.user_team_id was NULL')
+    }
+    else {
+        console.log('in changePlayerteam and playerChangeInfo.user_team_id was NOT NULL')
+    }
 
     //If the playerChangeInfo.user_team_id = null, then do  POST route with 
     //the PlayerChangeInfo.user-id and PlayerChangeInfo.team name.
