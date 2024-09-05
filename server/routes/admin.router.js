@@ -84,32 +84,119 @@ router.get('/leaguedata', async (req, res) => {
         }
 });
 
-router.get('/playerteam', async (req, res) => {
-	console.log('in get /api/admin/playerteam and req.params is: ', req.query)
 
-	//
-	const queryText = `
-	SELECT *
-		FROM "user_team"
-		JOIN "teams"
-			ON "user_team"."team_id" = "teams"."id"
-		WHERE "user_team"."user_id" = $1 AND "teams"."league_id" = $2;
+router.post ('/playerteam', async (req, res) => {
+	console.log('in POST /api/admin/playerteam and req.body is: ', req.body);
+	let connection;
+	try {
+		connection = await pool.connect()
+
+		await connection.query('BEGIN;')
+
+		const { playerId, team } = req.body
+
+		const teamQueryText = `
+			SELECT "id" FROM "teams"
+				WHERE "name" = $1;
+		`;
+
+		const teamQueryValue = [team]
+
+		const teamQueryResult = await connection.query(teamQueryText, teamQueryValue);
+
+		console.log('in POST /api/admin/playerteam and response from the database is: ', teamQueryResult.rows[0].id)
+	
+		const teamId = teamQueryResult.rows[0].id
+
+		const teamInsertText = `
+			INSERT INTO "user_team"
+			("user_id", "team_id")
+			VALUES
+			($1, $2);
+		`;
+
+		teamInsertValues = [playerId, teamId]
+
+		const insertTeamResult = await connection.query(teamInsertText, teamInsertValues)
+
+		await connection.query ('COMMIT;')
+
+		res.sendStatus(201);
+	} catch (error) {
+		console.log('error in POST /api/admin/playerteam: ', error);
+		await connection.query('ROLLBACK;')
+		res.sendStatus(500);
+	} finally {
+		await connection.release()
+	}
+});
+
+router.delete('/playerteam/:id', (req, res) => {
+	console.log('in /api/admin/playerteam DELETE route and the param is: ', req.params)
+
+	const teamToDelete = req.params.id;
+
+	const sqlText = `
+		DELETE FROM "user_team"
+			WHERE "id" = $1;
 	`;
 
-	const queryValues = [req.query.userId, req.query.league]
+	const sqlValue = [teamToDelete];
 
-	pool.query(queryText, queryValues)
+	pool.query (sqlText, sqlValue)
 		.then((result) => {
-			res.send(result.rows)
+			res.sendStatus(200);
 		})
-		.catch((dberr) => {
-			console.log('error in /api/admin/palyerteam: ', dberr);
+		.catch((dbErr) => {
+			console.log('error in /playerteam/:id DELETE router: ', dbErr)
 		})
-
 })
 
-router.put('/', (req, res) => {
-    console.log('in the PUT route of /api/admin', req.body);
-});
+router.put('/playerteam/:id', async (req, res) => {
+	console.log('/api/admin/palyerteam/:id has a request!: ', req.params, req.body);
+
+	const userTeamId = req.params.id;
+	const team = req.body.team;
+
+	let connection;
+	try {
+		connection = await pool.connect()
+
+		await connection.query('BEGIN;')
+
+		const teamQueryText = `
+			SELECT "id" FROM "teams"
+				WHERE "name" = $1;
+		`;
+
+		const teamQueryValue = [team]
+
+		const teamQueryResult = await connection.query(teamQueryText, teamQueryValue);
+
+		const teamId = teamQueryResult.rows[0].id
+
+		const teamInsertText = `
+			UPDATE "user_team"
+				SET "team_id" = $1
+				WHERE "id" = $2;
+		`;
+
+		teamInsertValues = [teamId, userTeamId]
+
+		const insertTeamResult = await connection.query(teamInsertText, teamInsertValues)
+
+		await connection.query ('COMMIT;')
+
+		res.sendStatus(201);
+	}  
+	catch (error) {
+		console.log('error in PUT /api/admin/playerteam: ', error);
+		await connection.query('ROLLBACK;')
+		res.sendStatus(500);
+	} 
+	finally {
+		await connection.release()
+	}
+})
 
   module.exports = router;
