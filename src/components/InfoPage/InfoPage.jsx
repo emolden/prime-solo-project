@@ -35,7 +35,7 @@ function InfoPage() {
   useEffect (() => {
     console.log('info page loaded')
       dispatch({ type: 'GET_LEAGUE_DATA'})
-  },[dispatch]);
+  },[dispatch], [leagueData]);
 
   const useFakeMutation = () => {
     console.log('in useFakeMutation function')

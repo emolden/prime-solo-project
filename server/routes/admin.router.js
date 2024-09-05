@@ -133,6 +133,27 @@ router.post ('/playerteam', async (req, res) => {
 
 router.delete('/playerteam/:id', (req, res) => {
 	console.log('in /api/admin/playerteam DELETE route and the param is: ', req.params)
+
+	const teamToDelete = req.params.id;
+
+	const sqlText = `
+		DELETE FROM "user_team"
+			WHERE "id" = $1;
+	`;
+
+	const sqlValue = [teamToDelete];
+
+	pool.query (sqlText, sqlValue)
+		.then((result) => {
+			res.sendStatus(200);
+		})
+		.catch((dbErr) => {
+			console.log('error in /playerteam/:id DELETE router: ', dbErr)
+		})
+})
+
+router.put('/playerteam/:id', (req, res) => {
+	console.log('/api/admin/palyerteam/:id has a request!: ', req.params, req.body);
 })
 
   module.exports = router;

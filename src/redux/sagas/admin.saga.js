@@ -48,9 +48,9 @@ function* changePlayerTeam (action) {
             try {
                 yield axios.delete(`/api/admin/playerteam/${playerChangeInfo.user_team_id}`)
 
-                // yield put({
-                //     type: 'GET_LEAGUE_DATA'
-                // })
+                yield put({
+                    type: 'GET_LEAGUE_DATA'
+                })
             } catch (error) {
                 console.log('error in delete route in changePlayerTeam saga: ', error);
             }
@@ -59,6 +59,11 @@ function* changePlayerTeam (action) {
             //If the length of playerChangeInfo.team != 0, then do a PUT route
             // with the playerChangeInfo.user_team_id and 
             // make a get request to the server looking for a row in user_team table
+            try {
+                yield axios.put(`/api/admin/playerteam/${playerChangeInfo.user_team_id}`, {team: playerChangeInfo.team})
+            } catch (error) {
+                console.log('error in put route in changePlayerTeam saga: ', error)
+            }
         }
     }
 }
