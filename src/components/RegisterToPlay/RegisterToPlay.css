@@ -27,9 +27,32 @@ h6 {
     font-weight: bold;
 }
 
-.waiver {
+.registration-form {
     border-color: black;
     border: solid;
     padding: 10px;
-    margin: 10%;
+    margin-top: 10%;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 10px;
+}
+
+.player-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.back-next-buttons {
+    margin-left: 10%;
+    margin-right: 10%;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.next-button {
+    margin-right: 10%;
+    display: flex;
+    justify-content: flex-end;
+
 }

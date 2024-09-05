@@ -10,8 +10,8 @@ function RegisterToPlay ( ) {
     return (
         <div>
             <h1>Register To Play</h1>
-            {/* <LiabilityAcknowledgment /> */}
-            <PlayerInformation />
+            <LiabilityAcknowledgment />
+            {/* <PlayerInformation /> */}
             {/* <RegistrationType />
             <SkillAndExperience />
             <ReviewAndSubmit /> */}

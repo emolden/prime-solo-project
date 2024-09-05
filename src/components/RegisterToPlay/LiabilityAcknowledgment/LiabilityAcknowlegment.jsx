@@ -41,7 +41,7 @@ function LiabilityAcknowledgment () {
                     </div>
                 </div>
             </section>
-            <section className='waiver'>
+            <section className='registration-form'>
                 <h3>Liability acknowledgment</h3>
                 ------
                 <h5>
@@ -109,7 +109,9 @@ function LiabilityAcknowledgment () {
                     placeholder= 'sign here'
                 />
             </section>
-            <button>NEXT</button>
+            <section className='next-button'>
+                <button>NEXT</button>
+            </section>
         </div>
     )
 }
