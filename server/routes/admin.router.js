@@ -84,33 +84,6 @@ router.get('/leaguedata', async (req, res) => {
         }
 });
 
-// router.get('/playerteam', async (req, res) => {
-// 	console.log('in get /api/admin/playerteam and req.params is: ', req.query)
-
-// 	//
-// 	const queryText = `
-// 	SELECT *
-// 		FROM "user_team"
-// 		JOIN "teams"
-// 			ON "user_team"."team_id" = "teams"."id"
-// 		WHERE "user_team"."user_id" = $1 AND "teams"."league_id" = $2;
-// 	`;
-
-// 	const queryValues = [req.query.userId, req.query.league]
-
-// 	pool.query(queryText, queryValues)
-// 		.then((result) => {
-// 			res.send(result.rows)
-// 		})
-// 		.catch((dberr) => {
-// 			console.log('error in /api/admin/palyerteam: ', dberr);
-// 		})
-
-// })
-
-// router.put('/', (req, res) => {
-//     console.log('in the PUT route of /api/admin', req.body);
-// });
 
 router.post ('/playerteam', async (req, res) => {
 	console.log('in POST /api/admin/playerteam and req.body is: ', req.body);
@@ -157,5 +130,9 @@ router.post ('/playerteam', async (req, res) => {
 		await connection.release()
 	}
 });
+
+router.delete('/playerteam/:id', (req, res) => {
+	console.log('in /api/admin/playerteam DELETE route and the param is: ', req.params)
+})
 
   module.exports = router;

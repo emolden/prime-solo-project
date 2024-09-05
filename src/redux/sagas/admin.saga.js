@@ -31,7 +31,7 @@ function* changePlayerTeam (action) {
                 yield axios.post('/api/admin/playerteam', {playerId: playerChangeInfo.user_id, team: playerChangeInfo.team})
                 
                 yield put({
-                    type: 'SET_LEAGUE_DATA'
+                    type: 'GET_LEAGUE_DATA'
                 })
             } catch (error) {
                 console.log('error in post route in changePlayerTeam saga: ', error);
@@ -39,40 +39,28 @@ function* changePlayerTeam (action) {
         }
     }
     else {
-        console.log('in changePlayerteam and playerChangeInfo.user_team_id was NOT NULL')
+        //If the playerChangeInfo.user_team_id != null, then check
+        //playerChangeInfo.team
+        // console.log('in changePlayerteam and playerChangeInfo.user_team_id was NOT NULL')
+        if (playerChangeInfo.team === 'DELETE') {
+            //If playerChangeInfo.team = DELETE, then do a DELETE 
+            //route with the playerChangeInfo.user_team_id
+            try {
+                yield axios.delete(`/api/admin/playerteam/${playerChangeInfo.user_team_id}`)
+
+                // yield put({
+                //     type: 'GET_LEAGUE_DATA'
+                // })
+            } catch (error) {
+                console.log('error in delete route in changePlayerTeam saga: ', error);
+            }
+        }
+        else {
+            //If the length of playerChangeInfo.team != 0, then do a PUT route
+            // with the playerChangeInfo.user_team_id and 
+            // make a get request to the server looking for a row in user_team table
+        }
     }
-
-    
-
-    //If the playerChangeInfo.user_team_id != null, then check
-    //playerChangeInfo.team
-
-    //If the length of playerChangeInfo.team = 0, then do a DELETE 
-    //route with the playerChangeInfo.user_team_id
-
-    //If the length of playerChangeInfo.team != 0, then do a PUT route
-    // with the playerChangeInfo.user_team_id and 
-    // make a get request to the server looking for a row in user_team table
-    //yield axios.get(`/api/giphy?q=${action.payload}`);
-            // try {
-            //    const response = yield axios.get(`/api/admin/playerteam`, {params: {userId: action.payload.user_id, league: action.payload.league_id}})
-            //    //response will have team id if it exists
-            //    console.log('in changePlayerTeam and server response is: ', response);
-            // }
-    // 1. if response is true (the selected player exists on a team) and 
-    //    action.payload.team is true (the admin user entered text in the team field)
-    //    then do a put route with the action.payload.team
-
-    // 2. if response is true and action.payload.team is false
-    //    then do a DELETE route with user_id and team_id
-
-    // 3. if response is false and action.paylaod.team is true
-    //    then do a POST route with user id and team id
-    //    look at matt's example for this to capture the team id.
-
-    // try {
-    //     yield axios.put(`/api/admin`, action.payload)
-    // } 
 }
 
 function* adminSaga() {
