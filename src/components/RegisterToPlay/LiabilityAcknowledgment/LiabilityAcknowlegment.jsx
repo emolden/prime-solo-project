@@ -42,7 +42,7 @@ function LiabilityAcknowledgment () {
                 </div>
             </section>
             <section className='registration-form'>
-                <h3>Liability acknowledgment</h3>
+                <h3>Liability Acknowledgment</h3>
                 ------
                 <h5>
                     Photo/Video Cosent
