@@ -19,6 +19,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import RegisterToPlay from '../RegisterToPlay/RegisterToPlay';
 
 import './App.css';
 
@@ -68,6 +69,14 @@ function App() {
             <InfoPage />
           </ProtectedRoute>
 
+          <ProtectedRoute
+            // logged in shows InfoPage else shows LoginPage
+            exact
+            path="/registertoplay"
+          >
+            <RegisterToPlay />
+          </ProtectedRoute>
+
           <Route
             exact
             path="/login"
@@ -84,7 +93,7 @@ function App() {
 
           <Route
             exact
-            path="/registration"
+            path="/registeranaccount"
           >
             {user.id ?
               // If the user is already logged in, 
