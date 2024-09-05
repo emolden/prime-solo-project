@@ -61,6 +61,10 @@ function* changePlayerTeam (action) {
             // make a get request to the server looking for a row in user_team table
             try {
                 yield axios.put(`/api/admin/playerteam/${playerChangeInfo.user_team_id}`, {team: playerChangeInfo.team})
+            
+                yield put({
+                    type: 'GET_LEAGUE_DATA'
+                })
             } catch (error) {
                 console.log('error in put route in changePlayerTeam saga: ', error)
             }

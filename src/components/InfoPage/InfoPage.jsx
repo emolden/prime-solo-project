@@ -11,11 +11,6 @@ import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 
 
-// This is one of our simplest components
-// It doesn't have local state
-// It doesn't dispatch any redux actions or display any part of redux state
-// or even care what the redux state is
-
 function InfoPage() {
 
   const dispatch = useDispatch()
@@ -35,7 +30,7 @@ function InfoPage() {
   useEffect (() => {
     console.log('info page loaded')
       dispatch({ type: 'GET_LEAGUE_DATA'})
-  },[dispatch], [leagueData]);
+  },[dispatch]);
 
   const useFakeMutation = () => {
     console.log('in useFakeMutation function')
@@ -55,28 +50,16 @@ function InfoPage() {
   };
   const mutateRow = useFakeMutation();
 
-  // const findTeamId = (teamDataArray, newRowObject) => {
-  //   for (let i=0; i< teamDataArray.length; i++) {
-  //     console.log(teamDataArray[i].name, newRowObject.team)
-  //     if(teamDataArray[i].name === newRowObject.team) {
-  //       return teamDataArray[i].id;
-  //     }
-  //   }
-  // }
 
-  const processRowUpdate = useCallback(
-    
-    async (newRow) => {
+  //currently have a bug where if team is deleted the page isn't reloading so the 
+  // user_team_id is still the previous id number
+  // WHAT SHOULD HAPPEN: after a team has been deleted, the id should be null and when there is a new team
+  // assigned, the admin.saga should do a POST request
+  // WHAT IS HAPPENING: admin.saga is sending a PUT request but there is no user_team_id
+  // in the database that matches and nothing is happening. 
+  const processRowUpdate = async (newRow) => {
       console.log( 'in processRowUPdate function and newRow and teamData reducer are: ', newRow);
-      // let teamId = findTeamId(teamData, newRow)
-
-      
-
-      // let updatePlayersTeam = {
-      //   user_id : newRow.user_id,
-      //   team_id : teamId
-      // }
-
+    
       // console.log('in processRowUpdate and updatePlayersTeam is: ')
       //sends the updated row as a payload as a dispatch
       dispatch({ type: 'CHANGE_PLAYER_TEAM', payload: newRow});
@@ -84,9 +67,7 @@ function InfoPage() {
       
       setSnackbar({ children: 'User successfully saved', severity: 'success' });
       return response;
-    },
-    [mutateRow],
-  );
+    }
 
   const handleProcessRowUpdateError = useCallback((error) => {
     console.log('in handleProcessRowUpdateError function and error is: ', error);

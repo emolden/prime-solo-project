@@ -152,8 +152,51 @@ router.delete('/playerteam/:id', (req, res) => {
 		})
 })
 
-router.put('/playerteam/:id', (req, res) => {
+router.put('/playerteam/:id', async (req, res) => {
 	console.log('/api/admin/palyerteam/:id has a request!: ', req.params, req.body);
+
+	const userTeamId = req.params.id;
+	const team = req.body.team;
+
+	let connection;
+	try {
+		connection = await pool.connect()
+
+		await connection.query('BEGIN;')
+
+		const teamQueryText = `
+			SELECT "id" FROM "teams"
+				WHERE "name" = $1;
+		`;
+
+		const teamQueryValue = [team]
+
+		const teamQueryResult = await connection.query(teamQueryText, teamQueryValue);
+
+		const teamId = teamQueryResult.rows[0].id
+
+		const teamInsertText = `
+			UPDATE "user_team"
+				SET "team_id" = $1
+				WHERE "id" = $2;
+		`;
+
+		teamInsertValues = [teamId, userTeamId]
+
+		const insertTeamResult = await connection.query(teamInsertText, teamInsertValues)
+
+		await connection.query ('COMMIT;')
+
+		res.sendStatus(201);
+	}  
+	catch (error) {
+		console.log('error in PUT /api/admin/playerteam: ', error);
+		await connection.query('ROLLBACK;')
+		res.sendStatus(500);
+	} 
+	finally {
+		await connection.release()
+	}
 })
 
   module.exports = router;
