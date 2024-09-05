@@ -23,6 +23,7 @@ router.get('/leaguedata', async (req, res) => {
      SELECT 
 	"user_league"."id" AS "id",
 	"user_league"."league_id" AS "league_id",
+	"user_team"."id" AS "user_team_id",
 	"user"."id" AS "user_id",
 	"user"."name" AS "name",
 	"user"."email" AS "email",

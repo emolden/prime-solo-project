@@ -16,6 +16,21 @@ function* leagueData (action) {
 // updatePlayerData sends a PUT request to the admin route
 function* changePlayerTeam (action) {
     console.log('in updatePlayerData saga and the payload is: ', action.payload)
+    let playerChangeInfo = action.payload;
+    //Check the playerChangeInfo.user_team_id to see if the user is already associated with a 
+    //team. 
+
+    //If the playerChangeInfo.user_team_id = null, then do  POST route with 
+    //the PlayerChangeInfo.user-id and PlayerChangeInfo.team name.
+
+    //If the playerChangeInfo.user_team_id != null, then check
+    //playerChangeInfo.team
+
+    //If the length of playerChangeInfo.team = 0, then do a DELETE 
+    //route with the playerChangeInfo.user_team_id
+
+    //If the length of playerChangeInfo.team != 0, then do a PUT route
+    // with the playerChangeInfo.user_team_id and 
     // make a get request to the server looking for a row in user_team table
     //yield axios.get(`/api/giphy?q=${action.payload}`);
     try {
@@ -23,8 +38,9 @@ function* changePlayerTeam (action) {
        //response will have team id if it exists
        console.log('in changePlayerTeam and server response is: ', response);
     }
-    // 1. if response is true and action.payload.team is true
-    //   then do a put route with the action.payload.team
+    // 1. if response is true (the selected player exists on a team) and 
+    //    action.payload.team is true (the admin user entered text in the team field)
+    //    then do a put route with the action.payload.team
 
     // 2. if response is true and action.payload.team is false
     //    then do a DELETE route with user_id and team_id
