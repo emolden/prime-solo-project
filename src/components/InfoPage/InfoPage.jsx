@@ -29,6 +29,7 @@ function InfoPage() {
   // leagueData is populated from the database with the registered users/players
   // it is an array of objects that contains: id, name, 
   const leagueData = useSelector((store) => store.leagueData);
+  // const teamData = useSelector((store) => store.teamData);
 
   //sends a dispatch to GET_LEAGUE_DATA upon page load
   useEffect (() => {
@@ -54,12 +55,33 @@ function InfoPage() {
   };
   const mutateRow = useFakeMutation();
 
+  // const findTeamId = (teamDataArray, newRowObject) => {
+  //   for (let i=0; i< teamDataArray.length; i++) {
+  //     console.log(teamDataArray[i].name, newRowObject.team)
+  //     if(teamDataArray[i].name === newRowObject.team) {
+  //       return teamDataArray[i].id;
+  //     }
+  //   }
+  // }
+
   const processRowUpdate = useCallback(
     
     async (newRow) => {
-      console.log( 'in processRowUPdate function and newRow is: ', newRow);
+      console.log( 'in processRowUPdate function and newRow and teamData reducer are: ', newRow);
+      // let teamId = findTeamId(teamData, newRow)
+
+      
+
+      // let updatePlayersTeam = {
+      //   user_id : newRow.user_id,
+      //   team_id : teamId
+      // }
+
+      // console.log('in processRowUpdate and updatePlayersTeam is: ')
+      //sends the updated row as a payload as a dispatch
+      dispatch({ type: 'CHANGE_PLAYER_TEAM', payload: newRow});
       const response = await mutateRow(newRow);
-      dispatch({ type: 'UPDATE_PLAYER_DATA', paylaod: newRow});
+      
       setSnackbar({ children: 'User successfully saved', severity: 'success' });
       return response;
     },
@@ -161,6 +183,9 @@ function InfoPage() {
   return (
     <div className="container">
       <p>Info Page</p>
+      <ul>
+        
+      </ul>
       <Box sx={{ height: 700, width: '100%' }}>
       <DataGrid
         slots={{ toolbar: GridToolbar }} 
