@@ -29,7 +29,7 @@ function InfoPage() {
   // leagueData is populated from the database with the registered users/players
   // it is an array of objects that contains: id, name, 
   const leagueData = useSelector((store) => store.leagueData);
-  // const teamData = useSelector((store) => store.teamData);
+  const teamData = useSelector((store) => store.teamData);
 
   //sends a dispatch to GET_LEAGUE_DATA upon page load
   useEffect (() => {
@@ -93,7 +93,13 @@ function InfoPage() {
     setSnackbar({ children: error.message, severity: 'error' });
   }, []);
 
+  const teamDropdownOptions = (teamArray) => {
+    let dropdown = ['DELETE'];
 
+    let teamOptions = teamArray.map((team) => { return (team.name)})
+
+    return dropdown.concat(teamOptions);
+  }
   
 
   const columns = [
@@ -156,6 +162,8 @@ function InfoPage() {
       headerName: 'Team',
       width: 110,
       editable: true,
+      type: 'singleSelect',
+      valueOptions: teamDropdownOptions(teamData)
     },
     {
       field: 'positions',
