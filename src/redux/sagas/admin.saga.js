@@ -29,6 +29,10 @@ function* changePlayerTeam (action) {
             //the PlayerChangeInfo.user-id and PlayerChangeInfo.team name. 
             try {
                 yield axios.post('/api/admin/playerteam', {playerId: playerChangeInfo.user_id, team: playerChangeInfo.team})
+                
+                yield put({
+                    type: 'SET_LEAGUE_DATA'
+                })
             } catch (error) {
                 console.log('error in post route in changePlayerTeam saga: ', error);
             }

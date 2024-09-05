@@ -114,6 +114,48 @@ router.get('/leaguedata', async (req, res) => {
 
 router.post ('/playerteam', async (req, res) => {
 	console.log('in POST /api/admin/playerteam and req.body is: ', req.body);
-})
+	let connection;
+	try {
+		connection = await pool.connect()
+
+		await connection.query('BEGIN;')
+
+		const { playerId, team } = req.body
+
+		const teamQueryText = `
+			SELECT "id" FROM "teams"
+				WHERE "name" = $1;
+		`;
+
+		const teamQueryValue = [team]
+
+		const teamQueryResult = await connection.query(teamQueryText, teamQueryValue);
+
+		console.log('in POST /api/admin/playerteam and response from the database is: ', teamQueryResult.rows[0].id)
+	
+		const teamId = teamQueryResult.rows[0].id
+
+		const teamInsertText = `
+			INSERT INTO "user_team"
+			("user_id", "team_id")
+			VALUES
+			($1, $2);
+		`;
+
+		teamInsertValues = [playerId, teamId]
+
+		const insertTeamResult = await connection.query(teamInsertText, teamInsertValues)
+
+		await connection.query ('COMMIT;')
+
+		res.sendStatus(201);
+	} catch (error) {
+		console.log('error in POST /api/admin/playerteam: ', error);
+		await connection.query('ROLLBACK;')
+		res.sendStatus(500);
+	} finally {
+		await connection.release()
+	}
+});
 
   module.exports = router;
