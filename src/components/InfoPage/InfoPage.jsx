@@ -93,6 +93,7 @@ function InfoPage() {
     setSnackbar({ children: error.message, severity: 'error' });
   }, []);
 
+  //will need to upate this function to only show team options within the league selected
   const teamDropdownOptions = (teamArray) => {
     let dropdown = ['DELETE'];
 

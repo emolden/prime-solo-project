@@ -21,13 +21,24 @@ function* changePlayerTeam (action) {
     //team. 
     if (playerChangeInfo.user_team_id === null) {
         console.log('in changePlayerteam and playerChangeInfo.user_team_id was NULL')
+        if (playerChangeInfo.team === 'DELETE') {
+            //do nothing
+        }
+        else {
+           //If the playerChangeInfo.user_team_id = null, then do  POST route with 
+            //the PlayerChangeInfo.user-id and PlayerChangeInfo.team name. 
+            try {
+                yield axios.post('/api/admin/playerteam', {playerId: playerChangeInfo.user_id, team: playerChangeInfo.team})
+            } catch (error) {
+                console.log('error in post route in changePlayerTeam saga: ', error);
+            }
+        }
     }
     else {
         console.log('in changePlayerteam and playerChangeInfo.user_team_id was NOT NULL')
     }
 
-    //If the playerChangeInfo.user_team_id = null, then do  POST route with 
-    //the PlayerChangeInfo.user-id and PlayerChangeInfo.team name.
+    
 
     //If the playerChangeInfo.user_team_id != null, then check
     //playerChangeInfo.team
@@ -39,11 +50,11 @@ function* changePlayerTeam (action) {
     // with the playerChangeInfo.user_team_id and 
     // make a get request to the server looking for a row in user_team table
     //yield axios.get(`/api/giphy?q=${action.payload}`);
-    try {
-       const response = yield axios.get(`/api/admin/playerteam`, {params: {userId: action.payload.user_id, league: action.payload.league_id}})
-       //response will have team id if it exists
-       console.log('in changePlayerTeam and server response is: ', response);
-    }
+            // try {
+            //    const response = yield axios.get(`/api/admin/playerteam`, {params: {userId: action.payload.user_id, league: action.payload.league_id}})
+            //    //response will have team id if it exists
+            //    console.log('in changePlayerTeam and server response is: ', response);
+            // }
     // 1. if response is true (the selected player exists on a team) and 
     //    action.payload.team is true (the admin user entered text in the team field)
     //    then do a put route with the action.payload.team
@@ -58,9 +69,6 @@ function* changePlayerTeam (action) {
     // try {
     //     yield axios.put(`/api/admin`, action.payload)
     // } 
-    catch (error) {
-        console.log('updatePlayerData had an error: ', error);
-    }
 }
 
 function* adminSaga() {
