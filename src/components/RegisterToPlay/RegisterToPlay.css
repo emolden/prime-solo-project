@@ -1,0 +1,35 @@
+.registration-header {
+    background-color: gainsboro;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-top: 30px;
+    padding-bottom : 30px;
+}
+
+.registration-section {
+    display: flex;
+    justify-content: space-around;
+    color: gray;
+    font-weight: normal; 
+}
+
+.registration-section-title {
+    padding-left: 5px;
+}
+
+h6 {
+    margin: 0px;
+}
+
+#current-registration-section {
+    color: black;
+    font-weight: bold;
+}
+
+.waiver {
+    border-color: black;
+    border: solid;
+    padding: 10px;
+    margin: 10%;
+}
