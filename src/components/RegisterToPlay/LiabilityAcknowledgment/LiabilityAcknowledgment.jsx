@@ -1,10 +1,26 @@
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min.js';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 function LiabilityAcknowledgment () {
 
     const history = useHistory();
+    const dispatch = useDispatch();
 
+    //stores the user's input as they type
+    const [signature, setSignature] = useState('')
+
+    //When the user clicks the button to go to the next page,
+    //their signature will be sent to the softballRegistration reducer,
+    //and they will be brought to the player information page.
     const nextPage = () => {
+
+        console.log('completed liability acknowledgment: ', signature);
+        dispatch({
+            type: 'SET_LIABILITY_ACKNOWLEDGMENT',
+            payload: signature
+        })
+
         history.push('/register_to_play/player_information')
     }
 
@@ -112,7 +128,9 @@ function LiabilityAcknowledgment () {
                     By signing my name below electronically, I assume all liability and responsibility in participating in West Metro Softball.
                 </h5>
                 <input
+                    onChange={(e) => setSignature(e.target.value)}
                     placeholder= 'sign here'
+                    value={signature}
                 />
             </section>
             <section className='next-button'>
