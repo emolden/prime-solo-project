@@ -18,6 +18,7 @@ function PlayerInformation () {
         setName(user.name);
         setEmail(user.email);
         setPhoneNumber(user.phone_number);
+        //need to put this in the correct form
         setBirthdate(user.birthdate);
     }, []);
 
