@@ -151,7 +151,7 @@ router.delete('/playerteam/:id', (req, res) => {
 
 //PUT route sends an UPDATE query to the user_team table
 router.put('/playerteam/:id', async (req, res) => {
-	console.log('/api/admin/palyerteam/:id has a request!: ', req.params, req.body);
+	// console.log('/api/admin/palyerteam/:id has a request!: ', req.params, req.body);
 
 	const userTeamId = req.params.id;
 	const team = req.body.team;

@@ -1,5 +1,5 @@
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min.js';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 function LiabilityAcknowledgment () {
@@ -9,8 +9,14 @@ function LiabilityAcknowledgment () {
 
     const user = useSelector(store => store.user)
 
-    //stores the user's input as they type
+    //stores the user's signature input as they type
     const [signature, setSignature] = useState('')
+
+    //useEffect sets the signature field to the conents from the database
+    //if anything exists
+    useEffect(() => {
+        setSignature(user.liability_acknowledgment)
+    }, []);
 
     //When the user clicks the button to go to the next page,
     //their signature will be sent to the softballRegistration reducer,

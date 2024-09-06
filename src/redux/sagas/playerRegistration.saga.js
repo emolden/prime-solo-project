@@ -2,13 +2,15 @@ import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
 function* liabilityAcknowledgment (action) {
-    console.log('in liabilityAcknowledgment saga function')
+    // console.log('in liabilityAcknowledgment saga function')
     try {
+        //PUT request sends the signature and user id 
         yield axios.put('/api/player_registration/liability_acknowledgment', action.payload)
 
-        // yield put ({
-        //     type: 'SET_LIABILITY_ACKNOWLEDGMENT'
-        // })
+        // FETCH_USER is in the user.saga which sends a GET request 
+        yield put ({
+            type: 'FETCH_USER'
+        })
     } catch (error) {
         console.log('there was an error liabilityAcknowledgment POST route: ', error);
     }
