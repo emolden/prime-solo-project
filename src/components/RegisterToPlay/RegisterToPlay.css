@@ -7,6 +7,28 @@
     padding-bottom : 30px;
 }
 
+h1 {
+    margin-left: 20px;
+}
+
+.league-options {
+    display: flex;
+    flex-direction: row;
+    margin-left: 10%;
+    margin-right: 10%;
+    justify-content: center;
+
+}
+
+.league-details {
+    width: 20em;
+    text-align: center
+}
+
+.start-registration {
+    text-align: center;
+}
+
 .registration-section {
     display: flex;
     justify-content: space-around;
