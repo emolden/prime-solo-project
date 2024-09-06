@@ -13,7 +13,9 @@ function* leagueData (action) {
         console.log('leagueData had an error: ', error)
     }
 }
-// updatePlayerData sends a PUT request to the admin route
+
+//Change player team updates the current team, adds a player to a team, or deletes a
+//player from a team
 function* changePlayerTeam (action) {
     // console.log('in updatePlayerData saga and the payload is: ', action.payload)
     let playerChangeInfo = action.payload;
@@ -30,6 +32,7 @@ function* changePlayerTeam (action) {
             try {
                 yield axios.post('/api/admin/playerteam', {playerId: playerChangeInfo.user_id, team: playerChangeInfo.team})
                 
+                //get request for updated league data
                 yield put({
                     type: 'GET_LEAGUE_DATA'
                 })
@@ -48,6 +51,7 @@ function* changePlayerTeam (action) {
             try {
                 yield axios.delete(`/api/admin/playerteam/${playerChangeInfo.user_team_id}`)
 
+                //get request for updated league data
                 yield put({
                     type: 'GET_LEAGUE_DATA'
                 })
@@ -61,7 +65,8 @@ function* changePlayerTeam (action) {
             // make a get request to the server looking for a row in user_team table
             try {
                 yield axios.put(`/api/admin/playerteam/${playerChangeInfo.user_team_id}`, {team: playerChangeInfo.team})
-            
+                
+                //get request for updated league data
                 yield put({
                     type: 'GET_LEAGUE_DATA'
                 })

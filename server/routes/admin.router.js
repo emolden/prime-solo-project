@@ -1,11 +1,5 @@
 const express = require('express');
-// const {
-//   rejectUnauthenticated,
-// } = require('../modules/authentication-middleware');
-// const encryptLib = require('../modules/encryption');
 const pool = require('../modules/pool');
-// const userStrategy = require('../strategies/user.strategy');
-
 const router = express.Router();
 
 //GET route requests the league data from the database
@@ -86,7 +80,7 @@ router.get('/leaguedata', async (req, res) => {
         }
 });
 
-
+//POST route sends an INSERT query to the user_team table
 router.post ('/playerteam', async (req, res) => {
 	console.log('in POST /api/admin/playerteam and req.body is: ', req.body);
 	let connection;
@@ -133,6 +127,7 @@ router.post ('/playerteam', async (req, res) => {
 	}
 });
 
+//DELETE route sends a DELETE query to the user_team table
 router.delete('/playerteam/:id', (req, res) => {
 	console.log('in /api/admin/playerteam DELETE route and the param is: ', req.params)
 
@@ -154,6 +149,7 @@ router.delete('/playerteam/:id', (req, res) => {
 		})
 })
 
+//PUT route sends an UPDATE query to the user_team table
 router.put('/playerteam/:id', async (req, res) => {
 	console.log('/api/admin/palyerteam/:id has a request!: ', req.params, req.body);
 
