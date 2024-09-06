@@ -1,0 +1,67 @@
+.registration-header {
+    background-color: gainsboro;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-top: 30px;
+    padding-bottom : 30px;
+}
+
+.registration-section {
+    display: flex;
+    justify-content: space-around;
+    color: gray;
+    font-weight: normal; 
+}
+
+.registration-section-title {
+    padding-left: 5px;
+}
+
+h6 {
+    margin: 0px;
+}
+
+#current-registration-section {
+    color: black;
+    font-weight: bold;
+}
+
+.registration-form {
+    border-color: black;
+    border: solid;
+    padding: 10px;
+    margin-top: 10%;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 10px;
+}
+
+.player-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.back-next-buttons {
+    margin-left: 10%;
+    margin-right: 10%;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.next-button {
+    margin-right: 10%;
+    display: flex;
+    justify-content: flex-end;
+
+}
+
+.skill-options {
+    display: flex;
+    flex-direction: column;
+}
+
+.position-options {
+    display: flex;
+}
