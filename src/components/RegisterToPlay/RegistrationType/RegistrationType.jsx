@@ -1,7 +1,17 @@
-
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min.js';
 
 
 function RegistrationType () {
+
+    const history = useHistory();
+
+    const nextPage = () => {
+        history.push('/register_to_play/skill_and_experience')
+    }
+
+    const backPage = () => {
+        history.push('/register_to_play/player_information')
+    }
 
     return (
         <div>
@@ -97,8 +107,8 @@ function RegistrationType () {
                 </div>
             </section>
             <section className='back-next-buttons'>
-                <button>BACK</button>
-                <button>NEXT</button>
+                <button onClick={backPage}>BACK</button>
+                <button onClick={nextPage}>NEXT</button>
             </section>
         </div>
     )

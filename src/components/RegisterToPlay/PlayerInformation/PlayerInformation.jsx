@@ -1,6 +1,16 @@
-
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min.js';
 
 function PlayerInformation () {
+
+    const history = useHistory();
+
+    const nextPage = () => {
+        history.push('/register_to_play/registration_type')
+    }
+
+    const backPage = () => {
+        history.push('/register_to_play/liability_acknowledgment')
+    }
 
     return (
         <div>
@@ -73,8 +83,8 @@ function PlayerInformation () {
                 </form>
             </section>
             <section className='back-next-buttons'>
-                <button>BACK</button>
-                <button>NEXT</button>
+                <button onClick={backPage}>BACK</button>
+                <button onClick={nextPage}>NEXT</button>
             </section>
         </div>
     )

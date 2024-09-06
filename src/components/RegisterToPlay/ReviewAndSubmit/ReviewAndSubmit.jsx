@@ -1,7 +1,22 @@
-
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min.js';
+import { useDispatch } from 'react-redux';
 
 
 function ReviewAndSubmit () {
+
+    const dispatch = useDispatch();
+    const history = useHistory();
+
+    const submitRegistration = () => {
+        dispatch({
+            type: 'NEW_PLAYER_REGISTRATION',
+            payload: 'new player'
+        })
+    }
+
+    const backPage = () => {
+        history.push('/register_to_play/skill_and_experience')
+    }
 
     return (
         <div>
@@ -79,8 +94,8 @@ function ReviewAndSubmit () {
                 </ol>
             </section>
             <section className='back-next-buttons'>
-                <button>BACK</button>
-                <button>SUBMIT</button>
+                <button onClick={backPage}>BACK</button>
+                <button onClick={submitRegistration}>SUBMIT</button>
             </section>
         </div>
     )
