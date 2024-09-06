@@ -56,3 +56,12 @@ h6 {
     justify-content: flex-end;
 
 }
+
+.skill-options {
+    display: flex;
+    flex-direction: column;
+}
+
+.position-options {
+    display: flex;
+}

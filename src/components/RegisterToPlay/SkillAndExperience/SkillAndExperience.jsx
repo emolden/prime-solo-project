@@ -47,10 +47,10 @@ function SkillAndExperience () {
             </section>
             <section className='registration-form'>
                 <h3>Skill & Experience</h3>
-                <div>
+                <div className='skill-question'>
                     <p>Please rate your hitting skill:</p>
-                    <div>
-                        <span>
+                    <div className='skill-options'>
+                        <span className= 'skill-input'>
                             <input
                                 type='radio'
                                 id='beginnerHitter'
@@ -59,7 +59,7 @@ function SkillAndExperience () {
                             />
                             <label htmlFor='beginnerHitter'> Beginner - Learning to make contact, if contact is made it's likely hit to the infield</label>
                         </span>
-                        <span>
+                        <span className= 'skill-input'>
                             <input
                                 type='radio'
                                 id='developingHitter'
@@ -68,7 +68,7 @@ function SkillAndExperience () {
                             />
                             <label htmlFor='developingHitter'> Developing - Makes contact most of the time. Infield hits are common and occasional outfield hit.</label>
                         </span>
-                        <span>
+                        <span className= 'skill-input'>
                             <input
                                 type='radio'
                                 id='intermediateHitter'
@@ -77,7 +77,7 @@ function SkillAndExperience () {
                             />
                             <label htmlFor='intermediateHitter'> Intermediate - Hits hard ground/fly balls. Occasional big hit.</label>
                         </span>
-                        <span>
+                        <span className= 'skill-input'>
                             <input
                                 type='radio'
                                 id='advancedHitter'
@@ -88,9 +88,9 @@ function SkillAndExperience () {
                         </span>
                     </div>
                 </div>
-                <div>
+                <div className='skill-question'>
                     <p>Please rate your fielding skill:</p>
-                    <div>
+                    <div className='skill-options'>
                         <span>
                             <input
                                 type='radio'
@@ -131,7 +131,7 @@ function SkillAndExperience () {
                 </div>
                 <div>
                     <p>Please select your position preference:</p>
-                    <div>
+                    <div className='skill-options'>
                         <span>
                             <input
                                 type='radio'
@@ -163,7 +163,7 @@ function SkillAndExperience () {
                 </div>
                 <div>
                     <p>Are you able/willing to pictch in a game?</p>
-                    <div>
+                    <div className='skill-options'>
                         <span>
                             <input
                                 type='radio'

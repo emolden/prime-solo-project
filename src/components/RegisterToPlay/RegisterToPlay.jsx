@@ -1,3 +1,5 @@
+
+
 import LiabilityAcknowledgment from "./LiabilityAcknowledgment/LiabilityAcknowlegment.jsx";
 import PlayerInformation from "./PlayerInformation/PlayerInformation";
 import RegistrationType from "./RegistrationType/RegistrationType";
@@ -10,11 +12,6 @@ function RegisterToPlay ( ) {
     return (
         <div>
             <h1>Register To Play</h1>
-            {/* <LiabilityAcknowledgment /> */}
-            {/* <PlayerInformation /> */}
-            {/* <RegistrationType /> */}
-            <SkillAndExperience />
-            {/* <ReviewAndSubmit /> */}
             
         </div>
     )

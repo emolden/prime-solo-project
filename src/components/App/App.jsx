@@ -22,6 +22,11 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import RegisterToPlay from '../RegisterToPlay/RegisterToPlay';
 
 import './App.css';
+import LiabilityAcknowledgment from '../RegisterToPlay/LiabilityAcknowledgment/LiabilityAcknowlegment';
+import PlayerInformation from '../RegisterToPlay/PlayerInformation/PlayerInformation';
+import RegistrationType from '../RegisterToPlay/RegistrationType/RegistrationType';
+import SkillAndExperience from '../RegisterToPlay/SkillAndExperience/SkillAndExperience';
+import ReviewAndSubmit from '../RegisterToPlay/ReviewAndSubmit/ReviewAndSubmit';
 
 function App() {
   const dispatch = useDispatch();
@@ -72,9 +77,39 @@ function App() {
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
             exact
-            path="/registertoplay"
+            path="/register_to_play"
           >
             <RegisterToPlay />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact path = '/register_to_play/liability_acknowledgment'
+          >
+            <LiabilityAcknowledgment />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact path = '/register_to_play/player_information'
+          >
+            <PlayerInformation />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact path = '/register_to_play/registration_type'
+          >
+            <RegistrationType />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact path = '/register_to_play/skill_and_experience'
+          >
+            <SkillAndExperience />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact path = '/register_to_play/review_and_submit'
+          >
+            <ReviewAndSubmit />
           </ProtectedRoute>
 
           <Route
