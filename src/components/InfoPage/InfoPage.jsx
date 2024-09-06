@@ -30,7 +30,7 @@ function InfoPage() {
   useEffect (() => {
     console.log('info page loaded')
       dispatch({ type: 'GET_LEAGUE_DATA'})
-  },[dispatch]);
+  },[]);
 
   const useFakeMutation = () => {
     console.log('in useFakeMutation function')
@@ -41,6 +41,7 @@ function InfoPage() {
             if (user.name?.trim() === '') {
               reject(new Error('Error while saving user: name cannot be empty.'));
             } else {
+              dispatch({ type: 'GET_LEAGUE_DATA'}) // 👈 HACKY (?) FIX for weird race condition around DELETE thing...
               resolve({ ...user, name: user.name?.toUpperCase() });
             }
           }, 200);

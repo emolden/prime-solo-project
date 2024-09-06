@@ -1,10 +1,37 @@
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min.js';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 function LiabilityAcknowledgment () {
 
     const history = useHistory();
+    const dispatch = useDispatch();
 
+    const user = useSelector(store => store.user)
+
+    //stores the user's signature input as they type
+    const [signature, setSignature] = useState('')
+
+    //useEffect sets the signature field to the conents from the database
+    //if anything exists
+    useEffect(() => {
+        setSignature(user.liability_acknowledgment)
+    }, []);
+
+    //When the user clicks the button to go to the next page,
+    //their signature will be sent to the softballRegistration reducer,
+    //and they will be brought to the player information page.
     const nextPage = () => {
+
+        // console.log('completed liability acknowledgment: ', signature);
+        dispatch({
+            type: 'UPDATE_LIABILITY_ACKNOWLEDGMENT',
+            payload: {
+                liability_acknowledgment: signature,
+                user_id: user.id
+            }
+        })
+
         history.push('/register_to_play/player_information')
     }
 
@@ -112,7 +139,9 @@ function LiabilityAcknowledgment () {
                     By signing my name below electronically, I assume all liability and responsibility in participating in West Metro Softball.
                 </h5>
                 <input
+                    onChange={(e) => setSignature(e.target.value)}
                     placeholder= 'sign here'
+                    value={signature}
                 />
             </section>
             <section className='next-button'>
