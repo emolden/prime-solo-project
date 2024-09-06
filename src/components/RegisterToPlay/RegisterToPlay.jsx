@@ -9,7 +9,7 @@ function RegisterToPlay ( ) {
     const dispatch = useDispatch();
     
     const user = useSelector(store => store.user)
-    const softballRegistration = useSelector(store => store.softballRegistration)
+    // const softballRegistration = useSelector(store => store.softballRegistration)
 
    
     const startRegistration = () => {

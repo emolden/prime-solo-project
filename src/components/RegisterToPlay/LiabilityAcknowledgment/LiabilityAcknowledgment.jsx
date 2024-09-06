@@ -1,11 +1,13 @@
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min.js';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 function LiabilityAcknowledgment () {
 
     const history = useHistory();
     const dispatch = useDispatch();
+
+    const user = useSelector(store => store.user)
 
     //stores the user's input as they type
     const [signature, setSignature] = useState('')
@@ -17,8 +19,11 @@ function LiabilityAcknowledgment () {
 
         // console.log('completed liability acknowledgment: ', signature);
         dispatch({
-            type: 'SET_LIABILITY_ACKNOWLEDGMENT',
-            payload: signature
+            type: 'UPDATE_LIABILITY_ACKNOWLEDGMENT',
+            payload: {
+                liability_acknowledgment: signature,
+                user_id: user.id
+            }
         })
 
         history.push('/register_to_play/player_information')
