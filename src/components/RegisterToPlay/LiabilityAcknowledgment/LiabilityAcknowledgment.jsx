@@ -1,6 +1,12 @@
-
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min.js';
 
 function LiabilityAcknowledgment () {
+
+    const history = useHistory();
+
+    const nextPage = () => {
+        history.push('/register_to_play/player_information')
+    }
 
     return (
         <div>
@@ -110,7 +116,7 @@ function LiabilityAcknowledgment () {
                 />
             </section>
             <section className='next-button'>
-                <button>NEXT</button>
+                <button onClick = {nextPage}>NEXT</button>
             </section>
         </div>
     )

@@ -22,7 +22,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import RegisterToPlay from '../RegisterToPlay/RegisterToPlay';
 
 import './App.css';
-import LiabilityAcknowledgment from '../RegisterToPlay/LiabilityAcknowledgment/LiabilityAcknowlegment';
+import LiabilityAcknowledgment from '../RegisterToPlay/LiabilityAcknowledgment/LiabilityAcknowledgment';
 import PlayerInformation from '../RegisterToPlay/PlayerInformation/PlayerInformation';
 import RegistrationType from '../RegisterToPlay/RegistrationType/RegistrationType';
 import SkillAndExperience from '../RegisterToPlay/SkillAndExperience/SkillAndExperience';
