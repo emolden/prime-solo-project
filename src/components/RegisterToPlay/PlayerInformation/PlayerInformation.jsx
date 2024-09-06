@@ -1,22 +1,32 @@
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min.js';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 function PlayerInformation () {
 
     const history = useHistory();
     const dispatch = useDispatch();
 
+    const user = useSelector(store => store.user)
+
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [phoneNumber, setPhoneNumber] = useState('')
     const [birthdate, setBirthdate] = useState('')
 
+    useEffect(() => {
+        setName(user.name);
+        setEmail(user.email);
+        setPhoneNumber(user.phone_number);
+        setBirthdate(user.birthdate);
+    }, []);
+
     const nextPage = () => {
 
         dispatch({
-            type: 'SET_PLAYER_INFORMATION',
+            type: 'UPDATE_PLAYER_INFORMATION',
             payload: {
+                user_id: user.id,
                 name: name,
                 email: email,
                 phone_number: phoneNumber,
