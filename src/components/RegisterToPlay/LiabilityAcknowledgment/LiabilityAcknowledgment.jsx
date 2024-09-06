@@ -15,7 +15,7 @@ function LiabilityAcknowledgment () {
     //and they will be brought to the player information page.
     const nextPage = () => {
 
-        console.log('completed liability acknowledgment: ', signature);
+        // console.log('completed liability acknowledgment: ', signature);
         dispatch({
             type: 'SET_LIABILITY_ACKNOWLEDGMENT',
             payload: signature

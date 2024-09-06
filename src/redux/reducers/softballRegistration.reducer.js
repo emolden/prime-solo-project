@@ -5,6 +5,14 @@ const softballregistrationReducer = (state = {}, action) => {
 
         case 'SET_LIABILITY_ACKNOWLEDGMENT':
             return {...state, liability_acknowledgment: action.payload}
+
+        case 'SET_PLAYER_INFORMATION':
+            return {...state, 
+                name: action.payload.name, 
+                email: action.payload.email, 
+                phone_number: action.payload.phone_number, 
+                birthdate: action.payload.birthdate
+            }
     
         default: 
             return state;

@@ -1,10 +1,28 @@
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min.js';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 function PlayerInformation () {
 
     const history = useHistory();
+    const dispatch = useDispatch();
+
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [phoneNumber, setPhoneNumber] = useState('')
+    const [birthdate, setBirthdate] = useState('')
 
     const nextPage = () => {
+
+        dispatch({
+            type: 'SET_PLAYER_INFORMATION',
+            payload: {
+                name: name,
+                email: email,
+                phone_number: phoneNumber,
+                birthdate: birthdate
+            }
+        })
         history.push('/register_to_play/registration_type')
     }
 
@@ -59,25 +77,36 @@ function PlayerInformation () {
                     <label htmlFor="name">
                         Name:
                         <input 
-                        id="name"
+                            onChange={(e) => setName(e.target.value)}
+                            id="name"
+                            value={name}
+                            placeholder='first last'
                         />
                     </label>
                     <label htmlFor="email">
                         Email:
                         <input 
-                        id="email"
+                            onChange={(e) => setEmail(e.target.value)}
+                            id="email"
+                            value={email}
                         />
                     </label>
                     <label htmlFor="phone">
                         Phone Number:
                         <input 
-                        id="phone"
+                            onChange={(e) => setPhoneNumber(e.target.value)}
+                            id="phone"
+                            value={phoneNumber}
+                            placeholder= '### - ### - ####'
                         />
                     </label>
-                    <label htmlFor="birthday">
+                    <label htmlFor="birthdate">
                         Birthdate:
                         <input 
-                        id="birthday"
+                            onChange={(e) => setBirthdate(e.target.value)}
+                            id="birthdate"
+                            value={birthdate}
+                            placeholder='MM/DD/YYYY'
                         />
                     </label>
                 </form>

@@ -74,7 +74,9 @@ router.get('/leaguedata', async (req, res) => {
 		leagueData : leagueDataQueryResult.rows,
 		teamData : teamQueryResult.rows
 	}
-
+	// MATT MATT MATT
+	console.log('*****\n*****\n*****\n*****\n*****\n*****\n')
+	console.log('response:', response)
 	res.send(response)
 	} catch(dbErr) {
             console.log('Error in get', dbErr)
