@@ -7,7 +7,11 @@ function* leagueOptions (action) {
     try {
         const leagueResults = yield axios.get('/api/league_information/league_options')
 
-        console.log('response from /api/league_information/legue_options: ', leagueResults)
+        // console.log('response from /api/league_information/legue_options: ', leagueResults)
+        yield put({
+            type: 'SET_LEAGUE_OPTIONS',
+            payload: leagueResults.data
+        })
     }
     catch (error) {
         console.log('there was an error in the leagueOptions saga: ', error);

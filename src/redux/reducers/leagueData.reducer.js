@@ -1,5 +1,5 @@
 const leagueDataReducer = (state = [], action) => {
-    console.log('action payload is ',action.payload)
+    // console.log('action payload is ',action.payload)
   switch (action.type) {
     case 'SET_LEAGUE_DATA':
       return action.payload;
