@@ -1,9 +1,19 @@
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min.js';
-
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 function RegistrationType () {
 
     const history = useHistory();
+    const dispatch = useDispatch();
+
+    const user = useSelector(store => store.user)
+
+    useEffect(() => {
+        dispatch({
+            type: 'GET_LEAGUE _OPTIONS'
+        })
+    }, []);
 
     const nextPage = () => {
         history.push('/register_to_play/skill_and_experience')
