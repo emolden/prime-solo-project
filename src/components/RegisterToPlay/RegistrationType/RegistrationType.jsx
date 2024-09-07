@@ -10,8 +10,9 @@ function RegistrationType () {
     const user = useSelector(store => store.user)
 
     useEffect(() => {
+        //dispatch to the leagueOptions saga
         dispatch({
-            type: 'GET_LEAGUE _OPTIONS'
+            type: 'GET_LEAGUE_OPTIONS'
         })
     }, []);
 

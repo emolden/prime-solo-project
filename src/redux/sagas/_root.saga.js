@@ -4,7 +4,7 @@ import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
 import adminSaga from './admin.saga';
 import playerRegistrationSaga from './playerRegistration.saga';
-import leagueOptionsSaga from './leagueOptions.saga';
+import leagueInformationSaga from './leagueInformation.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -20,6 +20,6 @@ export default function* rootSaga() {
     userSaga(),
     adminSaga(), //handles requests coming from the admin on the league data page
     playerRegistrationSaga(), //handles requests from the registration process
-    leagueOptionsSaga() // requests the current league options for the database
+    leagueInformationSaga() // requests the current league options for the database
   ]);
 }

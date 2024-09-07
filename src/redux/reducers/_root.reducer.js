@@ -4,7 +4,7 @@ import user from './user.reducer';
 import leagueData from './leagueData.reducer';
 import teamData from './teamData.reducer';
 import softballregistration from './softballRegistration.reducer';
-import leagueOptions from './leagueOptions.reducer';
+import leagueInformation from './leagueInformation.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -18,7 +18,7 @@ const rootReducer = combineReducers({
   leagueData, //will have an array of objects containing data on all players when an admin is logged in
   teamData,//will be an array of objects containing team name, and team id
   softballregistration,
-  leagueOptions // will be an array of objects containing the league name, day of the week, and id
+  leagueInformation // will be an array of objects containing the league name, day of the week, and id
 });
 
 export default rootReducer;
