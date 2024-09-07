@@ -8,14 +8,25 @@ function RegistrationType () {
     const dispatch = useDispatch();
 
     const user = useSelector(store => store.user)
-    const leagueOptions = useSelector(store => store.leagueOptions) 
+    const leagueOptions = useSelector(store => store.leagueOptions)
+    const registrationTypes = useSelector(store => store.registrationTypes) 
+    
     const [silver, setSilver] = useState(false)
     const [bronze, setBronze] = useState(false)
+    const [silverRegistrationType, setSilverRegistrationType] = useState('')
+    const [bronzeRegistrationType, setBronzeRegistrationType] = useState('')
+    const [silverSmallGroup, setSilverSmallGroup] = useState('')
+    const [silverTeam, setSilverTeam] = useState[''];
+    const [bronzeSmallGroup, setBronzeSmallGroup] = useState['']
+    const [bronzeTeam, setBronzeTeam] = useState['']
 
     useEffect(() => {
         //dispatch to the leagueOptions saga
         dispatch({
             type: 'GET_LEAGUE_OPTIONS'
+        })
+        dispatch({
+            type: 'GET_REGISTRATION_TYPES'
         })
     }, []);
 
@@ -113,23 +124,39 @@ function RegistrationType () {
                     <h4>For {leagueOptions[0].name} League</h4>
                     <div>
                         <label htmlFor='type'>How are you registering to play?</label>
-                        <select name='type' id='type'>
-                            {/* will need to map from registration_type table */}
-                            <option value='individual'>Individual</option>
+                        <select name='type' id='type' onChange={(e) => setSilverRegistrationType(e.target.value)}>
+                            {registrationTypes.map((type) => {
+                                return (
+                                    <option 
+                                        key={type.id} 
+                                        value={type.type}
+                                        
+                                    >
+                                    {type.type}
+                                    </option>
+                                )
+                            })}
+                            
                         </select>
                     </div>
+                    {silverRegistrationType === 'Small Group' &&
                     <div>
                         <label htmlFor='smallGroup'> If you chose "small group", put the names of the palyers with which you are registering below.</label>
                         <input 
                             id='smallGroup'
+                            value={silverSmallGroup}
+                            onChange={(e) => setSilverSmallGroup(e.target.value)}
                         />
-                    </div>
+                    </div>}
+                    {silverRegistrationType === 'Team' &&
                     <div>
                         <label htmlFor='team'> If you chose "team", put the name of your team below.</label>
                         <input 
                             id='team'
+                            value={silverTeam}
+                            onChange={(e) => setSilverTeam(e.target.value)}
                         />
-                    </div>
+                    </div>}
                     <div>
                         <p>Are you curerntly a team captain or are you insterested in being a team captain?</p>
                         <div>
@@ -159,23 +186,32 @@ function RegistrationType () {
                     <h4>For {leagueOptions[1].name} League</h4>
                     <div>
                         <label htmlFor='type'>How are you registering to play?</label>
-                        <select name='type' id='type'>
-                            {/* will need to map from registration_type table */}
-                            <option value='individual'>Individual</option>
+                        <select name='type' id='type' onChange={(e) => setBronzeRegistrationType(e.target.value)}>
+                            {registrationTypes.map((type) => {
+                                return (
+                                    <option key={type.id} value={type.type}>{type.type}</option>
+                                )
+                            })}
                         </select>
                     </div>
+                    {bronzeRegistrationType === 'Small Group' &&
                     <div>
                         <label htmlFor='smallGroup'> If you chose "small group", put the names of the palyers with which you are registering below.</label>
                         <input 
                             id='smallGroup'
+                            value={bronzeSmallGroup}
+                            onChange={(e) => setBronzeSmallGroup(e.target.value)}
                         />
-                    </div>
+                    </div>}
+                    {bronzeRegistrationType === 'Team' &&
                     <div>
                         <label htmlFor='team'> If you chose "team", put the name of your team below.</label>
                         <input 
                             id='team'
+                            value={bronzeTeam}
+                            onChange={(e) => setBronzeTeam(e.target.value)}
                         />
-                    </div>
+                    </div>}
                     <div>
                         <p>Are you curerntly a team captain or are you insterested in being a team captain?</p>
                         <div>
