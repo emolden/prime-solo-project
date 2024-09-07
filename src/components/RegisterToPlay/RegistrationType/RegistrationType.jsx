@@ -8,6 +8,9 @@ function RegistrationType () {
     const dispatch = useDispatch();
 
     const user = useSelector(store => store.user)
+    const leagueOptions = useSelector(store => store.leagueOptions) 
+    const [silver, setSilver] = useState(false)
+    const [bronze, setBronze] = useState(false)
 
     useEffect(() => {
         //dispatch to the leagueOptions saga
@@ -22,6 +25,14 @@ function RegistrationType () {
 
     const backPage = () => {
         history.push('/register_to_play/player_information')
+    }
+
+    const checkSilver = () => {
+        setSilver(!silver);  
+    }
+
+    const checkBronze = () => {
+        setBronze(!bronze);  
     }
 
     return (
@@ -68,54 +79,127 @@ function RegistrationType () {
             <section className='registration-form'>
                 <h3>Registration Type</h3>
                 <div>
-                    <label htmlFor='league'>What league are you registering for?</label>
-                    <select name='leagues' id='league'>
-                        {/* will need to map from leagues table */}
-                        <option value='gold'>Gold on Tuesday nighs</option>
-                    </select>
+                    <p>What league are you registering for?</p>
+
+                        {leagueOptions.length && 
+                        <>
+                        <div>
+                            <input
+                                key={leagueOptions[0].id}
+                                value={leagueOptions[0].id}
+                                type='checkbox'
+                                name={leagueOptions[0].name}
+                                checked={silver}
+                                onChange={checkSilver}
+                            />
+                            <label htmlFor={leagueOptions[0].name}>{leagueOptions[0].name} on {leagueOptions[0].day} nights</label>
+                        </div>
+                        <div>
+                            <input
+                                key={leagueOptions[1].id}
+                                value={leagueOptions[1].id}
+                                type='checkbox'
+                                name={leagueOptions[1].name}
+                                checked={bronze}
+                                onChange={checkBronze}
+                            />
+                            <label htmlFor={leagueOptions[1].name}>{leagueOptions[1].name} on {leagueOptions[1].day} nights</label>
+                        </div>
+                        </>
+                        }
                 </div>
-                <div>
-                    <label htmlFor='type'>How are you registering to play?</label>
-                    <select name='type' id='type'>
-                        {/* will need to map from registration_type table */}
-                        <option value='individual'>Individual</option>
-                    </select>
-                </div>
-                <div>
-                    <label htmlFor='smallGroup'> If you chose "small group", put the names of the palyers with which you are registering below.</label>
-                    <input 
-                        id='smallGroup'
-                    />
-                </div>
-                <div>
-                    <label htmlFor='team'> If you chose "team", put the name of your team below.</label>
-                    <input 
-                        id='team'
-                    />
-                </div>
-                <div>
-                    <p>Are you curerntly a team captain or are you insterested in being a team captain?</p>
+                {silver &&
+                <div className='silver-league'>
+                    <h4>For {leagueOptions[0].name} League</h4>
                     <div>
-                        <span>
-                            <input 
-                                type='radio'
-                                id='yes'
-                                name='yes'
-                                value='true'
-                            />
-                            <label htmlFor='yes'>yes</label>
-                        </span>
-                        <span>
-                            <input 
-                                type='radio'
-                                id='no'
-                                name='no'
-                                value='false'
-                            />
-                            <label htmlFor='no'>no</label>
-                        </span>
-                     </div>
-                </div>
+                        <label htmlFor='type'>How are you registering to play?</label>
+                        <select name='type' id='type'>
+                            {/* will need to map from registration_type table */}
+                            <option value='individual'>Individual</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label htmlFor='smallGroup'> If you chose "small group", put the names of the palyers with which you are registering below.</label>
+                        <input 
+                            id='smallGroup'
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor='team'> If you chose "team", put the name of your team below.</label>
+                        <input 
+                            id='team'
+                        />
+                    </div>
+                    <div>
+                        <p>Are you curerntly a team captain or are you insterested in being a team captain?</p>
+                        <div>
+                            <span>
+                                <input 
+                                    type='radio'
+                                    id='yes'
+                                    name='yes'
+                                    value='true'
+                                />
+                                <label htmlFor='yes'>yes</label>
+                            </span>
+                            <span>
+                                <input 
+                                    type='radio'
+                                    id='no'
+                                    name='no'
+                                    value='false'
+                                />
+                                <label htmlFor='no'>no</label>
+                            </span>
+                        </div>
+                    </div>
+                </div> }
+                {bronze &&
+                <div className='bronze-league'>
+                    <h4>For {leagueOptions[1].name} League</h4>
+                    <div>
+                        <label htmlFor='type'>How are you registering to play?</label>
+                        <select name='type' id='type'>
+                            {/* will need to map from registration_type table */}
+                            <option value='individual'>Individual</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label htmlFor='smallGroup'> If you chose "small group", put the names of the palyers with which you are registering below.</label>
+                        <input 
+                            id='smallGroup'
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor='team'> If you chose "team", put the name of your team below.</label>
+                        <input 
+                            id='team'
+                        />
+                    </div>
+                    <div>
+                        <p>Are you curerntly a team captain or are you insterested in being a team captain?</p>
+                        <div>
+                            <span>
+                                <input 
+                                    type='radio'
+                                    id='yes'
+                                    name='yes'
+                                    value='true'
+                                />
+                                <label htmlFor='yes'>yes</label>
+                            </span>
+                            <span>
+                                <input 
+                                    type='radio'
+                                    id='no'
+                                    name='no'
+                                    value='false'
+                                />
+                                <label htmlFor='no'>no</label>
+                            </span>
+                        </div>
+                    </div>
+                </div> }
             </section>
             <section className='back-next-buttons'>
                 <button onClick={backPage}>BACK</button>

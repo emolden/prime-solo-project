@@ -87,3 +87,11 @@ h6 {
 .position-options {
     display: flex;
 }
+
+.silver-league {
+    background-color: rgb(196, 198, 198);
+}
+
+.bronze-league {
+    background-color:rgb(242, 229, 205);
+}
