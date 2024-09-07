@@ -6,6 +6,8 @@ function* leagueOptions (action) {
     // console.log('inside the league options saga!!!')
     try {
         const leagueResults = yield axios.get('/api/league_information/league_options')
+
+        console.log('response from /api/league_information/legue_options: ', leagueResults)
     }
     catch (error) {
         console.log('there was an error in the leagueOptions saga: ', error);
