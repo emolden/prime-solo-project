@@ -15,29 +15,30 @@ router.get('/leaguedata', async (req, res) => {
 
     const leagueDataQueryText = `
      SELECT 
-	"user_league"."id" AS "id",
-	"user_league"."league_id" AS "league_id",
+	"user_league_type"."id" AS "id",
+	"user_league_type"."league_id" AS "league_id",
+	"user_team"."team_id" AS "team_id",
 	"user_team"."id" AS "user_team_id",
 	"user"."id" AS "user_id",
 	"user"."name" AS "name",
 	"user"."email" AS "email",
 	"user"."phone_number" AS "phone_number",
 	"user"."birthdate" AS "birthday",
-	"user_team"."is_captain" AS "captain",
+	"user_league_type"."is_captain" AS "captain",
 	"user"."is_pitcher" AS "pitcher",
-	"user"."small_group" AS "small_group_input",
+	"user_league_type"."small_group_input" AS "small_group_input",
 	"registration_type"."type" AS "registration_type",
-	"user"."team_name" AS "team_name_input",
+	"user_league_type"."team_name_input" AS "team_name_input",
 	"user"."hitting_skill" AS "hitting",
 	"user"."fielding_skill" AS "fielding",
 	"leagues"."name" AS "league",
 	"teams"."name" AS "team",
 	"positions"."name" AS "positions"
 	FROM "user"
-	FULL JOIN "user_league"
-	ON "user"."id" = "user_league"."user_id"
+	RIGHT JOIN "user_league_type"
+	ON "user"."id" = "user_league_type"."user_id"
 	LEFT JOIN "leagues"
-	ON "user_league"."league_id" = "leagues"."id"
+	ON "user_league_type"."league_id" = "leagues"."id"
 	LEFT JOIN "user_team"
 	ON "user"."id" = "user_team"."user_id"
 	LEFT JOIN "teams"
@@ -46,10 +47,8 @@ router.get('/leaguedata', async (req, res) => {
 	ON "user"."id" = "user_positions"."user_id"
 	LEFT JOIN "positions"
 	ON "user_positions"."position_id" = "positions"."id"
-	FULL JOIN "user_type"
-	ON "user"."id" = "user_type"."user_id"
 	LEFT JOIN "registration_type"
-	ON "user_type"."type_id" = "registration_type"."id";
+	ON "user_league_type"."type_id" = "registration_type"."id";
 	`;
 
 	const leagueDataQueryResult = await connection.query(leagueDataQueryText)
@@ -100,7 +99,7 @@ router.post ('/playerteam', async (req, res) => {
 
 		const teamQueryResult = await connection.query(teamQueryText, teamQueryValue);
 
-		console.log('in POST /api/admin/playerteam and response from the database is: ', teamQueryResult.rows[0].id)
+		// console.log('in POST /api/admin/playerteam and response from the database is: ', teamQueryResult.rows[0].id)
 	
 		const teamId = teamQueryResult.rows[0].id
 
