@@ -12,12 +12,12 @@ function* liabilityAcknowledgment (action) {
             type: 'FETCH_USER'
         })
     } catch (error) {
-        console.log('there was an error in the liabilityAcknowledgment POST route: ', error);
+        console.log('there was an error in the liabilityAcknowledgment PUT route: ', error);
     }
 }
 
 function* playerInformation (action) {
-    console.log('in playerInformation saga function')
+    // console.log('in playerInformation saga function')
     try {
         //PUT request sends the user id, name, email, phone number, and birthdate
         yield axios.put('/api/player_registration/player_information', action.payload)
@@ -26,23 +26,43 @@ function* playerInformation (action) {
             type: 'FETCH_USER'
         })
     } catch (error) {
-        console.log('there was an error in the playerInfomation POST route: ', error)
+        console.log('there was an error in the playerInfomation PUT route: ', error)
     }
 }
 
-function* silverTeamRegistration (action) {
-    console.log('dispatch to silverTeamRegistration saga: ', action.payload)
+function* LeagueRegistration (action) {
+    // console.log('dispatch to silverTeamRegistration saga: ', action.payload)
+    try {
+        //POST request sends the user id, league_id, small_group_input, team_name_input, is_captain, and type_id
+        yield axios.post('/api/player_registration/league_registration', action.payload)
+
+        // yield put ({
+        //     type: 'FETCH_USER'
+        // })
+    } catch (error) {
+        console.log('there was an error in the silveLeagueRegistration POST route: ', error)
+    }
 }
 
-function* bronzeTeamRegistration (action) {
-    console.log('dispatch to bronzeTeamRegistration saga: ', action.payload)
+function* bronzeLeagueRegistration (action) {
+    // console.log('dispatch to bronzeTeamRegistration saga: ', action.payload)
+    try {
+        //POST request sends the user id, league_id, small_group_input, team_name_input, is_captain, and type_id
+        yield axios.post('/api/player_registration/bronze_league_registration', action.payload)
+
+        // yield put ({
+        //     type: 'FETCH_USER'
+        // })
+    } catch (error) {
+        console.log('there was an error in the bronzeLeagueRegistration POST route: ', error)
+    }
 }
 
 function* playerRegistrationSaga() {
     yield takeLatest('UPDATE_LIABILITY_ACKNOWLEDGMENT', liabilityAcknowledgment);
     yield takeLatest('UPDATE_PLAYER_INFORMATION', playerInformation);
-    yield takeLatest('SILVER_LEAUGE_REGISTRATION', silverTeamRegistration);
-    yield takeLatest('BRONZE_LEAGUE_REGISTRATION', bronzeTeamRegistration);
+    yield takeLatest('LEAGUE_REGISTRATION', LeagueRegistration);
+    yield takeLatest('BRONZE_LEAGUE_REGISTRATION', bronzeLeagueRegistration);
 }
 
 export default playerRegistrationSaga
