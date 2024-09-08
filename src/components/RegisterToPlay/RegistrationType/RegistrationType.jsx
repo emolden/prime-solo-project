@@ -15,12 +15,14 @@ function RegistrationType () {
     const [bronze, setBronze] = useState(false)
     const [silverRegistrationType, setSilverRegistrationType] = useState('')
     const [bronzeRegistrationType, setBronzeRegistrationType] = useState('')
-    const [silverSmallGroup, setSilverSmallGroup] = useState('')
-    const [silverTeam, setSilverTeam] = useState[''];
-    const [bronzeSmallGroup, setBronzeSmallGroup] = useState['']
-    const [bronzeTeam, setBronzeTeam] = useState['']
-
+    // const [silverSmallGroup, setSilverSmallGroup] = useState('')
+    // const [silverTeam, setSilverTeam] = useState[''];
+    // const [bronzeSmallGroup, setBronzeSmallGroup] = useState['']
+    // const [bronzeTeam, setBronzeTeam] = useState['']
+    const [silverCaptain, setSilverCaptain] = useState('')
+    const [bronzeCaptain, setBronzeCaptain] = useState('')
     useEffect(() => {
+        console.log('dispatch on page load')
         //dispatch to the leagueOptions saga
         dispatch({
             type: 'GET_LEAGUE_OPTIONS'
@@ -32,6 +34,13 @@ function RegistrationType () {
 
     const nextPage = () => {
         history.push('/register_to_play/skill_and_experience')
+
+        if(silver === true) {
+            console.log('silver league registration submitted')
+        }
+        if(bronze === true) {
+            console.log('bronze league registration submitted')
+        }
     }
 
     const backPage = () => {
@@ -144,8 +153,8 @@ function RegistrationType () {
                         <label htmlFor='smallGroup'> If you chose "small group", put the names of the palyers with which you are registering below.</label>
                         <input 
                             id='smallGroup'
-                            value={silverSmallGroup}
-                            onChange={(e) => setSilverSmallGroup(e.target.value)}
+                            // value={silverSmallGroup}
+                            // onChange={(e) => setSilverSmallGroup(e.target.value)}
                         />
                     </div>}
                     {silverRegistrationType === 'Team' &&
@@ -153,8 +162,8 @@ function RegistrationType () {
                         <label htmlFor='team'> If you chose "team", put the name of your team below.</label>
                         <input 
                             id='team'
-                            value={silverTeam}
-                            onChange={(e) => setSilverTeam(e.target.value)}
+                            // value={silverTeam}
+                            // onChange={(e) => setSilverTeam(e.target.value)}
                         />
                     </div>}
                     <div>
@@ -163,20 +172,22 @@ function RegistrationType () {
                             <span>
                                 <input 
                                     type='radio'
-                                    id='yes'
-                                    name='yes'
+                                    id='yesSilverCaptain'
+                                    name='silverCaptain'
                                     value='true'
+                                    onChange={(e) => setSilverCaptain(e.target.value)}
                                 />
-                                <label htmlFor='yes'>yes</label>
+                                <label htmlFor='yesSilverCaptain'>yes</label>
                             </span>
                             <span>
                                 <input 
                                     type='radio'
-                                    id='no'
-                                    name='no'
+                                    id='noSiverCaptain'
+                                    name='silverCaptain'
                                     value='false'
+                                    onChange={(e) => setSilverCaptain(e.target.value)}
                                 />
-                                <label htmlFor='no'>no</label>
+                                <label htmlFor='noSilverCaptain'>no</label>
                             </span>
                         </div>
                     </div>
@@ -199,8 +210,8 @@ function RegistrationType () {
                         <label htmlFor='smallGroup'> If you chose "small group", put the names of the palyers with which you are registering below.</label>
                         <input 
                             id='smallGroup'
-                            value={bronzeSmallGroup}
-                            onChange={(e) => setBronzeSmallGroup(e.target.value)}
+                            // value={bronzeSmallGroup}
+                            // onChange={(e) => setBronzeSmallGroup(e.target.value)}
                         />
                     </div>}
                     {bronzeRegistrationType === 'Team' &&
@@ -208,8 +219,8 @@ function RegistrationType () {
                         <label htmlFor='team'> If you chose "team", put the name of your team below.</label>
                         <input 
                             id='team'
-                            value={bronzeTeam}
-                            onChange={(e) => setBronzeTeam(e.target.value)}
+                            // value={bronzeTeam}
+                            // onChange={(e) => setBronzeTeam(e.target.value)}
                         />
                     </div>}
                     <div>
@@ -218,20 +229,22 @@ function RegistrationType () {
                             <span>
                                 <input 
                                     type='radio'
-                                    id='yes'
-                                    name='yes'
+                                    id='yesBronzeCaptain'
+                                    name='bronzeCaptain'
                                     value='true'
+                                    onChange={(e) => setBronzeCaptain(e.target.value)}
                                 />
-                                <label htmlFor='yes'>yes</label>
+                                <label htmlFor='yesBronzeCaptain'>yes</label>
                             </span>
                             <span>
-                                <input 
+                            <input 
                                     type='radio'
-                                    id='no'
-                                    name='no'
+                                    id='noBronzeCaptain'
+                                    name='bronzeCaptain'
                                     value='false'
+                                    onChange={(e) => setBronzeCaptain(e.target.value)}
                                 />
-                                <label htmlFor='no'>no</label>
+                                <label htmlFor='noBronzeCaptain'>no</label>
                             </span>
                         </div>
                     </div>
