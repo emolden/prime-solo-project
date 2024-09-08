@@ -23,7 +23,7 @@ router.get('/leaguedata', async (req, res) => {
 	"user"."email" AS "email",
 	"user"."phone_number" AS "phone_number",
 	"user"."birthdate" AS "birthday",
-	"user"."is_captain" AS "captain",
+	"user_team"."is_captain" AS "captain",
 	"user"."is_pitcher" AS "pitcher",
 	"user"."small_group" AS "small_group_input",
 	"registration_type"."type" AS "registration_type",
