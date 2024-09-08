@@ -30,9 +30,19 @@ function* playerInformation (action) {
     }
 }
 
+function* silverTeamRegistration (action) {
+    console.log('dispatch to silverTeamRegistration saga: ', action.payload)
+}
+
+function* bronzeTeamRegistration (action) {
+    console.log('dispatch to bronzeTeamRegistration saga: ', action.payload)
+}
+
 function* playerRegistrationSaga() {
     yield takeLatest('UPDATE_LIABILITY_ACKNOWLEDGMENT', liabilityAcknowledgment);
     yield takeLatest('UPDATE_PLAYER_INFORMATION', playerInformation);
+    yield takeLatest('SILVER_LEAUGE_REGISTRATION', silverTeamRegistration);
+    yield takeLatest('BRONZE_LEAGUE_REGISTRATION', bronzeTeamRegistration);
 }
 
 export default playerRegistrationSaga
