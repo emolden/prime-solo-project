@@ -49,4 +49,26 @@ router.post('/logout', (req, res, next) => {
   });
 });
 
+router.get('/leauge_type/:id', (req, res) => {
+  console.log('in /api/user/league_type GET route and the param is: ', req.params)
+
+  const userId = req.params.id;
+
+  const sqlText = `
+    SELECT * FROM "user_league_type"
+      WHERE "user_id" = $1;
+  `;
+
+  const sqlValue = [userId];
+
+  pool.query (sqlText, sqlValue)
+    .then ((result) => {
+      res.send(result)
+    })
+    .catch((dbErr) => {
+      console.log('error in /user/league_type/:id GET router: ', dbErr)
+      res.sendStatus(500);
+    })
+})
+
 module.exports = router;

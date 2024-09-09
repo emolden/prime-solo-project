@@ -67,9 +67,6 @@ router.get('/leaguedata', async (req, res) => {
 		leagueData : leagueDataQueryResult.rows,
 		teamData : teamQueryResult.rows
 	}
-	// MATT MATT MATT
-	console.log('*****\n*****\n*****\n*****\n*****\n*****\n')
-	console.log('response:', response)
 	res.send(response)
 	} catch(dbErr) {
             console.log('Error in get', dbErr)
@@ -145,6 +142,7 @@ router.delete('/playerteam/:id', (req, res) => {
 		})
 		.catch((dbErr) => {
 			console.log('error in /playerteam/:id DELETE router: ', dbErr)
+			res.sendStatus(500);
 		})
 })
 
