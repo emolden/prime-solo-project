@@ -1,3 +1,5 @@
+// userLeagueType reducer is an array of objects containing the 
+// registration information for the leauges the user registered to play in
 const userLeagueTypeReducer = (state = [], action) => {
     console.log('in userLeaugeType reducer: ', action.payload)
 

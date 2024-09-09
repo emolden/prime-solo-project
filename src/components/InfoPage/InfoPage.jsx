@@ -75,7 +75,7 @@ function InfoPage() {
             // if the row name is not blank
             // accept the edits
             else {
-              //dispatch to admin saga 
+              //dispatch to admin saga -> request updated league data after row is updated
               dispatch({ type: 'GET_LEAGUE_DATA'}) // 👈 HACKY (?) FIX for weird race condition around DELETE thing...
               resolve({ ...user, name: user.name?.toUpperCase() });
             }

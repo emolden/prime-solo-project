@@ -1,6 +1,7 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
+//send the liability acknowledgment data to the database and fetch updated data
 function* liabilityAcknowledgment (action) {
     // console.log('in liabilityAcknowledgment saga function')
     try {
@@ -16,6 +17,7 @@ function* liabilityAcknowledgment (action) {
     }
 }
 
+//send the player information data to the database and fetch updated data
 function* playerInformation (action) {
     // console.log('in playerInformation saga function')
     try {
@@ -30,6 +32,7 @@ function* playerInformation (action) {
     }
 }
 
+//send the league registration data to the database and fetch updated data
 function* LeagueRegistration (action) {
     // console.log('dispatch to silverTeamRegistration saga: ', action.payload)
     try {
@@ -45,26 +48,10 @@ function* LeagueRegistration (action) {
     }
 }
 
-function* bronzeLeagueRegistration (action) {
-    // console.log('dispatch to bronzeTeamRegistration saga: ', action.payload)
-    try {
-        //POST request sends the user id, league_id, small_group_input, team_name_input, is_captain, and type_id
-        yield axios.post('/api/player_registration/bronze_league_registration', action.payload)
-
-        yield put ({
-            type: 'FETCH_USER_LEAGUE_TYPE',
-            payload: action.payload.user_id
-        })
-    } catch (error) {
-        console.log('there was an error in the bronzeLeagueRegistration POST route: ', error)
-    }
-}
-
 function* playerRegistrationSaga() {
     yield takeLatest('UPDATE_LIABILITY_ACKNOWLEDGMENT', liabilityAcknowledgment);
     yield takeLatest('UPDATE_PLAYER_INFORMATION', playerInformation);
     yield takeLatest('LEAGUE_REGISTRATION', LeagueRegistration);
-    yield takeLatest('BRONZE_LEAGUE_REGISTRATION', bronzeLeagueRegistration);
 }
 
 export default playerRegistrationSaga

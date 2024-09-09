@@ -24,13 +24,15 @@ function* fetchUser() {
   }
 }
 
+//fetches the registration information after the user registers for a league
 function* fetchUserLeagueType (action) {
   // console.log('fetchUserLeaugeType', action.payload)
   try {
-
+    // sends get request to the user router
     const response = yield axios.get(`/api/user/leauge_type/${action.payload}`)
 
-    console.log('response from the server in api/user/leauge_type: ', response.data)
+    // console.log('response from the server in api/user/leauge_type: ', response.data)
+    //send registration information to the user_league_type reducer
     yield put ({ type: 'SET_USER_LEAGUE_TYPE', payload: response.data});
 
   } catch (error) {

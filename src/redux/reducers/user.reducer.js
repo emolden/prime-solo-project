@@ -1,3 +1,4 @@
+// the user reducer is an object containing the specific information for the logged in user
 const userReducer = (state = {}, action) => {
   switch (action.type) {
     case 'SET_USER':
