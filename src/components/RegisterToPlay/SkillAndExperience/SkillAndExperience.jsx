@@ -1,9 +1,12 @@
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min.js';
+import { useState } from 'react';
 
-
+// 
 function SkillAndExperience () {
 
     const history = useHistory();
+
+    const[hittingSkill, setHittingSkill] = useState('')
 
     const nextPage = () => {
         history.push('/register_to_play/review_and_submit')
@@ -64,8 +67,10 @@ function SkillAndExperience () {
                             <input
                                 type='radio'
                                 id='beginnerHitter'
-                                name='beginnerHitter'
+                                name='hittingSkill'
                                 value = '1'
+                                checked={hittingSkill === '1' ? true : false}
+                                onChange={(e) => setHittingSkill(e.target.value)}
                             />
                             <label htmlFor='beginnerHitter'> Beginner - Learning to make contact, if contact is made it's likely hit to the infield</label>
                         </span>
@@ -73,8 +78,10 @@ function SkillAndExperience () {
                             <input
                                 type='radio'
                                 id='developingHitter'
-                                name='developingHitter'
+                                name='hittingSkill'
                                 value = '2'
+                                checked={hittingSkill === '2' ? true : false}
+                                onChange={(e) => setHittingSkill(e.target.value)}
                             />
                             <label htmlFor='developingHitter'> Developing - Makes contact most of the time. Infield hits are common and occasional outfield hit.</label>
                         </span>
@@ -82,8 +89,10 @@ function SkillAndExperience () {
                             <input
                                 type='radio'
                                 id='intermediateHitter'
-                                name='intermediateHitter'
+                                name='hittingSkill'
                                 value = '3'
+                                checked={hittingSkill === '3' ? true : false}
+                                onChange={(e) => setHittingSkill(e.target.value)}
                             />
                             <label htmlFor='intermediateHitter'> Intermediate - Hits hard ground/fly balls. Occasional big hit.</label>
                         </span>
@@ -91,8 +100,10 @@ function SkillAndExperience () {
                             <input
                                 type='radio'
                                 id='advancedHitter'
-                                name='advancedHitter'
+                                name='hittingSkill'
                                 value = '4'
+                                checked={hittingSkill === '4' ? true : false}
+                                onChange={(e) => setHittingSkill(e.target.value)}
                             />
                             <label htmlFor='advancedHitter'> Advanced - Power hitter, deep fly balls, and occasional homerun.</label>
                         </span>
@@ -105,8 +116,10 @@ function SkillAndExperience () {
                             <input
                                 type='radio'
                                 id='beginnerFielder'
-                                name='beginnerFielder'
+                                name='fieldingSkill'
                                 value = '1'
+                                checked={fieldingSkill === '1' ? true : false}
+                                onChange={(e) => setFieldingSkill(e.target.value)}
                             />
                             <label htmlFor='beginnerFielder'> Beginner - Learning positions and fielding/throwing skills</label>
                         </span>
@@ -114,8 +127,10 @@ function SkillAndExperience () {
                             <input
                                 type='radio'
                                 id='developingFielder'
-                                name='developingFielder'
+                                name='fieldingSkill'
                                 value = '2'
+                                checked={fieldingSkill === '2' ? true : false}
+                                onChange={(e) => setFieldingSkill(e.target.value)}
                             />
                             <label htmlFor='developingFielder'> Developing - Comfortable in basic positions and developing reliable fielding/trhowing skills.</label>
                         </span>
@@ -123,8 +138,10 @@ function SkillAndExperience () {
                             <input
                                 type='radio'
                                 id='intermediateFielder'
-                                name='intermediateFielder'
+                                name='fieldingSkill'
                                 value = '3'
+                                checked={fieldingSkill === '3' ? true : false}
+                                onChange={(e) => setFieldingSkill(e.target.value)}
                             />
                             <label htmlFor='intermediateFielder'> Intermediate - Can play all poisitions comfortable, accurate throw, and reliable skill.</label>
                         </span>
@@ -132,7 +149,7 @@ function SkillAndExperience () {
                             <input
                                 type='radio'
                                 id='advancedFielder'
-                                name='advancedFielder'
+                                name='fieldingSkill'
                                 value = '4'
                             />
                             <label htmlFor='advancedFielder'> Advanced - Strong and accurate throw, reliale in all positions, and can lead aspects of gameplay.</label>
