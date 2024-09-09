@@ -57,57 +57,60 @@ router.put('/player_information', (req, res) => {
 router.post('/league_registration', async (req, res) => {
     console.log('playerRegistration router received a request via /api/player_registration/league_registration ', req.body)
 
-    const { league_id, type_id, small_group_input, team_input, is_captain, user_id } = req.body
-    console.log(user_id, league_id, type_id, is_captain, small_group_input, team_input)
-
     let connection;
     try {
         connection = await pool.connect()
 
         await connection.query('BEGIN;')
 
-        const userLeagueText = `
-            SELECT "id" FROM "user_league_type"
-                WHERE "user_id" = $1 AND "league_id" = $2;
-        `;
+        for (let league of req.body) {
+            const { league_id, type_id, small_group_input, team_input, is_captain, user_id } = league
+            console.log(user_id, league_id, type_id, is_captain, small_group_input, team_input)
+        
 
-        const userLeagueValue = [user_id, league_id]
-
-        //checks to see if the user is already registered with the silver league
-        const userLeagueResult = await connection.query(userLeagueText, userLeagueValue);
-
-        if (userLeagueResult.rows[0]) {
-            //the user is already registered with the silver league
-            const userLeagueId = userLeagueResult.rows[0].id
-
-            const updateUserLeagueText = `
-                UPDATE "user_league_type"
-                    SET "user_id" = $1,
-                        "league_id" = $2,
-                        "type_id" = $3,
-                        "is_captain" = $4,
-                        "small_group_input" = $5,
-                        "team_name_input" = $6
-                    WHERE "id" = $7;
+            const userLeagueText = `
+                SELECT "id" FROM "user_league_type"
+                    WHERE "user_id" = $1 AND "league_id" = $2;
             `;
 
-            const updateUserLeagueValues = [user_id, league_id, type_id, is_captain, small_group_input, team_input, userLeagueId]
+            const userLeagueValue = [user_id, league_id]
 
-            const updateUserLeagueResult = await connection.query(updateUserLeagueText, updateUserLeagueValues)
-        }
-        else {
-            //the user is not registered with the silver league
-            //so we need to INSERT a new row in the user_league_type table
-            const insertUserLeagueText = `
-                INSERT INTO "user_league_type"
-                    ("user_id", "league_id", "type_id", "is_captain", "small_group_input", "team_name_input")
-                    VALUES
-                    ($1, $2, $3, $4, $5, $6);
-            `;
+            //checks to see if the user is already registered with the silver league
+            const userLeagueResult = await connection.query(userLeagueText, userLeagueValue);
 
-            const insertUserLeagueValues = [user_id, league_id, type_id, is_captain, small_group_input, team_input]
+            if (userLeagueResult.rows[0]) {
+                //the user is already registered with the silver league
+                const userLeagueId = userLeagueResult.rows[0].id
 
-            const insertUserLeagueResult = await connection.query(insertUserLeagueText, insertUserLeagueValues)
+                const updateUserLeagueText = `
+                    UPDATE "user_league_type"
+                        SET "user_id" = $1,
+                            "league_id" = $2,
+                            "type_id" = $3,
+                            "is_captain" = $4,
+                            "small_group_input" = $5,
+                            "team_name_input" = $6
+                        WHERE "id" = $7;
+                `;
+
+                const updateUserLeagueValues = [user_id, league_id, type_id, is_captain, small_group_input, team_input, userLeagueId]
+
+                const updateUserLeagueResult = await connection.query(updateUserLeagueText, updateUserLeagueValues)
+            }
+            else {
+                //the user is not registered with the silver league
+                //so we need to INSERT a new row in the user_league_type table
+                const insertUserLeagueText = `
+                    INSERT INTO "user_league_type"
+                        ("user_id", "league_id", "type_id", "is_captain", "small_group_input", "team_name_input")
+                        VALUES
+                        ($1, $2, $3, $4, $5, $6);
+                `;
+
+                const insertUserLeagueValues = [user_id, league_id, type_id, is_captain, small_group_input, team_input]
+
+                const insertUserLeagueResult = await connection.query(insertUserLeagueText, insertUserLeagueValues)
+            }
         }
 
         await connection.query('Commit;')

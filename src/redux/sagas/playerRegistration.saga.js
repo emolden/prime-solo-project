@@ -38,7 +38,7 @@ function* LeagueRegistration (action) {
 
         yield put ({
             type: 'FETCH_USER_LEAGUE_TYPE',
-            payload: action.payload.user_id
+            payload: action.payload[0].user_id
         })
     } catch (error) {
         console.log('there was an error in the silveLeagueRegistration POST route: ', error)

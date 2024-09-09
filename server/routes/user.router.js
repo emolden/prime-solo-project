@@ -63,7 +63,7 @@ router.get('/leauge_type/:id', (req, res) => {
 
   pool.query (sqlText, sqlValue)
     .then ((result) => {
-      res.send(result)
+      res.send(result.rows)
     })
     .catch((dbErr) => {
       console.log('error in /user/league_type/:id GET router: ', dbErr)
