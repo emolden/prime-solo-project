@@ -8,6 +8,7 @@ function SkillAndExperience () {
 
     const[hittingSkill, setHittingSkill] = useState('')
     const[fieldingSkill, setFieldingSkill] = useState('')
+    const[position, setPosition] = useState('')
 
     const nextPage = () => {
         history.push('/register_to_play/review_and_submit')
@@ -166,8 +167,10 @@ function SkillAndExperience () {
                             <input
                                 type='radio'
                                 id='infield'
-                                name='infield'
+                                name='position'
                                 value='infield'
+                                checked={position === 'infield' ? true : false}
+                                onChange={(e) => setPosition(e.target.value)}
                             />
                             <label htmlFor='infield'>Infield</label>
                         </span>
@@ -175,8 +178,10 @@ function SkillAndExperience () {
                             <input
                                 type='radio'
                                 id='outfield'
-                                name='outfield'
+                                name='position'
                                 value='outfield'
+                                checked={position === 'outfield' ? true : false}
+                                onChange={(e) => setPosition(e.target.value)}
                             />
                             <label htmlFor='outfield'>Outfield</label>
                         </span>
@@ -184,8 +189,10 @@ function SkillAndExperience () {
                             <input
                                 type='radio'
                                 id='infieldOrOutfield'
-                                name='infieldOrOutfield'
+                                name='position'
                                 value='infieldOrOutfield'
+                                checked={position === 'infieldOrOutfield' ? true : false}
+                                onChange={(e) => setPosition(e.target.value)}
                             />
                             <label htmlFor='infieldOrOutfield'>Infield or Outfield</label>
                         </span>
