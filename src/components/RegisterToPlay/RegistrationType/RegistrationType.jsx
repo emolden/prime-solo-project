@@ -10,6 +10,7 @@ function RegistrationType () {
     const user = useSelector(store => store.user)
     const leagueOptions = useSelector(store => store.leagueOptions)
     const registrationTypes = useSelector(store => store.registrationTypes) 
+    const userLeagueType = useSelector(store => store.userLeagueType)
     
     const [silver, setSilver] = useState(false)
     const [bronze, setBronze] = useState(false)
@@ -30,6 +31,28 @@ function RegistrationType () {
         dispatch({
             type: 'GET_REGISTRATION_TYPES'
         })
+        if (userLeagueType.length > 0) {
+            for (let league of userLeagueType) {
+                if(league.league_id === '1') {
+                    setSilver(true);
+                    setSilverRegistrationType(league.type_id);
+                    setSilverSmallGroup(league.small_group_input)
+                    setSilverTeam(league.team_name_input)
+                    console.log(league.is_captain)
+                    setSilverCaptain(league.is_captain === true ? 'true' : 'false')
+                }
+                if(league.league_id === '2') {
+                    setBronze(true);
+                    setBronzeRegistrationType(league.type_id);
+                    setBronzeSmallGroup(league.small_group_input)
+                    setBronzeTeam(league.team_name_input)
+                    console.log(league.is_captain)
+                    setBronzeCaptain(league.is_captain === true ? 'true' : 'false')
+                }
+            }
+        }
+
+
     }, []);
 
     //dispatch to the playerRegistration saga
@@ -201,6 +224,7 @@ function RegistrationType () {
                                     id='yesSilverCaptain'
                                     name='silverCaptain'
                                     value='true'
+                                    checked={silverCaptain === 'true' ? true : false}
                                     onChange={(e) => setSilverCaptain(e.target.value)}
                                 />
                                 <label htmlFor='yesSilverCaptain'>yes</label>
@@ -211,6 +235,7 @@ function RegistrationType () {
                                     id='noSiverCaptain'
                                     name='silverCaptain'
                                     value='false'
+                                    checked={silverCaptain === 'false' ? true : false}
                                     onChange={(e) => setSilverCaptain(e.target.value)}
                                 />
                                 <label htmlFor='noSilverCaptain'>no</label>
@@ -257,7 +282,8 @@ function RegistrationType () {
                                     type='radio'
                                     id='yesBronzeCaptain'
                                     name='bronzeCaptain'
-                                    value='true'
+                                    value = 'true'
+                                    checked={bronzeCaptain === 'true' ? true : false}
                                     onChange={(e) => setBronzeCaptain(e.target.value)}
                                 />
                                 <label htmlFor='yesBronzeCaptain'>yes</label>
@@ -268,6 +294,7 @@ function RegistrationType () {
                                     id='noBronzeCaptain'
                                     name='bronzeCaptain'
                                     value='false'
+                                    checked={bronzeCaptain === 'false' ? true : false}
                                     onChange={(e) => setBronzeCaptain(e.target.value)}
                                 />
                                 <label htmlFor='noBronzeCaptain'>no</label>
