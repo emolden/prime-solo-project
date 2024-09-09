@@ -34,7 +34,7 @@ function RegistrationType () {
 
     //dispatch to the playerRegistration saga
     const nextPage = () => {
-        history.push('/register_to_play/skill_and_experience')
+        let leagueRegistration = []
 
         if(silver === true) {
             let silverLeagueRegistration = {
@@ -45,11 +45,9 @@ function RegistrationType () {
                 is_captain: silverCaptain,
                 user_id: user.id
             }
+            leagueRegistration.push(silverLeagueRegistration)
             // console.log('silver league registration submitted: ', silverLeagueRegistration)
-            dispatch({
-                type: 'LEAGUE_REGISTRATION',
-                payload: silverLeagueRegistration
-            })
+            
         }
         if(bronze === true) {
             let bronzeLeagueRegistration = {
@@ -60,12 +58,15 @@ function RegistrationType () {
                 is_captain: bronzeCaptain,
                 user_id: user.id
             }
+            leagueRegistration.push(bronzeLeagueRegistration)
             // console.log('bronze league registration submitted: ', bronzeLeagueRegistration)
-            dispatch({
-                type: 'LEAGUE_REGISTRATION',
-                payload: bronzeLeagueRegistration
-            })
         }
+        dispatch({
+            type: 'LEAGUE_REGISTRATION',
+            payload: leagueRegistration
+        })
+
+        history.push('/register_to_play/skill_and_experience')
     }
 
     const backPage = () => {
