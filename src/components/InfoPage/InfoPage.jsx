@@ -10,37 +10,72 @@ import {
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 
+//??????????????????? let admin be able to create/edit/delete teams ????????????????????
+//??????????????????? let admin be able to create/edit/delete leagues ??????????????????
+//??????????????????? let admin be able to see data from previous years ????????????????
+//??????????????????? let admin be able to see the data as charts ??????????????????????
+//???????????????????? delete snackbar ?????????????????????????????????????????????????
 
 function InfoPage() {
 
   const dispatch = useDispatch()
 
-  
-
   const [snackbar, setSnackbar] = useState(null);
 
+  // the snackbar is closed by resetting the snackbar value
   const handleCloseSnackbar = () => setSnackbar(null);
 
-  // leagueData is populated from the database with the registered users/players
-  // it is an array of objects that contains: id, name, 
+  // leagueData is an array of objects containing the registered users/players
+  // an example object is:
+  //{
+  //  id: 1,
+  //  league_id: 2,
+  //  team_id: 3,
+  //  user_team_id: 1,
+  //  user_id: 1,
+  //  name: Alice Walker,
+  //  email: alice.walker@example.com,
+  //  phone_number: 123-456-7890,
+  //  birthdate: 1990-06-15,
+  //  captain: false,
+  //  small_group_input: anna and becca,
+  //  registration_type: Small Group,
+  //  team_name_input: Queen Bees,
+  //  hitting: 2,
+  //  fielding: 1,
+  //  league: Bronze,
+  //  team: null,
+  //  positions: infield
+  //}
   const leagueData = useSelector((store) => store.leagueData);
+  // teamData is an array of objects containing all the teams 
+  // an example object is: {id: 1, name: Storm Hawks, league_id: 1}
   const teamData = useSelector((store) => store.teamData);
 
-  //sends a dispatch to GET_LEAGUE_DATA upon page load
+  //on page load
   useEffect (() => {
     console.log('info page loaded')
-      dispatch({ type: 'GET_LEAGUE_DATA'})
+    //sends a dispatch to admin saga
+    dispatch({ type: 'GET_LEAGUE_DATA'})
   },[]);
 
+  //function is called when a row is updated
   const useFakeMutation = () => {
-    console.log('in useFakeMutation function')
+    // console.log('in useFakeMutation function')
     return useCallback(
       (user) =>
         new Promise((resolve, reject) => {
           setTimeout(() => {
+            // console.log('in useFakeMutation function and user is: ', user);
+            // if the updated row name is left blank
+            // reject the edit and display an error in the snackbar
             if (user.name?.trim() === '') {
               reject(new Error('Error while saving user: name cannot be empty.'));
-            } else {
+            } 
+            // if the row name is not blank
+            // accept the edits
+            else {
+              //dispatch to admin saga -> request updated league data after row is updated
               dispatch({ type: 'GET_LEAGUE_DATA'}) // 👈 HACKY (?) FIX for weird race condition around DELETE thing...
               resolve({ ...user, name: user.name?.toUpperCase() });
             }
@@ -51,27 +86,24 @@ function InfoPage() {
   };
   const mutateRow = useFakeMutation();
 
-
-  //currently have a bug where if team is deleted the page isn't reloading so the 
-  // user_team_id is still the previous id number
-  // WHAT SHOULD HAPPEN: after a team has been deleted, the id should be null and when there is a new team
-  // assigned, the admin.saga should do a POST request
-  // WHAT IS HAPPENING: admin.saga is sending a PUT request but there is no user_team_id
-  // in the database that matches and nothing is happening. 
+  //function is called when a row is updated
   const processRowUpdate = async (newRow) => {
-      console.log( 'in processRowUPdate function and newRow and teamData reducer are: ', newRow);
+      // console.log( 'in processRowUPdate function and newRow and teamData reducer are: ', newRow);
     
-      // console.log('in processRowUpdate and updatePlayersTeam is: ')
-      //sends the updated row as a payload as a dispatch
+      //dispatches the updated row as a payload to admin saga
       dispatch({ type: 'CHANGE_PLAYER_TEAM', payload: newRow});
+
       const response = await mutateRow(newRow);
       
+      // if the new row edits are accepted set successful snackbar message
       setSnackbar({ children: 'User successfully saved', severity: 'success' });
       return response;
     }
-
+  
+  // is called when there is an error updating the row
   const handleProcessRowUpdateError = useCallback((error) => {
     console.log('in handleProcessRowUpdateError function and error is: ', error);
+    // if there was an error updating the row set the error snackbar message
     setSnackbar({ children: error.message, severity: 'error' });
   }, []);
 
@@ -79,15 +111,17 @@ function InfoPage() {
   const teamDropdownOptions = (teamArray) => {
     let dropdown = ['DELETE'];
 
+    // captures the team names as strings in an array
     let teamOptions = teamArray.map((team) => { return (team.name)})
 
+    //returns an array of team name strings with a 'DELETE' string
     return dropdown.concat(teamOptions);
   }
   
 
   const columns = [
     // field references a key in a row object
-    // headerName is what is desplaye don the dom
+    // headerName is what is desplayed on the dom
     // width is the set width but it can be adjusted by the user
     {
       field: 'name',
@@ -177,28 +211,41 @@ function InfoPage() {
       <ul>
         
       </ul>
+      {/* Box is the entire data table */}
       <Box sx={{ height: 700, width: '100%' }}>
       <DataGrid
+        // GriedToolbar is a type of toolbar that displays 
         slots={{ toolbar: GridToolbar }} 
+        // when a user double clicks on a cell, all the cells in the row that
+        // are editable can be changed
         editMode="row"
+        // all the object values with keys from leagueData that match column field keys 
+        // are displayed in the grid
         rows={leagueData}
+        // column headers come from the columns variable
         columns={columns}
+        // is called when the user hits enter or clicks somewhere else after editing a row
         processRowUpdate={processRowUpdate}
+        // is called when there is an error updating the row
         onProcessRowUpdateError={handleProcessRowUpdateError}
         initialState={{
           pagination: {
             paginationModel: {
+              // 15 rows are shown at a time
               pageSize: 15,
             },
           },
         }}
+        // the user can choose to show 5, 10, or 15 rows at a time
         pageSizeOptions={[5, 10, 15]}
-        checkboxSelection
+        // row editing stops when the user clicks off the row
         disableRowSelectionOnClick
       />
+      {/* when a row us updated the snackbar is displayed */}
       {!!snackbar && (
         <Snackbar
           open
+          //position of the snackbar
           anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
           onClose={handleCloseSnackbar}
           autoHideDuration={6000}

@@ -2,11 +2,29 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min.js';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+//?????????????????????data validation????????????????????
+
 function PlayerInformation () {
 
     const history = useHistory();
     const dispatch = useDispatch();
 
+    //user is an object of the form:
+    //{
+    //  id: 1,
+    //  name: Alice Walker,
+    //  username: awalker92,
+    //  password: *hashed and salted*,
+    //  is_admin: true,
+    //  email: alice.walker@example.com,
+    //  phone_number: 123-456-7890,
+    //  birthdate: 01/02/2003,
+    //  is_pitcher: true,
+    //  hitting_skill: 2,
+    //  fielding_skill: 1,
+    //  liability_acknowledgment: Alice Walker,
+    //  image: null
+    //}
     const user = useSelector(store => store.user)
 
     const [name, setName] = useState('')
@@ -18,12 +36,12 @@ function PlayerInformation () {
         setName(user.name);
         setEmail(user.email);
         setPhoneNumber(user.phone_number);
-        //need to put this in the correct form
+        //?????????????????need to put this in the correct form?????????????????????
         setBirthdate(user.birthdate);
     }, []);
 
     const nextPage = () => {
-
+        //dispatch to the playerRegistration reducer
         dispatch({
             type: 'UPDATE_PLAYER_INFORMATION',
             payload: {
@@ -34,10 +52,12 @@ function PlayerInformation () {
                 birthdate: birthdate
             }
         })
+        // go to next page
         history.push('/register_to_play/registration_type')
     }
 
     const backPage = () => {
+        //go to previous page
         history.push('/register_to_play/liability_acknowledgment')
     }
 

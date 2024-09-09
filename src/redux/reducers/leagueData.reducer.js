@@ -1,3 +1,5 @@
+//leagueData contain all the users that registered to play softball
+// and populates on the admin page 
 const leagueDataReducer = (state = [], action) => {
     // console.log('action payload is ',action.payload)
   switch (action.type) {

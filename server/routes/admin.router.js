@@ -2,8 +2,8 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-//GET route requests the league data from the database
-//route sends an array of objects back to the leagueData saga
+//GET route requests the league data and team data from the database
+//route sends an array of objects back to the admin saga
 router.get('/leaguedata', async (req, res) => {
     console.log('in the GET route of /api/admin/leaguedata');
 	let connection;
@@ -94,6 +94,7 @@ router.post ('/playerteam', async (req, res) => {
 
 		const teamQueryValue = [team]
 
+		//get the id of the team a player was put on
 		const teamQueryResult = await connection.query(teamQueryText, teamQueryValue);
 
 		// console.log('in POST /api/admin/playerteam and response from the database is: ', teamQueryResult.rows[0].id)
@@ -109,6 +110,7 @@ router.post ('/playerteam', async (req, res) => {
 
 		teamInsertValues = [playerId, teamId]
 
+		//use the team id to insert a new row into the user_team table
 		const insertTeamResult = await connection.query(teamInsertText, teamInsertValues)
 
 		await connection.query ('COMMIT;')
@@ -129,6 +131,7 @@ router.delete('/playerteam/:id', (req, res) => {
 
 	const teamToDelete = req.params.id;
 
+	//delete a row from the user_team table
 	const sqlText = `
 		DELETE FROM "user_team"
 			WHERE "id" = $1;
@@ -166,6 +169,7 @@ router.put('/playerteam/:id', async (req, res) => {
 
 		const teamQueryValue = [team]
 
+		//get the team id of the team the player was added to
 		const teamQueryResult = await connection.query(teamQueryText, teamQueryValue);
 
 		const teamId = teamQueryResult.rows[0].id
@@ -178,6 +182,7 @@ router.put('/playerteam/:id', async (req, res) => {
 
 		teamInsertValues = [teamId, userTeamId]
 
+		//update the row in the user_team table with the new team id
 		const insertTeamResult = await connection.query(teamInsertText, teamInsertValues)
 
 		await connection.query ('COMMIT;')

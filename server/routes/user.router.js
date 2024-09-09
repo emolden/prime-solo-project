@@ -49,6 +49,7 @@ router.post('/logout', (req, res, next) => {
   });
 });
 
+//request all the rows from the user_league_type table with which the user is associated
 router.get('/leauge_type/:id', (req, res) => {
   console.log('in /api/user/league_type GET route and the param is: ', req.params)
 
