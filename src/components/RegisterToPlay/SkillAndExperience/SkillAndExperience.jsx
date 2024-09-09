@@ -9,8 +9,10 @@ function SkillAndExperience () {
     const[hittingSkill, setHittingSkill] = useState('')
     const[fieldingSkill, setFieldingSkill] = useState('')
     const[position, setPosition] = useState('')
+    const[pitcher, setPitcher] = useState('')
 
     const nextPage = () => {
+        console.log(hittingSkill, fieldingSkill, position, pitcher);
         history.push('/register_to_play/review_and_submit')
     }
 
@@ -205,8 +207,10 @@ function SkillAndExperience () {
                             <input
                                 type='radio'
                                 id='yes'
-                                name='yes'
+                                name='pitcher'
                                 value='yes'
+                                checked={pitcher === 'yes' ? true : false}
+                                onChange={(e) => setPitcher(e.target.value)}
                             />
                             <label htmlFor='yes'>Yes</label>
                         </span>
@@ -214,8 +218,10 @@ function SkillAndExperience () {
                             <input
                                 type='radio'
                                 id='no'
-                                name='no'
+                                name='pitcher'
                                 value='no'
+                                checked={pitcher === 'no' ? true : false}
+                                onChange={(e) => setPitcher(e.target.value)}
                             />
                             <label htmlFor='no'>No</label>
                         </span>
