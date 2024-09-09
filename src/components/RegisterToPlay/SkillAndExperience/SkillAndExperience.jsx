@@ -7,6 +7,7 @@ function SkillAndExperience () {
     const history = useHistory();
 
     const[hittingSkill, setHittingSkill] = useState('')
+    const[fieldingSkill, setFieldingSkill] = useState('')
 
     const nextPage = () => {
         history.push('/register_to_play/review_and_submit')
@@ -151,6 +152,8 @@ function SkillAndExperience () {
                                 id='advancedFielder'
                                 name='fieldingSkill'
                                 value = '4'
+                                checked={fieldingSkill === '4' ? true : false}
+                                onChange={(e) => setFieldingSkill(e.target.value)}
                             />
                             <label htmlFor='advancedFielder'> Advanced - Strong and accurate throw, reliale in all positions, and can lead aspects of gameplay.</label>
                         </span>
