@@ -6,6 +6,7 @@ import teamData from './teamData.reducer';
 import softballregistration from './softballRegistration.reducer';
 import leagueOptions from './leagueOptions.reducer';
 import registrationTypes from './registrationTypes.reducer';
+import userLeagueType from './user_league_type.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   softballregistration,
   leagueOptions, // will be an array of objects containing the league name, day of the week, and id
   registrationTypes, //will be an array of objects containing the id and type
+  userLeagueType, //will be an array of objects containing the user id, league id, type id, small group input, team input
 });
 
 export default rootReducer;

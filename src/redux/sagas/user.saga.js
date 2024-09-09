@@ -24,8 +24,23 @@ function* fetchUser() {
   }
 }
 
+function* fetchUserLeagueType (action) {
+  // console.log('fetchUserLeaugeType', action.payload)
+  try {
+
+    const response = yield axios.get(`/api/user/leauge_type/${action.payload}`)
+
+    console.log('response from the server in api/user/leauge_type: ', response.data)
+    yield put ({ type: 'SET_USER_LEAGUE_TYPE', payload: response.data});
+
+  } catch (error) {
+    console.log('UserLeagueType GET request failed: ', error);
+  }
+}
+
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
+  yield takeLatest('FETCH_USER_LEAGUE_TYPE', fetchUserLeagueType)
 }
 
 export default userSaga;

@@ -36,9 +36,10 @@ function* LeagueRegistration (action) {
         //POST request sends the user id, league_id, small_group_input, team_name_input, is_captain, and type_id
         yield axios.post('/api/player_registration/league_registration', action.payload)
 
-        // yield put ({
-        //     type: 'FETCH_USER'
-        // })
+        yield put ({
+            type: 'FETCH_USER_LEAGUE_TYPE',
+            payload: action.payload.user_id
+        })
     } catch (error) {
         console.log('there was an error in the silveLeagueRegistration POST route: ', error)
     }
@@ -50,9 +51,10 @@ function* bronzeLeagueRegistration (action) {
         //POST request sends the user id, league_id, small_group_input, team_name_input, is_captain, and type_id
         yield axios.post('/api/player_registration/bronze_league_registration', action.payload)
 
-        // yield put ({
-        //     type: 'FETCH_USER'
-        // })
+        yield put ({
+            type: 'FETCH_USER_LEAGUE_TYPE',
+            payload: action.payload.user_id
+        })
     } catch (error) {
         console.log('there was an error in the bronzeLeagueRegistration POST route: ', error)
     }
