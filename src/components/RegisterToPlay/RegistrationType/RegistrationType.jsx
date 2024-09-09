@@ -22,6 +22,8 @@ function RegistrationType () {
     const [bronzeTeam, setBronzeTeam] = useState('')
     const [silverCaptain, setSilverCaptain] = useState('')
     const [bronzeCaptain, setBronzeCaptain] = useState('')
+    
+    //??????????? include a DELETE request ?????????????
     useEffect(() => {
         console.log('dispatch on page load')
         //dispatch to the leagueOptions saga
