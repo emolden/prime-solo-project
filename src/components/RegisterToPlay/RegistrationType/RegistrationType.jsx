@@ -58,8 +58,8 @@ function RegistrationType () {
     const [silverTeam, setSilverTeam] = useState('')
     const [bronzeSmallGroup, setBronzeSmallGroup] = useState('')
     const [bronzeTeam, setBronzeTeam] = useState('')
-    const [silverCaptain, setSilverCaptain] = useState('false')
-    const [bronzeCaptain, setBronzeCaptain] = useState('falsse')
+    const [silverCaptain, setSilverCaptain] = useState('')
+    const [bronzeCaptain, setBronzeCaptain] = useState('')
     
     useEffect(() => {
         console.log('dispatch on page load')
@@ -73,6 +73,7 @@ function RegistrationType () {
         })
         //if the userLeagueType reducer has something in the array
         if (userLeagueType.length > 0) {
+            console.log('userLeagueType is populated')
             // loop through the userLeagueType array
             for (let league of userLeagueType) {
                 // if the league_id is 1 (Silver)
