@@ -16,11 +16,11 @@ function RegisterToPlay ( ) {
         //send the user.id to the softballRegistration reducer so that
         // the POST request at the end of the registration process will know
         // which user is registering to play
-        console.log('started registration!: ', user.id);
-        dispatch({
-            type: `SET_USER_REGISTERING_TO_PLAY`,
-            payload: user.id
-        })
+        // console.log('started registration!: ', user.id);
+        // dispatch({
+        //     type: `SET_USER_REGISTERING_TO_PLAY`,
+        //     payload: user.id
+        // })
         //go to the nex page, liability acknowledgment
         history.push('/register_to_play/liability_acknowledgment')
     }
