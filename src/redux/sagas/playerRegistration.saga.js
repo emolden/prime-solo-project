@@ -54,9 +54,10 @@ function* skillAndExperience (action) {
         //PUT request sends the user_id, hitting_skill, fielding_skill, position_id, and is_pitcher
         yield axios.put('/api/player_registration/skill_and_experience', action.payload)
 
-        // yield put ({
-        //     type: 'FETCH_USER'
-        // })
+        //GET updated user data from the database
+        yield put ({
+            type: 'FETCH_USER'
+        })
     } catch (error) {
         console.log('there was an error in the playerInfomation PUT route: ', error)
     }
