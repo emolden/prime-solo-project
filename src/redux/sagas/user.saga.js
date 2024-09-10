@@ -55,8 +55,11 @@ function* fetchUserPosition (action) {
 
 // fetches the player names for everyone on the same team(s) as the user
 function* fetchCurrentTeams (action) {
+  console.log('in fetchCurrent Teams the action.payload is: ', action.payload)
   try {
     const response = yield axios.get(`/api/user/current_teams/${action.payload}`)
+
+    console.log('response form the server in /api/user/current_team/:id: ', response.data)
 
     // yield put ({type: , payload:})
   } catch (error) {

@@ -94,12 +94,12 @@ router.get('/position/:id', (req, res) => {
     })
 })
 
-router.get('/api/user/current_teams/:id', async (req, res) => {
+router.get('/current_teams/:id', async (req, res) => {
 
   const userId = req.params.id;
   let connection;
   try {
-    connection = await poolconnect()
+    connection = await pool.connect()
 
     await connection.query('BEGIN;')
 
@@ -112,7 +112,7 @@ router.get('/api/user/current_teams/:id', async (req, res) => {
     const userTeamValues = [userId]
 
     const userTeamResult = await connection.query(userTeamText, userTeamValues)
-    console.log('userTeamResult from the /api/user/current_team/:id GET route: ', userTeamResult)
+    console.log('userTeamResult from the /api/user/current_team/:id GET route: ', userTeamResult.rows)
 
       // use the team ids from the response to return the full teams to the user saga
     if(userTeamResult.rows.length === 1) {
@@ -135,7 +135,7 @@ router.get('/api/user/current_teams/:id', async (req, res) => {
 
       await connection.query('Commit;')
 
-      res.send(currentTeamResult)
+      res.send(currentTeamResult.rows)
     }
     else if (userTeamResult.rows.length === 2) {
       const currentTeamText = `
@@ -157,7 +157,7 @@ router.get('/api/user/current_teams/:id', async (req, res) => {
 
       await connection.query('Commit;')
 
-      res.send(currentTeamResult)
+      res.send(currentTeamResult.rows)
     }
     else {
       res.send([])
