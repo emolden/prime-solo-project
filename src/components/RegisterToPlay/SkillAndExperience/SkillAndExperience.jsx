@@ -26,6 +26,7 @@ function SkillAndExperience () {
     //  image: null
     //}
     const user = useSelector(store => store.user)
+    // userPosition is an object of the form: {id: 1, user_id: 5, position_id: 2}
     const userPosition = useSelector(store => store.userPosition)
 
     const[hittingSkill, setHittingSkill] = useState('')
@@ -122,7 +123,7 @@ function SkillAndExperience () {
                                 checked={hittingSkill === '1' ? true : false}
                                 onChange={(e) => setHittingSkill(e.target.value)}
                             />
-                            <label htmlFor='beginnerHitter'> Beginner - Learning to make contact, if contact is made it's likely hit to the infield</label>
+                            <label htmlFor='beginnerHitter'> Beginner - Learning to make contact, if contact is made it's likely hit to the infield.</label>
                         </span>
                         <span className= 'skill-input'>
                             <input
@@ -171,7 +172,7 @@ function SkillAndExperience () {
                                 checked={fieldingSkill === '1' ? true : false}
                                 onChange={(e) => setFieldingSkill(e.target.value)}
                             />
-                            <label htmlFor='beginnerFielder'> Beginner - Learning positions and fielding/throwing skills</label>
+                            <label htmlFor='beginnerFielder'> Beginner - Learning positions and fielding/throwing skills.</label>
                         </span>
                         <span>
                             <input
@@ -182,7 +183,7 @@ function SkillAndExperience () {
                                 checked={fieldingSkill === '2' ? true : false}
                                 onChange={(e) => setFieldingSkill(e.target.value)}
                             />
-                            <label htmlFor='developingFielder'> Developing - Comfortable in basic positions and developing reliable fielding/trhowing skills.</label>
+                            <label htmlFor='developingFielder'> Developing - Comfortable in basic positions and developing reliable fielding/throwing skills.</label>
                         </span>
                         <span>
                             <input
