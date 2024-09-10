@@ -58,6 +58,10 @@ function* skillAndExperience (action) {
         yield put ({
             type: 'FETCH_USER'
         })
+        yield put ({
+            type:'FETCH_USER_POSITION',
+            payload: action.payload.user_id
+        })
     } catch (error) {
         console.log('there was an error in the playerInfomation PUT route: ', error)
     }
