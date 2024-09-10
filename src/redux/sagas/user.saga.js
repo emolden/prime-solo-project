@@ -29,7 +29,7 @@ function* fetchUserLeagueType (action) {
   // console.log('fetchUserLeaugeType', action.payload)
   try {
     // sends get request to the user router
-    const response = yield axios.get(`/api/user/leauge_type/${action.payload}`)
+    const response = yield axios.get(`/api/user/league_type/${action.payload}`)
 
     // console.log('response from the server in api/user/leauge_type: ', response.data)
     //send registration information to the user_league_type reducer
@@ -40,9 +40,23 @@ function* fetchUserLeagueType (action) {
   }
 }
 
+function* fetchUserPosition (action) {
+  // console.log('in fetchUserPosition saga: ', action.payload)
+  try {
+    const response = yield axios.get(`api/user/position/${action.payload}`)
+
+    console.log('response from fetchUserPosition GET route: ', response.data)
+
+    // yield put ({})
+  } catch (error) {
+    console.log('error in fetchUserPosition GET request: ', error);
+  }
+}
+
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
   yield takeLatest('FETCH_USER_LEAGUE_TYPE', fetchUserLeagueType)
+  yield takeLatest('FETCH_USER_POSITION', fetchUserPosition)
 }
 
 export default userSaga;

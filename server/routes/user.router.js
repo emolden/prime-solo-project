@@ -50,8 +50,8 @@ router.post('/logout', (req, res, next) => {
 });
 
 //request all the rows from the user_league_type table with which the user is associated
-router.get('/leauge_type/:id', (req, res) => {
-  console.log('in /api/user/league_type GET route and the param is: ', req.params)
+router.get('/league_type/:id', (req, res) => {
+  // console.log('in /api/user/league_type GET route and the param is: ', req.params)
 
   const userId = req.params.id;
 
@@ -68,6 +68,28 @@ router.get('/leauge_type/:id', (req, res) => {
     })
     .catch((dbErr) => {
       console.log('error in /user/league_type/:id GET router: ', dbErr)
+      res.sendStatus(500);
+    })
+})
+
+router.get('/position/:id', (req, res) => {
+  console.log('in /api/user/position GET route and the param is: ', req.params)
+
+  const userId = req.params.id;
+
+  const sqlText = `
+    SELECT * FROM "user_positions"
+      WHERE "user_id" = $1;
+  `;
+
+  const sqlValue = [userId];
+
+  pool.query (sqlText, sqlValue)
+    .then ((result) => {
+      res.send(result.rows)
+    })
+    .catch((dbErr) => {
+      console.log('error in /user/position/:id GET router: ', dbErr)
       res.sendStatus(500);
     })
 })
