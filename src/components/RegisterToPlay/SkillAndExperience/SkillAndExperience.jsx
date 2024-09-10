@@ -1,5 +1,5 @@
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min.js';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 //????????????????????Data validation???????????????????????
@@ -31,6 +31,17 @@ function SkillAndExperience () {
     const[fieldingSkill, setFieldingSkill] = useState('')
     const[position, setPosition] = useState('')
     const[pitcher, setPitcher] = useState('')
+
+    useEffect(() => {
+        if(user.hitting_skill) {
+            setHittingSkill(user.hitting_skill)
+        }
+        if(user.fielding_skill) {
+            setFieldingSkill(user.fielding_skill)
+            setPitcher(user.is_pitcher === true ? 'true' : 'false')
+        }
+        
+    })
 
     const nextPage = () => {
         // console.log(hittingSkill, fieldingSkill, position, pitcher);
