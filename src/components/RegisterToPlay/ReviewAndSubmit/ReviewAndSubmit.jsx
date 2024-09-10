@@ -1,6 +1,7 @@
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import Swal from 'sweetalert2';
 
 
 function ReviewAndSubmit () {
@@ -42,10 +43,13 @@ function ReviewAndSubmit () {
     const userLeagueType = useSelector(store => store.userLeagueType)
 
     const submitRegistration = () => {
-        // dispatch({
-        //     type: 'NEW_PLAYER_REGISTRATION',
-        //     payload: 'new player'
-        // })
+        Swal.fire({
+            title: "Success!",
+            text: "You have successfully registered for West Metro Softball.",
+            icon: "success"
+          });
+        
+        history.push('/')
     }
 
     const backPage = () => {
