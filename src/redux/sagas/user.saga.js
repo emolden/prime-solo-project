@@ -45,9 +45,9 @@ function* fetchUserPosition (action) {
   try {
     const response = yield axios.get(`api/user/position/${action.payload}`)
 
-    console.log('response from fetchUserPosition GET route: ', response.data)
+    // console.log('response from fetchUserPosition GET route: ', response.data)
 
-    // yield put ({})
+    yield put ({ type: 'SET_USER_POSITION', payload: response.data})
   } catch (error) {
     console.log('error in fetchUserPosition GET request: ', error);
   }
