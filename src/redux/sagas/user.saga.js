@@ -53,10 +53,15 @@ function* fetchUserPosition (action) {
   }
 }
 
+function* fetchCurrentTeams (action) {
+  
+}
+
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
   yield takeLatest('FETCH_USER_LEAGUE_TYPE', fetchUserLeagueType)
   yield takeLatest('FETCH_USER_POSITION', fetchUserPosition)
+  yield takeLatest('FETCH_CURRENT_TEAMS', fetchCurrentTeams)
 }
 
 export default userSaga;
