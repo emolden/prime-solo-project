@@ -73,7 +73,7 @@ router.get('/league_type/:id', (req, res) => {
 })
 
 router.get('/position/:id', (req, res) => {
-  console.log('in /api/user/position GET route and the param is: ', req.params)
+  // console.log('in /api/user/position GET route and the param is: ', req.params)
 
   const userId = req.params.id;
 
@@ -92,6 +92,48 @@ router.get('/position/:id', (req, res) => {
       console.log('error in /user/position/:id GET router: ', dbErr)
       res.sendStatus(500);
     })
+})
+
+router.get('/api/user/current_teams/:id', async (req, res) => {
+
+  const userId = req.params.id;
+  let connection;
+  try {
+    connection = await poolconnect()
+
+    await connection.query('BEGIN;')
+
+    // check the user_teams table for the user's id
+    const userTeamText = `
+      SELECT * FROM "user_team"
+        WHERE "user_id" = $1;
+    `;
+
+    const userTeamValues = [userId]
+
+    const userTeamResult = await connection.query(userTeamText, userTeamValues)
+
+      // use the team ids from the response to return the full teams to the user saga
+    if(userTeamResult.length === 1) {
+
+    }
+    else if (userTeamResult.length === 2) {
+
+    }
+    else {
+
+    }
+  } catch (error) {
+    console.log('error in api/user/current_teams/:id ', error)
+    await connection.query('RollBack;')
+    res.sendStatus(500);
+  } finally {
+    await connection.release()
+  }
+  
+
+
+
 })
 
 module.exports = router;
