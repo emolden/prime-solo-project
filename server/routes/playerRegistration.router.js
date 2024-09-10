@@ -125,8 +125,78 @@ router.post('/league_registration', async (req, res) => {
     }
 });
 
-router.post('/bronze_league_registration', (req, res) => {
-    console.log('playerRegistration router received a request via /api/player_registration/bronze_league_registration ', req.body)
+//PUT route UPDATES the user table with the fielding_skill, hitting_skill, and is_pitcher
+// and either INSERTS or UPDATES the user_position table with the user_id and position_id
+router.put('/skill_and_experience', async (req, res) => {
+    // console.log('playerRegistration router received a request via /api/player_registration/skill_and_experience ', req.body)
+
+    const {user_id, hitting_skill, fielding_skill, is_pitcher, position_id} = req.body;
+
+    let connection;
+    try {
+        connection = await pool.connect()
+
+        await connection.query('BEGIN;')
+
+        //update the user table with the new data
+        const updateUserText = `
+            UPDATE "user"
+                SET "hitting_skill" = $1,
+                    "fielding_skill" = $2,
+                    "is_pitcher" = $3
+                WHERE "id" = $4;
+        `;
+
+        const updateUserValues = [hitting_skill, fielding_skill, is_pitcher, user_id];
+
+        const updateUserResult = await connection.query(updateUserText, updateUserValues)
+
+        //check for an existing row in the user_positions table with the user_id
+        const userPositionText = `
+            SELECT * FROM "user_positions"
+                WHERE "user_id" = $1;
+        `;
+
+        const userPositionValue = [user_id];
+
+        const userPositionResult = await connection.query(userPositionText, userPositionValue);
+
+        if (userPositionResult.rows[0]) {
+            //a row with the users id already exists
+            const updateUserPositionText = `
+                UPDATE "user_positions"
+                    SET "position_id" = $1
+                    WHERE "user_id" = $2;
+            `;
+
+            const updateUserPositionValues = [position_id, user_id];
+
+            const updateUserPositionResult = await connection.query(updateUserPositionText, updateUserPositionValues);
+        }
+        else {
+            const insertUserPositionText = `
+                INSERT INTO "user_positions"
+                ("user_id", "position_id")
+                VALUES
+                ($1, $2);
+            `;
+
+            const insertUserPositionValues = [user_id, position_id];
+
+            const instertUserPositionResult = await connection.query(insertUserPositionText, insertUserPositionValues);
+        }
+
+        await connection.query('Commit;')
+
+        res.sendStatus(201);
+    } catch (error) {
+        console.log('error in /api/player_registration/skill_and_experience PUT route: ', error)
+        await connection.query('ROLLBACK;')
+        res.sendStatus(500);
+    } finally {
+        await connection.release()
+    }
+
 })
 
 module.exports = router;
