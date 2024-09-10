@@ -26,6 +26,7 @@ function SkillAndExperience () {
     //  image: null
     //}
     const user = useSelector(store => store.user)
+    const userPosition = useSelector(store => store.userPosition)
 
     const[hittingSkill, setHittingSkill] = useState('')
     const[fieldingSkill, setFieldingSkill] = useState('')
@@ -40,8 +41,10 @@ function SkillAndExperience () {
             setFieldingSkill(user.fielding_skill)
             setPitcher(user.is_pitcher === true ? 'true' : 'false')
         }
-        
-    })
+        if(userPosition.position_id) {
+            setPosition(userPosition.position_id)
+        }
+    }, [])
 
     const nextPage = () => {
         // console.log(hittingSkill, fieldingSkill, position, pitcher);
