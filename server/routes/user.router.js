@@ -112,16 +112,55 @@ router.get('/api/user/current_teams/:id', async (req, res) => {
     const userTeamValues = [userId]
 
     const userTeamResult = await connection.query(userTeamText, userTeamValues)
+    console.log('userTeamResult from the /api/user/current_team/:id GET route: ', userTeamResult)
 
       // use the team ids from the response to return the full teams to the user saga
-    if(userTeamResult.length === 1) {
+    if(userTeamResult.rows.length === 1) {
+      const currentTeamText = `
+        SELECT 
+          "user_team"."id" AS "id",
+          "user"."name" AS "name",
+          "teams"."name" AS "team_name"
+          FROM "user"
+          JOIN "user_team"
+            ON "user"."id" = "user_team"."user_id"
+          JOIN "teams"
+            ON "user_team"."team_id" = "teams"."id"
+          WHERE "teams"."id" = $1;
+      `;
 
+      const currentTeamValues = [userTeamResult.rows[0].team_id]
+
+      const currentTeamResult = await connection.query(currentTeamText, currentTeamValues)
+
+      await connection.query('Commit;')
+
+      res.send(currentTeamResult)
     }
-    else if (userTeamResult.length === 2) {
+    else if (userTeamResult.rows.length === 2) {
+      const currentTeamText = `
+        SELECT 
+          "user_team"."id" AS "id",
+          "user"."name" AS "name",
+          "teams"."name" AS "team_name"
+          FROM "user"
+          JOIN "user_team"
+            ON "user"."id" = "user_team"."user_id"
+          JOIN "teams"
+            ON "user_team"."team_id" = "teams"."id"
+          WHERE "teams"."id" = $1 OR "teams"."id" = $2;
+      `;
 
+      const currentTeamValues = [userTeamResult.rows[0].team_id, userTeamResult.rows[1].team_id]
+
+      const currentTeamResult = await connection.query(currentTeamText, currentTeamValues)
+
+      await connection.query('Commit;')
+
+      res.send(currentTeamResult)
     }
     else {
-
+      res.send([])
     }
   } catch (error) {
     console.log('error in api/user/current_teams/:id ', error)
