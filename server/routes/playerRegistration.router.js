@@ -125,8 +125,12 @@ router.post('/league_registration', async (req, res) => {
     }
 });
 
-router.post('/bronze_league_registration', (req, res) => {
-    console.log('playerRegistration router received a request via /api/player_registration/bronze_league_registration ', req.body)
+//PUT route UPDATES the user table with the fielding_skill, hitting_skill, and is_pitcher
+// and either INSERTS or UPDATES the user_position table with the user_id and position_id
+router.put('/skill_and_experience', async (req, res) => {
+    console.log('playerRegistration router received a request via /api/player_registration/skill_and_experience ', req.body)
+
+    const
 })
 
 module.exports = router;

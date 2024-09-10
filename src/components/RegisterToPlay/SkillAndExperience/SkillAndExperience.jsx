@@ -1,10 +1,31 @@
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min.js';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-// 
+//????????????????????Data validation???????????????????????
+//???????????GET position prefrences from database??????????
 function SkillAndExperience () {
 
     const history = useHistory();
+    const dispatch = useDispatch();
+
+    //user is an object of the form:
+    //{
+    //  id: 1,
+    //  name: Alice Walker,
+    //  username: awalker92,
+    //  password: *hashed and salted*,
+    //  is_admin: true,
+    //  email: alice.walker@example.com,
+    //  phone_number: 123-456-7890,
+    //  birthdate: 01/02/2003,
+    //  is_pitcher: true,
+    //  hitting_skill: 2,
+    //  fielding_skill: 1,
+    //  liability_acknowledgment: Alice Walker,
+    //  image: null
+    //}
+    const user = useSelector(store => store.user)
 
     const[hittingSkill, setHittingSkill] = useState('')
     const[fieldingSkill, setFieldingSkill] = useState('')
@@ -12,7 +33,18 @@ function SkillAndExperience () {
     const[pitcher, setPitcher] = useState('')
 
     const nextPage = () => {
-        console.log(hittingSkill, fieldingSkill, position, pitcher);
+        // console.log(hittingSkill, fieldingSkill, position, pitcher);
+        //sends a dispatch to playerRegistration saga
+        dispatch({
+            type: 'UPDATE_SKILL_AND_EXPEREINCE',
+            payload: {
+                user_id: user.id,
+                hitting_skill: hittingSkill,
+                fielding_skill: fieldingSkill,
+                position_id: position,
+                is_pitcher: pitcher
+            }
+        })
         history.push('/register_to_play/review_and_submit')
     }
 
@@ -170,8 +202,8 @@ function SkillAndExperience () {
                                 type='radio'
                                 id='infield'
                                 name='position'
-                                value='infield'
-                                checked={position === 'infield' ? true : false}
+                                value= '1'
+                                checked={position === '1' ? true : false}
                                 onChange={(e) => setPosition(e.target.value)}
                             />
                             <label htmlFor='infield'>Infield</label>
@@ -181,8 +213,8 @@ function SkillAndExperience () {
                                 type='radio'
                                 id='outfield'
                                 name='position'
-                                value='outfield'
-                                checked={position === 'outfield' ? true : false}
+                                value='2'
+                                checked={position === '2' ? true : false}
                                 onChange={(e) => setPosition(e.target.value)}
                             />
                             <label htmlFor='outfield'>Outfield</label>
@@ -192,8 +224,8 @@ function SkillAndExperience () {
                                 type='radio'
                                 id='infieldOrOutfield'
                                 name='position'
-                                value='infieldOrOutfield'
-                                checked={position === 'infieldOrOutfield' ? true : false}
+                                value='3'
+                                checked={position === '3' ? true : false}
                                 onChange={(e) => setPosition(e.target.value)}
                             />
                             <label htmlFor='infieldOrOutfield'>Infield or Outfield</label>
@@ -208,8 +240,8 @@ function SkillAndExperience () {
                                 type='radio'
                                 id='yes'
                                 name='pitcher'
-                                value='yes'
-                                checked={pitcher === 'yes' ? true : false}
+                                value='true'
+                                checked={pitcher === 'true' ? true : false}
                                 onChange={(e) => setPitcher(e.target.value)}
                             />
                             <label htmlFor='yes'>Yes</label>
@@ -219,8 +251,8 @@ function SkillAndExperience () {
                                 type='radio'
                                 id='no'
                                 name='pitcher'
-                                value='no'
-                                checked={pitcher === 'no' ? true : false}
+                                value='false'
+                                checked={pitcher === 'false' ? true : false}
                                 onChange={(e) => setPitcher(e.target.value)}
                             />
                             <label htmlFor='no'>No</label>
