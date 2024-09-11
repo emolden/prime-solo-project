@@ -1,15 +1,23 @@
 import React from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
+import { useEffect } from 'react';
 // ???????????????????Upload Profile Picture???????????????????????????????
 function UserPage() {
-  // dispatch
+  const dispatch = useDispatch();
 
 
   const user = useSelector((store) => store.user);
   //call the current teams reducer
 
   //use UseEffect to fetch users current teams
+  useEffect (() => {
+    dispatch({
+      type: 'FETCH_CURRENT_TEAMS',
+        payload: user.id
+    })
+  }, []);
+
   return (
     <div className="container">
       <h2>Welcome, {user.username}!</h2>

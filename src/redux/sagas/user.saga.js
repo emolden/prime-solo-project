@@ -53,10 +53,25 @@ function* fetchUserPosition (action) {
   }
 }
 
+// fetches the player names for everyone on the same team(s) as the user
+function* fetchCurrentTeams (action) {
+  console.log('in fetchCurrent Teams the action.payload is: ', action.payload)
+  try {
+    const response = yield axios.get(`/api/user/current_teams/${action.payload}`)
+
+    console.log('response form the server in /api/user/current_team/:id: ', response.data)
+
+    // yield put ({type: , payload:})
+  } catch (error) {
+    console.log('currentTeams get request failed: ', error);
+  }
+}
+
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
   yield takeLatest('FETCH_USER_LEAGUE_TYPE', fetchUserLeagueType)
   yield takeLatest('FETCH_USER_POSITION', fetchUserPosition)
+  yield takeLatest('FETCH_CURRENT_TEAMS', fetchCurrentTeams)
 }
 
 export default userSaga;
