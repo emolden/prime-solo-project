@@ -95,7 +95,7 @@ router.get('/position/:id', (req, res) => {
 })
 
 router.get('/current_teams/:id', async (req, res) => {
-  console.log('/api/user/current_teams/:id received a request!')
+  // console.log('/api/user/current_teams/:id received a request!')
 
   const userId = req.params.id;
   let connection;
@@ -121,7 +121,7 @@ router.get('/current_teams/:id', async (req, res) => {
     const userTeamValues = [userId]
 
     const userTeamResult = await connection.query(userTeamText, userTeamValues)
-    console.log('userTeamResult from the /api/user/current_team/:id GET route: ', userTeamResult.rows)
+    // console.log('userTeamResult from the /api/user/current_team/:id GET route: ', userTeamResult.rows)
     // userTeamResult will come back as an empty array or an array with objects of the form:
     // {id: 11, user_id: '7', team_id: '4', team_name: 'Spectrum Screenprinting', league_id: '2'}
 
@@ -160,7 +160,7 @@ router.get('/current_teams/:id', async (req, res) => {
     
       let newTeam = {};
       newTeam[team.team_name] = currentTeamResult.rows;
-      console.log(newTeam)
+      // console.log(newTeam)
 
       fullTeams.push(newTeam)
     }

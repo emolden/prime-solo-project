@@ -61,6 +61,8 @@ function* fetchCurrentTeams (action) {
 
     console.log('response form the server in /api/user/current_team/:id: ', response.data)
 
+
+    //check for empty array in response
     // yield put ({type: , payload:})
   } catch (error) {
     console.log('currentTeams get request failed: ', error);
