@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import {useSelector, useDispatch} from 'react-redux';
 import { useEffect } from 'react';
@@ -17,6 +17,8 @@ function UserPage() {
   //  }]
   const currentTeams = useSelector((store) => store.currentTeams);
 
+  const [editForm, setEditForm] = useState(false);
+
   //use UseEffect to fetch users current teams
   useEffect (() => {
     dispatch({
@@ -25,6 +27,10 @@ function UserPage() {
     })
   }, []);
 
+  const inEditForm = () => {
+    setEditForm(!editForm);
+  }
+
   return (
     <div className="container">
       <h2>Welcome, {user.username}!</h2>
@@ -32,6 +38,7 @@ function UserPage() {
         <div>
           <img></img>
         </div>
+        {!editForm &&
         <div>
           <h3>User Profile</h3>
           <p>Name: {user.name}</p>
@@ -40,8 +47,21 @@ function UserPage() {
           <p>Phone Number: {user.phone_number}</p>
           <p>Birthdate: {user.birthdate}</p>
           {/* need to give the user the ability to edit when button is clicked */}
-          <button>Edit Profile Info</button>
+          <button onClick={inEditForm}>Edit Profile Info</button>
         </div>
+        }
+        {editForm &&
+        <div>
+        <h3>User Profile</h3>
+        <p>Name: {user.name}</p>
+        <p>Username: {user.username}</p>
+        <p>Email: {user.email}</p>
+        <p>Phone Number: {user.phone_number}</p>
+        <p>Birthdate: {user.birthdate}</p>
+        {/* need to give the user the ability to edit when button is clicked */}
+        <button onClick={inEditForm}>Save Profile Info</button>
+      </div>
+        }
       </section>
       <section>
         <h3>Your Current Teams</h3>
