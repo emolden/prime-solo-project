@@ -73,22 +73,11 @@ function* fetchCurrentTeams (action) {
   }
 }
 
-//updates the user information after the user saves on the user page
-// function* updateUserInfo (action) {
-//   try {
-//     yield axios.put('/api/user', action.payload);
-//     yield put({ type: 'SET_USER', payload: response.data });
-//   }catch{
-//     onsole.log('User get request failed', error);
-//   }
-// }
-
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
   yield takeLatest('FETCH_USER_LEAGUE_TYPE', fetchUserLeagueType)
   yield takeLatest('FETCH_USER_POSITION', fetchUserPosition)
   yield takeLatest('FETCH_CURRENT_TEAMS', fetchCurrentTeams)
-  // yield takeLatest('UPDATE_USER_INFO', updateUserInfo)
 }
 
 export default userSaga;
