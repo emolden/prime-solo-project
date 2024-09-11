@@ -95,6 +95,7 @@ router.get('/position/:id', (req, res) => {
 })
 
 router.get('/current_teams/:id', async (req, res) => {
+  console.log('/api/user/current_teams/:id received a request!')
 
   const userId = req.params.id;
   let connection;
@@ -105,7 +106,15 @@ router.get('/current_teams/:id', async (req, res) => {
 
     // check the user_teams table for the user's id
     const userTeamText = `
-      SELECT * FROM "user_team"
+      SELECT 
+        "user_team"."id" AS "id",
+        "user_team"."user_id" AS "user_id",
+        "user_team"."team_id" AS "team_id",
+        "teams"."name" AS "team_name",
+        "teams"."league_id" AS "league_id"
+        FROM "user_team"
+        JOIN "teams"
+          ON "user_team"."team_id" = "teams"."id"
         WHERE "user_id" = $1;
     `;
 
@@ -113,54 +122,59 @@ router.get('/current_teams/:id', async (req, res) => {
 
     const userTeamResult = await connection.query(userTeamText, userTeamValues)
     console.log('userTeamResult from the /api/user/current_team/:id GET route: ', userTeamResult.rows)
+    // userTeamResult will come back as an empty array or an array with objects of the form:
+    // {id: 11, user_id: '7', team_id: '4', team_name: 'Spectrum Screenprinting', league_id: '2'}
+
+    //fullTeams is an array of objects containing the full roster of players
+    // for each of the teams the user is on. It will have the form:
+    // [ {Storm Hawks: [
+    //      {
+    //        {id: 7, name: 'Charlotte Smitth', team_name: 'Storm Hawks'}
+    //      }]}]
+    let fullTeams = [];
+    
+    //if the userTeamResults array is not empty
+    if(userTeamResult.rows.length > 0) {
+      //loop through each object, using the team_id to return an
+      //array of objects containing the names of all the players on 
+      //the team
+      for(let team of userTeamResult.rows) {
+        const currentTeamText = `
+        SELECT 
+          "user_team"."id" AS "id",
+          "user"."name" AS "name",
+          "teams"."name" AS "team_name"
+          FROM "user"
+          JOIN "user_team"
+            ON "user"."id" = "user_team"."user_id"
+          JOIN "teams"
+            ON "user_team"."team_id" = "teams"."id"
+          WHERE "teams"."id" = $1
+          ORDER BY "user"."name";
+      `;
+
+      const currentTeamValues = [team.team_id]
 
       // use the team ids from the response to return the full teams to the user saga
-    if(userTeamResult.rows.length === 1) {
-      const currentTeamText = `
-        SELECT 
-          "user_team"."id" AS "id",
-          "user"."name" AS "name",
-          "teams"."name" AS "team_name"
-          FROM "user"
-          JOIN "user_team"
-            ON "user"."id" = "user_team"."user_id"
-          JOIN "teams"
-            ON "user_team"."team_id" = "teams"."id"
-          WHERE "teams"."id" = $1;
-      `;
-
-      const currentTeamValues = [userTeamResult.rows[0].team_id]
-
       const currentTeamResult = await connection.query(currentTeamText, currentTeamValues)
+    
+      let newTeam = {};
+      newTeam[team.team_name] = currentTeamResult.rows;
+      console.log(newTeam)
 
-      await connection.query('Commit;')
-
-      res.send(currentTeamResult.rows)
+      fullTeams.push(newTeam)
     }
-    else if (userTeamResult.rows.length === 2) {
-      const currentTeamText = `
-        SELECT 
-          "user_team"."id" AS "id",
-          "user"."name" AS "name",
-          "teams"."name" AS "team_name"
-          FROM "user"
-          JOIN "user_team"
-            ON "user"."id" = "user_team"."user_id"
-          JOIN "teams"
-            ON "user_team"."team_id" = "teams"."id"
-          WHERE "teams"."id" = $1 OR "teams"."id" = $2;
-      `;
-
-      const currentTeamValues = [userTeamResult.rows[0].team_id, userTeamResult.rows[1].team_id]
-
-      const currentTeamResult = await connection.query(currentTeamText, currentTeamValues)
 
       await connection.query('Commit;')
 
-      res.send(currentTeamResult.rows)
+      //the length of this array will be the number of teams the user is on
+      res.send(fullTeams)
     }
     else {
-      res.send([])
+      await connection.query('Commit;')
+
+      //fullTeams will be an empty array
+      res.send(fullTeams)
     }
   } catch (error) {
     console.log('error in api/user/current_teams/:id ', error)
