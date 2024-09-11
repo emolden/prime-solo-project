@@ -3,7 +3,7 @@ import axios from 'axios';
 
 //leagueData sends a GET request to the admin route
 function* leagueData (action) {
-    console.log('in leagueData saga function')
+    // console.log('in leagueData saga function')
     try{
         const response = yield axios.get(`/api/admin/leaguedata`);
         // console.log('response data from GET /api/admin in the leagueData saga is: ', response);

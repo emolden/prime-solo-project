@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import {useSelector, useDispatch} from 'react-redux';
 import { useEffect } from 'react';
+import convertISOtoDisplayable from '../../Helpers/dateFormatter';
 // ???????????????????Upload Profile Picture???????????????????????????????
 function UserPage() {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ function UserPage() {
   const [username, setUsername] = useState(user.username)
   const [email, setEmail] = useState(user.email)
   const [phone, setPhone] = useState(user.phone_number)
-  const [birthdate, setBirthdate] = useState(user.birthdate)
+  const [birthdate, setBirthdate] = useState(convertISOtoDisplayable(user.birthdate))
 
   //use UseEffect to fetch users current teams
   useEffect (() => {
@@ -67,7 +68,7 @@ function UserPage() {
           <p>Username: {user.username}</p>
           <p>Email: {user.email}</p>
           <p>Phone Number: {user.phone_number}</p>
-          <p>Birthdate: {user.birthdate}</p>
+          <p>Birthdate: {convertISOtoDisplayable(user.birthdate)}</p>
           {/* need to give the user the ability to edit when button is clicked */}
           <button onClick={enterEditForm}>Edit Profile Info</button>
         </div>
