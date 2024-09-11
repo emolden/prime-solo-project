@@ -95,6 +95,7 @@ router.get('/position/:id', (req, res) => {
 })
 
 router.get('/current_teams/:id', async (req, res) => {
+  console.log('/api/user/current_teams/:id received a request!')
 
   const userId = req.params.id;
   let connection;
@@ -114,7 +115,7 @@ router.get('/current_teams/:id', async (req, res) => {
         FROM "user_team"
         JOIN "teams"
           ON "user_team"."team_id" = "teams"."id"
-        WHERE "user_id" = 7;
+        WHERE "user_id" = $1;
     `;
 
     const userTeamValues = [userId]
@@ -158,9 +159,9 @@ router.get('/current_teams/:id', async (req, res) => {
       const currentTeamResult = await connection.query(currentTeamText, currentTeamValues)
     
       let newTeam = {};
-      newTeam[team_name] = currentTeamResult;
+      newTeam[team.team_name] = currentTeamResult.rows;
       console.log(newTeam)
-      
+
       fullTeams.push(newTeam)
     }
 
