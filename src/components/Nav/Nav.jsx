@@ -27,13 +27,22 @@ function Nav() {
             <Link className="navLink" to="/user">
               Home
             </Link>
-
-            <Link className="navLink" to="/info">
-              Info Page
+            <Link className="navLink" to="/register_to_play">
+              Register To Play
             </Link>
+            
 
             <LogOutButton className="navLink" />
           </>
+        )}
+
+        {/* If an admin is logged in, show these links */}
+        {user.is_admin && (
+          <>
+            <Link className="navLink" to="/admin">
+             League Data
+            </Link>
+        </>
         )}
 
         <Link className="navLink" to="/about">

@@ -122,8 +122,8 @@ function ReviewAndSubmit () {
                                                            {league.type_id === '2' && 'Small Group'}
                                                            {league.type_id === '3' && 'Team'}
                                     </li>
-                                    {league.type_id === '2' && <li>`Small Group: ${league.small_group_input}`</li>} 
-                                    {league.type_id === '3' && <li>`Team: ${league.team_name_input}`</li> }       
+                                    {league.type_id === '2' && <li>Small Group: {league.small_group_input}</li>} 
+                                    {league.type_id === '3' && <li>Team: {league.team_name_input}</li> }       
                                     <li>Willing to be team manager: {league.is_captian === true ? 'Yes' : 'No'}</li>
                                     </ul>
                                 )
