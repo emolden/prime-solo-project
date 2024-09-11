@@ -19,6 +19,10 @@ function UserPage() {
 
   const [editForm, setEditForm] = useState(false);
   const [name, setName] = useState(user.name);
+  const [username, setUsername] = useState(user.username)
+  const [email, setEmail] = useState(user.email)
+  const [phone, setPhone] = useState(user.phone_number)
+  const [birthdate, setBirthdate] = useState(user.birthdate)
 
   //use UseEffect to fetch users current teams
   useEffect (() => {
@@ -37,7 +41,7 @@ function UserPage() {
     dispatch({
       type: 'UPDATE_USER_INFO',
       payload: {
-        name: name
+        name, username, email, phone, birthdate
       }
     })
   }
@@ -69,10 +73,26 @@ function UserPage() {
           value = {name}
           onChange={(e) => setName(e.target.value)} 
         />
-        <p>Username: {user.username}</p>
-        <p>Email: {user.email}</p>
-        <p>Phone Number: {user.phone_number}</p>
-        <p>Birthdate: {user.birthdate}</p>
+        <p>Username:</p> 
+        <input
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <p>Email:</p>
+        <input
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <p>Phone Number:</p>
+        <input
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+        />
+        <p>Birthdate:</p>
+        <input
+          value={birthdate}
+          onChange={(e) => setBirthdate(e.target.value)}
+        />
         {/* need to give the user the ability to edit when button is clicked */}
         <button onClick={leaveEditForm}>Save Profile Info</button>
       </div>
