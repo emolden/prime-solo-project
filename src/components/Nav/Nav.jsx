@@ -27,17 +27,24 @@ function Nav() {
             <Link className="navLink" to="/user">
               Home
             </Link>
-            <Link className="navLink" to="/register_to_play">
-              Register To Play
-            </Link>
-            
-
-            <LogOutButton className="navLink" />
           </>
         )}
 
-        {/* If an admin is logged in, show these links */}
-        {user.is_admin && (
+        <Link className="navLink" to="/about">
+          About
+        </Link>
+
+        {/* If a user is logged in, show these links */}
+        {user.id && (
+          <>
+            <Link className="navLink" to="/register_to_play">
+              Register To Play
+            </Link>
+          </>
+        )}
+
+         {/* If an admin is logged in, show these links */}
+         {user.is_admin && (
           <>
             <Link className="navLink" to="/admin">
              League Data
@@ -45,9 +52,12 @@ function Nav() {
         </>
         )}
 
-        <Link className="navLink" to="/about">
-          About
-        </Link>
+        {/* If a user is logged in, show these links */}
+        {user.id && (
+          <>
+            <LogOutButton className="navLink" />
+          </>
+        )}
       </div>
     </div>
   );
