@@ -38,6 +38,7 @@ function UserPage() {
 
   const leaveEditForm = () => {
     setEditForm(!editForm)
+    // console.log({name, username, email, phone, birthdate})
     dispatch({
       type: 'UPDATE_USER_INFO',
       payload: {
