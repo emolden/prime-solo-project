@@ -127,10 +127,12 @@ router.get('/current_teams/:id', async (req, res) => {
 
     //fullTeams is an array of objects containing the full roster of players
     // for each of the teams the user is on. It will have the form:
-    // [ {Storm Hawks: [
-    //      {
-    //        {id: 7, name: 'Charlotte Smitth', team_name: 'Storm Hawks'}
-    //      }]}]
+    // [ {
+    //      teamName: 'Storm Hawks', 
+    //      players: [
+    //                {id: 7, name: 'Charlotte Smitth', team_name: 'Storm Hawks'}
+    //                ]
+    //  }]
     let fullTeams = [];
     
     //if the userTeamResults array is not empty
@@ -158,8 +160,10 @@ router.get('/current_teams/:id', async (req, res) => {
       // use the team ids from the response to return the full teams to the user saga
       const currentTeamResult = await connection.query(currentTeamText, currentTeamValues)
     
-      let newTeam = {};
-      newTeam[team.team_name] = currentTeamResult.rows;
+      let newTeam = {
+        teamName: team.team_name,
+        players: currentTeamResult.rows
+      };
       // console.log(newTeam)
 
       fullTeams.push(newTeam)

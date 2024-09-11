@@ -9,6 +9,13 @@ function UserPage() {
 
   const user = useSelector((store) => store.user);
   //call the current teams reducer
+  // [ {
+  //      teamName: 'Storm Hawks', 
+  //      players: [
+  //                {id: 7, name: 'Charlotte Smitth', team_name: 'Storm Hawks'}
+  //                ]
+  //  }]
+  const currentTeams = useSelector((store) => store.currentTeams);
 
   //use UseEffect to fetch users current teams
   useEffect (() => {
@@ -38,20 +45,22 @@ function UserPage() {
       </section>
       <section>
         <h3>Your Current Teams</h3>
-        <div>
           {/* Will need to map through teams here */}
-          <div>
-            <h4>Pocket Square</h4>
-            {/* will need to map thorugh player names here */}
-            <ol>
-              <li>Player 1</li>
-              <li>Player 1</li>
-              <li>Player 1</li>
-              <li>Player 1</li>
-              <li>Player 1</li>
-            </ol>
-          </div>
-        </div>
+          {currentTeams.map((team) => {
+            return(
+              <div>
+                <h4>{team.teamName}</h4>
+                {/* will need to map thorugh player names here */}
+                <ol>
+                  {team.players.map((player) => {
+                    return (
+                        <li>{player.name}</li>
+                    )
+                  })}
+                </ol>
+              </div>
+              )
+          })}
       </section>
       {/* <p>Your ID is: {user.id}</p> */}
       {/* <LogOutButton className="btn" /> */}

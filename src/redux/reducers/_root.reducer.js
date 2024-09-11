@@ -7,7 +7,7 @@ import leagueOptions from './leagueOptions.reducer';
 import registrationTypes from './registrationTypes.reducer';
 import userLeagueType from './userLeagueType.reducer';
 import userPosition from './userPosition.reducer';
-import currentTeamsReducer from './currentTeams.reducer';
+import currentTeams from './currentTeams.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -24,7 +24,7 @@ const rootReducer = combineReducers({
   registrationTypes, //will be an array of objects containing the id and type
   userLeagueType, //will be an array of objects containing the user id, league id, type id, small group input, team input
   userPosition, //will be an array of objects containing the id, user_id, position_id
-  currentTeamsReducer, //will be an array of team objects containing and array of objects containing the names of all the players on that team
+  currentTeams, //will be an array of team objects containing and array of objects containing the names of all the players on that team
 });
 
 export default rootReducer;
