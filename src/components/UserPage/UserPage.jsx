@@ -18,6 +18,7 @@ function UserPage() {
   const currentTeams = useSelector((store) => store.currentTeams);
 
   const [editForm, setEditForm] = useState(false);
+  const [name, setName] = useState(user.name);
 
   //use UseEffect to fetch users current teams
   useEffect (() => {
@@ -27,8 +28,18 @@ function UserPage() {
     })
   }, []);
 
-  const inEditForm = () => {
+  const enterEditForm = () => {
     setEditForm(!editForm);
+  }
+
+  const leaveEditForm = () => {
+    setEditForm(!editForm)
+    dispatch({
+      type: 'UPDATE_USER_INFO',
+      payload: {
+        name: name
+      }
+    })
   }
 
   return (
@@ -47,19 +58,23 @@ function UserPage() {
           <p>Phone Number: {user.phone_number}</p>
           <p>Birthdate: {user.birthdate}</p>
           {/* need to give the user the ability to edit when button is clicked */}
-          <button onClick={inEditForm}>Edit Profile Info</button>
+          <button onClick={enterEditForm}>Edit Profile Info</button>
         </div>
         }
         {editForm &&
         <div>
         <h3>User Profile</h3>
-        <p>Name: {user.name}</p>
+        <p>Name:</p> 
+        <input
+          value = {name}
+          onChange={(e) => setName(e.target.value)} 
+        />
         <p>Username: {user.username}</p>
         <p>Email: {user.email}</p>
         <p>Phone Number: {user.phone_number}</p>
         <p>Birthdate: {user.birthdate}</p>
         {/* need to give the user the ability to edit when button is clicked */}
-        <button onClick={inEditForm}>Save Profile Info</button>
+        <button onClick={leaveEditForm}>Save Profile Info</button>
       </div>
         }
       </section>
