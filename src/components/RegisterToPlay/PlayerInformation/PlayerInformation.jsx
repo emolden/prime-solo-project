@@ -46,6 +46,7 @@ function PlayerInformation () {
             type: 'UPDATE_PLAYER_INFORMATION',
             payload: {
                 user_id: user.id,
+                username: user.username,
                 name: name,
                 email: email,
                 phone_number: phoneNumber,

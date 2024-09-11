@@ -31,18 +31,19 @@ router.put('/liability_acknowledgment', (req, res) => {
 router.put('/player_information', (req, res) => {
     // console.log('/api/player_registration/liability_acknowledgment PUT route received a request!', req.body)
 
-    const { user_id, name, email, phone_number, birthdate } = req.body;
+    const { user_id, username, name, email, phone_number, birthdate } = req.body;
 
     sqlText = `
         UPDATE "user"
             SET "name" = $1,
-                "email" = $2,
-                "phone_number" = $3,
-                "birthdate" = $4
-            WHERE "id" = $5;
+                "username" = $2,
+                "email" = $3,
+                "phone_number" = $4,
+                "birthdate" = $5
+            WHERE "id" = $6;
     `;
 
-    sqlValues = [name, email, phone_number, birthdate, user_id];
+    sqlValues = [name, username, email, phone_number, birthdate, user_id];
 
     pool.query (sqlText, sqlValues)
         .then((result) => {
