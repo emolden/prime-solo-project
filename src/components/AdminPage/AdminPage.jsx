@@ -9,6 +9,7 @@ import {
 } from '@mui/x-data-grid';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
+import convertISOtoDisplayable from '../../Helpers/dateFormatter';
 
 //??????????????????? let admin be able to create/edit/delete teams ????????????????????
 //??????????????????? let admin be able to create/edit/delete leagues ??????????????????
@@ -54,10 +55,36 @@ function AdminPage() {
 
   //on page load
   useEffect (() => {
-    console.log('info page loaded')
+    // console.log('info page loaded')
     //sends a dispatch to admin saga
     dispatch({ type: 'GET_LEAGUE_DATA'})
   },[]);
+
+  //parse and format date from database
+  const formatDates = leagueData.map(player => {
+    // console.log(player, player.birthday);
+      return {...player, birthday: convertISOtoDisplayable(player.birthday)}
+    })
+
+
+  // id: arrayOfObjects.id,
+  //         league_id: arrayOfObjects.league_id,
+  //         team_id: arrayOfObjects.team_id,
+  //         user_team_id: arrayOfObjects.user_team,
+  //         user_id: arrayOfObjects.user_id,
+  //         name: arrayOfObjects.name,
+  //         email: arrayOfObjects.email,
+  //         phone_number: arrayOfObjects.phone_number,
+  //         birthdate: convertISOtoDisplayable(arrayOfObjects.birthdate),
+  //         captain: arrayOfObjects.captain,
+  //         small_group_input: arrayOfObjects.small_group_input,
+  //         registration_type: arrayOfObjects.registration_type,
+  //         team_name_input: arrayOfObjects.team_input,
+  //         hitting: ,
+  //         fielding: 1,
+  //         league: Bronze,
+  //         team: null,
+  //         positions: infield
 
   //function is called when a row is updated
   const useFakeMutation = () => {
@@ -221,7 +248,7 @@ function AdminPage() {
         editMode="row"
         // all the object values with keys from leagueData that match column field keys 
         // are displayed in the grid
-        rows={leagueData}
+        rows={formatDates}
         // column headers come from the columns variable
         columns={columns}
         // is called when the user hits enter or clicks somewhere else after editing a row

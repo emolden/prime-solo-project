@@ -2,7 +2,7 @@
 // position preferences for the user registering to play
 
 const userPositionReducer = (state = {}, action) => {
-    console.log('in userPosition reducer:', action.payload)
+    // console.log('in userPosition reducer:', action.payload)
 
     switch (action.type) {
         case 'SET_USER_POSITION':

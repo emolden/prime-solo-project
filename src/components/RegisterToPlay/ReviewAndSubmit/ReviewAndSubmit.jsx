@@ -2,6 +2,7 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import Swal from 'sweetalert2';
+import convertISOtoDisplayable from '../../../Helpers/dateFormatter';
 
 
 function ReviewAndSubmit () {
@@ -109,7 +110,7 @@ function ReviewAndSubmit () {
                             <li>Name: {user.name}</li>
                             <li>Email: {user.email}</li>
                             <li>Phone Number: {user.phone_number}</li>
-                            <li>Birthdate: {user.birthdate}</li>
+                            <li>Birthdate: {convertISOtoDisplayable(user.birthdate)}</li>
                         </ul>
                     </li>
                     <li>
