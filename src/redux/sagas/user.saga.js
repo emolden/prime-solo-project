@@ -40,6 +40,7 @@ function* fetchUserLeagueType (action) {
   }
 }
 
+//fetches the position preferences the user has
 function* fetchUserPosition (action) {
   // console.log('in fetchUserPosition saga: ', action.payload)
   try {

@@ -39,10 +39,16 @@ function UserPage() {
   const leaveEditForm = () => {
     setEditForm(!editForm)
     // console.log({name, username, email, phone, birthdate})
+    //dispatch to the user saga
     dispatch({
-      type: 'UPDATE_USER_INFO',
+      type: 'UPDATE_PLAYER_INFORMATION',
       payload: {
-        name, username, email, phone, birthdate
+                user_id: user.id,
+                username: username,
+                name: name,
+                email: email,
+                phone_number: phone,
+                birthdate: birthdate
       }
     })
   }
