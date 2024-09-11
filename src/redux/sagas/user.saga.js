@@ -59,9 +59,14 @@ function* fetchCurrentTeams (action) {
   try {
     const response = yield axios.get(`/api/user/current_teams/${action.payload}`)
 
-    console.log('response form the server in /api/user/current_team/:id: ', response.data)
-
-    // yield put ({type: , payload:})
+    // console.log('response form the server in /api/user/current_team/:id: ', response.data)
+    
+    //check for empty array in response
+    if(response.data.length > 0) {
+      //send the response data to the currentTeams reducer
+      yield put ({type: 'SET_CURRENT_TEAMS', payload: response.data})
+    }
+    
   } catch (error) {
     console.log('currentTeams get request failed: ', error);
   }
