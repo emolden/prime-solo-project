@@ -25,8 +25,9 @@ function UserPage() {
   const [phone, setPhone] = useState(user.phone_number)
   const [birthdate, setBirthdate] = useState(convertISOtoDisplayable(user.birthdate))
 
-  //use UseEffect to fetch users current teams
+  //use UseEffect to fetch users current teams 
   useEffect (() => {
+    //dispatch to user saga
     dispatch({
       type: 'FETCH_CURRENT_TEAMS',
         payload: user.id

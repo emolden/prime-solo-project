@@ -56,7 +56,7 @@ router.put('/player_information', (req, res) => {
 
 //POST route either UPDATES or INSERTS row in the user_league_type table
 router.post('/league_registration', async (req, res) => {
-    // console.log('playerRegistration router received a request via /api/player_registration/league_registration ', req.body)
+    console.log('playerRegistration router received a request via /api/player_registration/league_registration ', req.body)
 
     let connection;
     try {
@@ -66,7 +66,7 @@ router.post('/league_registration', async (req, res) => {
 
         for (let league of req.body) {
             const { league_id, type_id, small_group_input, team_input, is_captain, user_id } = league
-            // console.log(user_id, league_id, type_id, is_captain, small_group_input, team_input)
+            console.log(user_id, league_id, type_id, is_captain, small_group_input, team_input)
         
 
             const userLeagueText = `
@@ -78,7 +78,7 @@ router.post('/league_registration', async (req, res) => {
 
             //checks to see if the user is already registered with the silver league
             const userLeagueResult = await connection.query(userLeagueText, userLeagueValue);
-            // console.log('database response to userLeague', userLeagueResult)
+            console.log('database response to userLeague', userLeagueResult)
 
             if (userLeagueResult.rows[0]) {
                 //the user is already registered with the silver league
@@ -98,7 +98,7 @@ router.post('/league_registration', async (req, res) => {
                 const updateUserLeagueValues = [Number(user_id), Number(league_id), Number(type_id), is_captain, small_group_input, team_input, userLeagueId]
 
                 const updateUserLeagueResult = await connection.query(updateUserLeagueText, updateUserLeagueValues)
-                // console.log('database response to updateUserLeague', updateUserLeagueResult)
+                console.log('database response to updateUserLeague', updateUserLeagueResult)
             }
             else {
                 //the user is not registered with the silver league
@@ -113,7 +113,7 @@ router.post('/league_registration', async (req, res) => {
                 const insertUserLeagueValues = [Number(user_id), Number(league_id), Number(type_id), is_captain, small_group_input, team_input]
 
                 const insertUserLeagueResult = await connection.query(insertUserLeagueText, insertUserLeagueValues)
-                // console.log('database response to insertUserLeague', insertLeagueResult)
+                console.log('database response to insertUserLeague', insertLeagueResult)
             }
         }
 

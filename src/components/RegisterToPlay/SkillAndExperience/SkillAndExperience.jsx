@@ -248,7 +248,7 @@ function SkillAndExperience () {
                     </div>
                 </div>
                 <div>
-                    <p>Are you able/willing to pictch in a game?</p>
+                    <p>Are you able/willing to pitch in a game?</p>
                     <div className='skill-options'>
                         <span>
                             <input

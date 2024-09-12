@@ -118,13 +118,13 @@ function ReviewAndSubmit () {
                             {userLeagueType.map((league) => {
                                 return (
                                     <ul key={league.id}>
-                                    <li>League: {league.league_id === '1' ? 'Silver' : 'Bronze'}</li>
-                                    <li>Registration Type: {league.type_id === '1' && 'Individual'} 
-                                                           {league.type_id === '2' && 'Small Group'}
-                                                           {league.type_id === '3' && 'Team'}
+                                    <li>League: {Number(league.league_id) === 1 ? 'Silver' : 'Bronze'}</li>
+                                    <li>Registration Type: {Number(league.type_id) === 1 && 'Individual'} 
+                                                           {Number(league.type_id) === 2 && 'Small Group'}
+                                                           {Number(league.type_id) === 3 && 'Team'}
                                     </li>
-                                    {league.type_id === '2' && <li>Small Group: {league.small_group_input}</li>} 
-                                    {league.type_id === '3' && <li>Team: {league.team_name_input}</li> }       
+                                    {Number(league.type_id) === 2 && <li>Small Group: {league.small_group_input}</li>} 
+                                    {Number(league.type_id) === 3 && <li>Team: {league.team_name_input}</li> }       
                                     <li>Willing to be team manager: {league.is_captian === true ? 'Yes' : 'No'}</li>
                                     </ul>
                                 )
@@ -134,19 +134,19 @@ function ReviewAndSubmit () {
                     <li>
                         <p>Skill & Experience</p>
                         <ul>
-                            <li>Hitting Skill:  {user.hitting_skill === '1' && `Beginner - Learning to make contact, if contact is made it's likely hit to the infield.`} 
-                                                {user.hitting_skill === '2' && 'Developing - Makes contact most of the time. Infield hits are common and occasional outfield hit.'}
-                                                {user.hitting_skill === '3' && 'Intermediate - Hits hard ground/fly balls. Occasional big hit.'}
-                                                {user.hitting_skill === '4' && 'Advanced - Power hitter, deep fly balls, and occasional homerun.'}
+                            <li>Hitting Skill:  {Number(user.hitting_skill) === 1 && `Beginner - Learning to make contact, if contact is made it's likely hit to the infield.`} 
+                                                {Number(user.hitting_skill) === 2 && 'Developing - Makes contact most of the time. Infield hits are common and occasional outfield hit.'}
+                                                {Number(user.hitting_skill) === 3 && 'Intermediate - Hits hard ground/fly balls. Occasional big hit.'}
+                                                {Number(user.hitting_skill) === 4 && 'Advanced - Power hitter, deep fly balls, and occasional homerun.'}
                             </li>
-                            <li>Fielding Skill: {user.fielding_skill === '1' && 'Beginner - Learning positions and fielding/throwing skills.'}
-                                                {user.fielding_skill === '2' && 'Developing - Comfortable in basic positions and developing reliable fielding/throwing skills.'}
-                                                {user.fielding_skill === '3' && 'Intermediate - Can play all poisitions comfortable, accurate throw, and reliable skill.'}
-                                                {user.fielding_skill === '4' && 'Advanced - Strong and accurate throw, reliale in all positions, and can lead aspects of gameplay.'}
+                            <li>Fielding Skill: {Number(user.fielding_skill) === 1 && 'Beginner - Learning positions and fielding/throwing skills.'}
+                                                {Number(user.fielding_skill) === 2 && 'Developing - Comfortable in basic positions and developing reliable fielding/throwing skills.'}
+                                                {Number(user.fielding_skill) === 3 && 'Intermediate - Can play all poisitions comfortable, accurate throw, and reliable skill.'}
+                                                {Number(user.fielding_skill) === 4 && 'Advanced - Strong and accurate throw, reliale in all positions, and can lead aspects of gameplay.'}
                             </li>
-                            <li>Position Preference:{userPosition.position_id === '1' && 'Infield'}
-                                                    {userPosition.position_id === '2' && 'Outfield'}
-                                                    {userPosition.position_id === '3' && 'Infield or Outfield'}
+                            <li>Position Preference:{Number(userPosition.position_id) === 1 && 'Infield'}
+                                                    {Number(userPosition.position_id) === 2 && 'Outfield'}
+                                                    {Number(userPosition.position_id) === 3 && 'Infield or Outfield'}
 
                             </li>
                             <li>Able to Pitch:{user.is_pitcher === true ? 'Yes' : 'No'}</li>
