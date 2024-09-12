@@ -21,15 +21,15 @@ function* leagueData (action) {
 function* changePlayerTeam (action) {
     // console.log('in updatePlayerData saga and the payload is: ', action.payload)
     let playerChangeInfo = action.payload;
-    //Check the playerChangeInfo.user_team_id to see if the user is already associated with a 
+    //Check the playerChangeInfo.user_league_type_team_id to see if the user is already associated with a 
     //team. 
-    if (playerChangeInfo.user_team_id === null) {
-        console.log('in changePlayerteam and playerChangeInfo.user_team_id was NULL')
+    if (playerChangeInfo.user_league_type_team_id === null) {
+        console.log('in changePlayerteam and playerChangeInfo.user_league_type_team_id was NULL')
         if (playerChangeInfo.team === 'DELETE') {
             //do nothing
         }
         else {
-           //If the playerChangeInfo.user_team_id = null, then do  POST route with 
+           //If the playerChangeInfo.user_league_type_team_id = null, then do  POST route with 
             //the PlayerChangeInfo.user-id and PlayerChangeInfo.team name. 
             try {
                 yield axios.post('/api/admin/playerteam', {playerId: playerChangeInfo.user_id, team: playerChangeInfo.team})
@@ -44,14 +44,14 @@ function* changePlayerTeam (action) {
         }
     }
     else {
-        //If the playerChangeInfo.user_team_id != null, then check
+        //If the playerChangeInfo.user_league_type_team_id != null, then check
         //playerChangeInfo.team
-        // console.log('in changePlayerteam and playerChangeInfo.user_team_id was NOT NULL')
+        // console.log('in changePlayerteam and playerChangeInfo.user_league_type_team_id was NOT NULL')
         if (playerChangeInfo.team === 'DELETE') {
             //If playerChangeInfo.team = DELETE, then do a DELETE 
-            //route with the playerChangeInfo.user_team_id
+            //route with the playerChangeInfo.user_league_type_team_id
             try {
-                yield axios.delete(`/api/admin/playerteam/${playerChangeInfo.user_team_id}`)
+                yield axios.delete(`/api/admin/playerteam/${playerChangeInfo.user_league_type_team_id}`)
 
                 //get request for updated league data
                 yield put({
@@ -63,10 +63,10 @@ function* changePlayerTeam (action) {
         }
         else {
             //If the length of playerChangeInfo.team != 0, then do a PUT route
-            // with the playerChangeInfo.user_team_id and 
-            // make a get request to the server looking for a row in user_team table
+            // with the playerChangeInfo.user_league_type_team_id and 
+            // make a get request to the server looking for a row in ult_team table
             try {
-                yield axios.put(`/api/admin/playerteam/${playerChangeInfo.user_team_id}`, {team: playerChangeInfo.team})
+                yield axios.put(`/api/admin/playerteam/${playerChangeInfo.user_league_type_team_id}`, {team: playerChangeInfo.team})
                 
                 //get request for updated league data
                 yield put({
