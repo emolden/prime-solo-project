@@ -32,7 +32,7 @@ function AdminPage() {
   //  id: 1,
   //  league_id: 2,
   //  team_id: 3,
-  //  user_team_id: 1,
+  //  user_league_type_team_id: 1,
   //  user_id: 1,
   //  name: Alice Walker,
   //  email: alice.walker@example.com,
@@ -72,10 +72,10 @@ function AdminPage() {
     })
 
 
-  // id: arrayOfObjects.id,
+  //         id: arrayOfObjects.id,
   //         league_id: arrayOfObjects.league_id,
   //         team_id: arrayOfObjects.team_id,
-  //         user_team_id: arrayOfObjects.user_team,
+  //         user_league_type_team_id: arrayOfObjects.user_league_type_team_id,
   //         user_id: arrayOfObjects.user_id,
   //         name: arrayOfObjects.name,
   //         email: arrayOfObjects.email,
