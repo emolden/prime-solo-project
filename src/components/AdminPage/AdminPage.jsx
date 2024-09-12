@@ -63,7 +63,12 @@ function AdminPage() {
   //parse and format date from database
   const formatDates = leagueData.map(player => {
     // console.log(player, player.birthday);
+    if(player.birthday) {
       return {...player, birthday: convertISOtoDisplayable(player.birthday)}
+    }
+    else {
+      return{...player}
+    }
     })
 
 
