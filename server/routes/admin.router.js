@@ -14,16 +14,16 @@ router.get('/leaguedata', async (req, res) => {
 		await connection.query('BEGIN;')
 
     const leagueDataQueryText = `
-     SELECT 
+    SELECT 
 	"user_league_type"."id" AS "id",
 	"user_league_type"."league_id" AS "league_id",
-	"user_team"."team_id" AS "team_id",
-	"user_team"."id" AS "user_team_id",
+	"ult_team"."team_id" AS "team_id",
+	"ult_team"."id" AS "user_league_type_team_id",
 	"user"."id" AS "user_id",
 	"user"."name" AS "name",
 	"user"."email" AS "email",
 	"user"."phone_number" AS "phone_number",
-	"user"."birthdate" AS "birthday",
+	"user"."birthdate" AS "birthdate",
 	"user_league_type"."is_captain" AS "captain",
 	"user"."is_pitcher" AS "pitcher",
 	"user_league_type"."small_group_input" AS "small_group_input",
@@ -35,20 +35,21 @@ router.get('/leaguedata', async (req, res) => {
 	"teams"."name" AS "team",
 	"positions"."name" AS "positions"
 	FROM "user"
-	RIGHT JOIN "user_league_type"
-	ON "user"."id" = "user_league_type"."user_id"
-	LEFT JOIN "leagues"
-	ON "user_league_type"."league_id" = "leagues"."id"
-	LEFT JOIN "user_team"
-	ON "user"."id" = "user_team"."user_id"
+	JOIN "user_league_type"
+		ON "user"."id" = "user_league_type"."user_id"
+	INNER JOIN "leagues"
+		ON "user_league_type"."league_id" = "leagues"."id"
+	LEFT JOIN "ult_team"
+		ON "user_league_type"."id" = "ult_team"."user_league_type_id"
 	LEFT JOIN "teams"
-	ON "teams"."id" = "user_team"."team_id"
+		ON "teams"."id" = "ult_team"."team_id"
 	FULL JOIN "user_positions"
 	ON "user"."id" = "user_positions"."user_id"
-	LEFT JOIN "positions"
+		LEFT JOIN "positions"
 	ON "user_positions"."position_id" = "positions"."id"
 	LEFT JOIN "registration_type"
 	ON "user_league_type"."type_id" = "registration_type"."id";
+
 	`;
 
 	const leagueDataQueryResult = await connection.query(leagueDataQueryText)
@@ -76,7 +77,8 @@ router.get('/leaguedata', async (req, res) => {
         }
 });
 
-//POST route sends an INSERT query to the user_team table
+//POST route sends an INSERT query to the ult_team table
+// route comes from 
 router.post ('/playerteam', async (req, res) => {
 	console.log('in POST /api/admin/playerteam and req.body is: ', req.body);
 	let connection;
@@ -85,7 +87,8 @@ router.post ('/playerteam', async (req, res) => {
 
 		await connection.query('BEGIN;')
 
-		const { playerId, team } = req.body
+		//ultID is the user_league_team_id and team is the 
+		const { ultId, team } = req.body
 
 		const teamQueryText = `
 			SELECT "id" FROM "teams"
@@ -102,15 +105,15 @@ router.post ('/playerteam', async (req, res) => {
 		const teamId = teamQueryResult.rows[0].id
 
 		const teamInsertText = `
-			INSERT INTO "user_team"
-			("user_id", "team_id")
+			INSERT INTO "ult_team"
+			("user_league_team_id", "team_id")
 			VALUES
 			($1, $2);
 		`;
 
-		teamInsertValues = [playerId, teamId]
+		teamInsertValues = [ultId, teamId]
 
-		//use the team id to insert a new row into the user_team table
+		//use the team id to insert a new row into the ult_team table
 		const insertTeamResult = await connection.query(teamInsertText, teamInsertValues)
 
 		await connection.query ('COMMIT;')
@@ -125,15 +128,15 @@ router.post ('/playerteam', async (req, res) => {
 	}
 });
 
-//DELETE route sends a DELETE query to the user_team table
+//DELETE route sends a DELETE query to the ult_team table
 router.delete('/playerteam/:id', (req, res) => {
 	console.log('in /api/admin/playerteam DELETE route and the param is: ', req.params)
 
 	const teamToDelete = req.params.id;
 
-	//delete a row from the user_team table
+	//delete a row from the ult_team table
 	const sqlText = `
-		DELETE FROM "user_team"
+		DELETE FROM "ult_team"
 			WHERE "id" = $1;
 	`;
 
@@ -149,11 +152,11 @@ router.delete('/playerteam/:id', (req, res) => {
 		})
 })
 
-//PUT route sends an UPDATE query to the user_team table
+//PUT route sends an UPDATE query to the ult_team table
 router.put('/playerteam/:id', async (req, res) => {
 	// console.log('/api/admin/palyerteam/:id has a request!: ', req.params, req.body);
 
-	const userTeamId = req.params.id;
+	const userLeagueTypeTeamId = req.params.id;
 	const team = req.body.team;
 
 	let connection;
@@ -175,14 +178,14 @@ router.put('/playerteam/:id', async (req, res) => {
 		const teamId = teamQueryResult.rows[0].id
 
 		const teamInsertText = `
-			UPDATE "user_team"
+			UPDATE "ult_team"
 				SET "team_id" = $1
 				WHERE "id" = $2;
 		`;
 
-		teamInsertValues = [teamId, userTeamId]
+		teamInsertValues = [teamId, userLeagueTypeTeamId]
 
-		//update the row in the user_team table with the new team id
+		//update the row in the ult_team table with the new team id
 		const insertTeamResult = await connection.query(teamInsertText, teamInsertValues)
 
 		await connection.query ('COMMIT;')

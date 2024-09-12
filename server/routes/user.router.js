@@ -104,17 +104,17 @@ router.get('/current_teams/:id', async (req, res) => {
 
     await connection.query('BEGIN;')
 
-    // check the user_teams table for the user's id
+    // check the ult_teams table for the user's id
     const userTeamText = `
       SELECT 
-        "user_team"."id" AS "id",
-        "user_team"."user_id" AS "user_id",
-        "user_team"."team_id" AS "team_id",
+        "ult_team"."id" AS "id",
+        "ult_team"."user_league_type_id" AS "user_id",
+        "ult_team"."team_id" AS "team_id",
         "teams"."name" AS "team_name",
         "teams"."league_id" AS "league_id"
-        FROM "user_team"
+        FROM "ult_team"
         JOIN "teams"
-          ON "user_team"."team_id" = "teams"."id"
+          ON "ult_team"."team_id" = "teams"."id"
         WHERE "user_id" = $1;
     `;
 
@@ -143,14 +143,16 @@ router.get('/current_teams/:id', async (req, res) => {
       for(let team of userTeamResult.rows) {
         const currentTeamText = `
         SELECT 
-          "user_team"."id" AS "id",
+          "ult_team"."id" AS "id",
           "user"."name" AS "name",
           "teams"."name" AS "team_name"
           FROM "user"
-          JOIN "user_team"
-            ON "user"."id" = "user_team"."user_id"
+          JOIN "user_league_type"
+            ON "user"."id" = "user_league_type"."user_id"
+          JOIN "ult_team"
+            ON "user_league_type"."id" = "ult_team"."user_league_type_id"
           JOIN "teams"
-            ON "user_team"."team_id" = "teams"."id"
+            ON "ult_team"."team_id" = "teams"."id"
           WHERE "teams"."id" = $1
           ORDER BY "user"."name";
       `;

@@ -32,7 +32,7 @@ function* changePlayerTeam (action) {
            //If the playerChangeInfo.user_league_type_team_id = null, then do  POST route with 
             //the PlayerChangeInfo.user-id and PlayerChangeInfo.team name. 
             try {
-                yield axios.post('/api/admin/playerteam', {playerId: playerChangeInfo.user_id, team: playerChangeInfo.team})
+                yield axios.post('/api/admin/playerteam', {utlId: playerChangeInfo.id, team: playerChangeInfo.team})
                 
                 //get request for updated league data
                 yield put({
