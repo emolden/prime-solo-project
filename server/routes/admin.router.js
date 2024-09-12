@@ -88,7 +88,7 @@ router.post ('/playerteam', async (req, res) => {
 		await connection.query('BEGIN;')
 
 		//ultID is the user_league_team_id and team is the 
-		const { ultId, team } = req.body
+		const { utlId, team } = req.body
 
 		const teamQueryText = `
 			SELECT "id" FROM "teams"
@@ -106,12 +106,12 @@ router.post ('/playerteam', async (req, res) => {
 
 		const teamInsertText = `
 			INSERT INTO "ult_team"
-			("user_league_team_id", "team_id")
+			("user_league_type_id", "team_id")
 			VALUES
 			($1, $2);
 		`;
 
-		teamInsertValues = [ultId, teamId]
+		teamInsertValues = [utlId, teamId]
 
 		//use the team id to insert a new row into the ult_team table
 		const insertTeamResult = await connection.query(teamInsertText, teamInsertValues)

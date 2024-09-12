@@ -108,13 +108,15 @@ router.get('/current_teams/:id', async (req, res) => {
     const userTeamText = `
       SELECT 
         "ult_team"."id" AS "id",
-        "ult_team"."user_league_type_id" AS "user_id",
+        "user_league_type"."user_id" AS "user_id",
         "ult_team"."team_id" AS "team_id",
         "teams"."name" AS "team_name",
         "teams"."league_id" AS "league_id"
         FROM "ult_team"
         JOIN "teams"
           ON "ult_team"."team_id" = "teams"."id"
+        JOIN "user_league_type"
+        	ON "ult_team"."user_league_type_id" = "user_league_type"."id" 
         WHERE "user_id" = $1;
     `;
 

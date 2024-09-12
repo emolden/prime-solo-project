@@ -34,7 +34,7 @@ function* playerInformation (action) {
 
 //send the league registration data to the database and fetch updated data
 function* leagueRegistration (action) {
-    // console.log('dispatch to silverTeamRegistration saga: ', action.payload)
+    console.log('dispatch to silverTeamRegistration saga: ', action.payload)
     try {
         //POST request sends the user id, league_id, small_group_input, team_name_input, is_captain, and type_id
         yield axios.post('/api/player_registration/league_registration', action.payload)

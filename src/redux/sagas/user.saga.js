@@ -58,6 +58,7 @@ function* fetchUserPosition (action) {
 function* fetchCurrentTeams (action) {
   console.log('in fetchCurrent Teams the action.payload is: ', action.payload)
   try {
+    //actin.payload is the user id as a number
     const response = yield axios.get(`/api/user/current_teams/${action.payload}`)
 
     // console.log('response form the server in /api/user/current_team/:id: ', response.data)
@@ -72,7 +73,6 @@ function* fetchCurrentTeams (action) {
     console.log('currentTeams get request failed: ', error);
   }
 }
-
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
   yield takeLatest('FETCH_USER_LEAGUE_TYPE', fetchUserLeagueType)

@@ -6,7 +6,7 @@ function* leagueData (action) {
     // console.log('in leagueData saga function')
     try{
         const response = yield axios.get(`/api/admin/leaguedata`);
-        // console.log('response data from GET /api/admin in the leagueData saga is: ', response);
+        console.log('response data from GET /api/admin in the leagueData saga is: ', response);
         //sends leagueData to the leagueData reducer
         yield put({ type: 'SET_LEAGUE_DATA', payload: response.data.leagueData });
         //sends teamData to the teamData reducer
