@@ -45,7 +45,7 @@ function RegisterToPlay ( ) {
                 </div>
             </div>
             <div className='start-registration'>
-                <button  onClick={startRegistration}>Start Registration</button>
+                <button  className="btn" onClick={startRegistration}>Start Registration</button>
             </div>
         </div>
     )

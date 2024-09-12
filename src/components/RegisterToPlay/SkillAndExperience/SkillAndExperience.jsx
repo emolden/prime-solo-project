@@ -47,6 +47,13 @@ function SkillAndExperience () {
         }
     }, [])
 
+    const autoPopulate = () => {
+        setHittingSkill('2')
+        setFieldingSkill('3')
+        setPitcher('false')
+        setPosition('2')
+    }
+
     const nextPage = () => {
         // console.log(hittingSkill, fieldingSkill, position, pitcher);
         //sends a dispatch to playerRegistration saga
@@ -271,13 +278,14 @@ function SkillAndExperience () {
                                 onChange={(e) => setPitcher(e.target.value)}
                             />
                             <label htmlFor='no'>No</label>
+                            <button className='hiddenButton' onClick={autoPopulate}>auto populate</button>
                         </span>
                     </div>
                 </div>
             </section>
             <section className='back-next-buttons'>
-                <button onClick={backPage}>BACK</button>
-                <button onClick={nextPage}>NEXT</button>
+                <button className="btn" onClick={backPage}>BACK</button>
+                <button className="btn" onClick={nextPage}>NEXT</button>
             </section>
         </div>
     )

@@ -42,6 +42,13 @@ function PlayerInformation () {
         setBirthdate(convertISOtoDisplayable(user.birthdate));
     }, []);
 
+    const autoPopulate = () => {
+        setName('Ella Martinez')
+        setEmail('emartinez@example.com')
+        setPhoneNumber('123-456-7890')
+        setBirthdate('01/02/2003')
+    }
+
     const nextPage = () => {
         //dispatch to the playerRegistration reducer
         dispatch({
@@ -143,11 +150,12 @@ function PlayerInformation () {
                             placeholder='MM/DD/YYYY'
                         />
                     </label>
+                    <button className='hiddenButton' onClick={autoPopulate}>auto populate</button>
                 </form>
             </section>
             <section className='back-next-buttons'>
-                <button onClick={backPage}>BACK</button>
-                <button onClick={nextPage}>NEXT</button>
+                <button className="btn" onClick={backPage}>BACK</button>
+                <button className="btn" onClick={nextPage}>NEXT</button>
             </section>
         </div>
     )

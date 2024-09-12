@@ -71,7 +71,7 @@ function UserPage() {
           <p>Phone Number: {user.phone_number}</p>
           <p>Birthdate: {convertISOtoDisplayable(user.birthdate)}</p>
           {/* need to give the user the ability to edit when button is clicked */}
-          <button onClick={enterEditForm}>Edit Profile Info</button>
+          <button className="btn" onClick={enterEditForm}>Edit Profile Info</button>
         </div>
         }
         {editForm &&
@@ -103,7 +103,7 @@ function UserPage() {
           onChange={(e) => setBirthdate(e.target.value)}
         />
         {/* need to give the user the ability to edit when button is clicked */}
-        <button onClick={leaveEditForm}>Save Profile Info</button>
+        <button className="btn" onClick={leaveEditForm}>Save Profile Info</button>
       </div>
         }
       </section>

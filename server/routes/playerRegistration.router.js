@@ -113,7 +113,7 @@ router.post('/league_registration', async (req, res) => {
                 const insertUserLeagueValues = [Number(user_id), Number(league_id), Number(type_id), is_captain, small_group_input, team_input]
 
                 const insertUserLeagueResult = await connection.query(insertUserLeagueText, insertUserLeagueValues)
-                console.log('database response to insertUserLeague', insertLeagueResult)
+                console.log('database response to insertUserLeague', insertUserLeagueResult)
             }
         }
 

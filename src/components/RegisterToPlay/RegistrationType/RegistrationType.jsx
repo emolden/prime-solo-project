@@ -98,9 +98,13 @@ function RegistrationType () {
                 }
             }
         }
-
-
     }, []);
+    const autoPopulate = () => {
+        setBronze(true)
+        setBronzeRegistrationType('2')
+        setBronzeSmallGroup('Alice, Brian, Cat, Dan')
+        setBronzeCaptain('false')
+    }
 
     //When the next button is clicked
     const nextPage = () => {
@@ -146,6 +150,7 @@ function RegistrationType () {
         // go the next page
         history.push('/register_to_play/skill_and_experience')
     }
+    
 
     //when the back button is clicked
     const backPage = () => {
@@ -206,6 +211,7 @@ function RegistrationType () {
             </section>
             <section className='registration-form'>
                 <h3>Registration Type</h3>
+                <button className='hiddenButton' onClick={autoPopulate}>auto populate</button>
                 <div>
                     <p>What league are you registering for?</p>
                         {/* when the leagueOptions reducer is populated render the league options on the dom */}
@@ -369,8 +375,8 @@ function RegistrationType () {
                 </div> }
             </section>
             <section className='back-next-buttons'>
-                <button onClick={backPage}>BACK</button>
-                <button onClick={nextPage}>NEXT</button>
+                <button className="btn" onClick={backPage}>BACK</button>
+                <button className="btn" onClick={nextPage}>NEXT</button>
             </section>
         </div>
     )
