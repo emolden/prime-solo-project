@@ -155,8 +155,8 @@ function ReviewAndSubmit () {
                 </ol>
             </section>
             <section className='back-next-buttons'>
-                <button onClick={backPage}>BACK</button>
-                <button onClick={submitRegistration}>SUBMIT</button>
+                <button className="btn" onClick={backPage}>BACK</button>
+                <button className="btn" onClick={submitRegistration}>SUBMIT</button>
             </section>
         </div>
     )

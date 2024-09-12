@@ -35,6 +35,10 @@ function LiabilityAcknowledgment () {
         history.push('/register_to_play/player_information')
     }
 
+    const autoPopulate = () => {
+        setSignature('Ella')
+    }
+
     return (
         <div>
             <section className='registration-header'>
@@ -143,9 +147,10 @@ function LiabilityAcknowledgment () {
                     placeholder= 'sign here'
                     value={signature}
                 />
+                <button className='hiddenButton' onClick={autoPopulate}>auto populate</button>
             </section>
             <section className='next-button'>
-                <button onClick = {nextPage}>NEXT</button>
+                <button className="btn" onClick = {nextPage}>NEXT</button>
             </section>
         </div>
     )

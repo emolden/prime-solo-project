@@ -160,30 +160,30 @@ function AdminPage() {
       headerName: 'Name',
       width: 150,
     },
-    {
-      field: 'email',
-      headerName: 'Email',
-      width: 150,
-    },
-    {
-      field: 'phone_number',
-      headerName: 'Phone number',
-      width: 110,
-    },
-    {
-      field: 'birthday',
-      headerName: 'Birthday',
-      width: 110,
-    },
+    // {
+    //   field: 'email',
+    //   headerName: 'Email',
+    //   width: 150,
+    // },
+    // {
+    //   field: 'phone_number',
+    //   headerName: 'Phone number',
+    //   width: 110,
+    // },
+    // {
+    //   field: 'birthday',
+    //   headerName: 'Birthday',
+    //   width: 110,
+    // },
     {
       field: 'fielding',
-      headerName: 'Fielding',
+      headerName: 'Fielding Skill',
       width: 110,
       type: 'number',
     },
     {
       field: 'hitting',
-      headerName: 'Hitting',
+      headerName: 'Hitting Skill',
       width: 110,
     },
     {
@@ -193,12 +193,12 @@ function AdminPage() {
     },
     {
       field: 'registration_type',
-      headerName: 'registionType',
+      headerName: 'Registion Type',
       width: 110,
     },
     {
       field: 'small_group_input',
-      headerName: 'Group input',
+      headerName: 'Small Group input',
       width: 110,
     },
     {
@@ -225,13 +225,13 @@ function AdminPage() {
       type: 'boolean',
       width: 160,
     },
-    {
-      field: 'captain',
-      headerName: 'Captain',
-      type: 'boolean',
-      width: 160,
-      editable: true,
-    },
+    // {
+    //   field: 'captain',
+    //   headerName: 'Captain',
+    //   type: 'boolean',
+    //   width: 160,
+    //   editable: true,
+    // },
   ];
   
   
