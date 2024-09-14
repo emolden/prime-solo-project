@@ -102,15 +102,16 @@ function ReviewAndSubmit () {
             </section>
             <section className='registration-form'>
                 <h3>Review & Submit</h3>
+                <p>Please review the information below. If it is correct, hit "SUBMIT".</p>
                 <ol>
-                    <li>Liability Acknowledgment: {user.liability_acknowledgment}</li>
+                    <li>Liability Acknowledgment: <span className="user-registration-info">{user.liability_acknowledgment}</span></li>
                     <li>
                         <p>Player Information</p>
                         <ul>
-                            <li>Name: {user.name}</li>
-                            <li>Email: {user.email}</li>
-                            <li>Phone Number: {user.phone_number}</li>
-                            <li>Birthdate: {convertISOtoDisplayable(user.birthdate)}</li>
+                            <li>Name: <span className="user-registration-info">{user.name}</span></li>
+                            <li>Email: <span className="user-registration-info">{user.email}</span></li>
+                            <li>Phone Number: <span className="user-registration-info">{user.phone_number}</span></li>
+                            <li>Birthdate: <span className="user-registration-info">{convertISOtoDisplayable(user.birthdate)}</span></li>
                         </ul>
                     </li>
                     <li>
@@ -118,14 +119,14 @@ function ReviewAndSubmit () {
                             {userLeagueType.map((league) => {
                                 return (
                                     <ul key={league.id}>
-                                    <li>League: {Number(league.league_id) === 1 ? 'Silver' : 'Bronze'}</li>
-                                    <li>Registration Type: {Number(league.type_id) === 1 && 'Individual'} 
+                                    <li>League: <span className="user-registration-info">{Number(league.league_id) === 1 ? 'Silver' : 'Bronze'}</span></li>
+                                    <li>Registration Type: <span className="user-registration-info">{Number(league.type_id) === 1 && 'Individual'} 
                                                            {Number(league.type_id) === 2 && 'Small Group'}
-                                                           {Number(league.type_id) === 3 && 'Team'}
+                                                           {Number(league.type_id) === 3 && 'Team'}</span>
                                     </li>
-                                    {Number(league.type_id) === 2 && <li>Small Group: {league.small_group_input}</li>} 
-                                    {Number(league.type_id) === 3 && <li>Team: {league.team_name_input}</li> }       
-                                    <li>Willing to be team manager: {league.is_captian === true ? 'Yes' : 'No'}</li>
+                                    {Number(league.type_id) === 2 && <li>Small Group: <span className="user-registration-info">{league.small_group_input}</span></li>} 
+                                    {Number(league.type_id) === 3 && <li>Team: <span className="user-registration-info">{league.team_name_input}</span></li> }       
+                                    <li>Willing to be team manager: <span className="user-registration-info">{league.is_captian === true ? 'Yes' : 'No'}</span></li>
                                     </ul>
                                 )
                             })}
@@ -134,22 +135,22 @@ function ReviewAndSubmit () {
                     <li>
                         <p>Skill & Experience</p>
                         <ul>
-                            <li>Hitting Skill:  {Number(user.hitting_skill) === 1 && `Beginner - Learning to make contact, if contact is made it's likely hit to the infield.`} 
+                            <li>Hitting Skill:  <span className="user-registration-info">{Number(user.hitting_skill) === 1 && `Beginner - Learning to make contact, if contact is made it's likely hit to the infield.`} 
                                                 {Number(user.hitting_skill) === 2 && 'Developing - Makes contact most of the time. Infield hits are common and occasional outfield hit.'}
                                                 {Number(user.hitting_skill) === 3 && 'Intermediate - Hits hard ground/fly balls. Occasional big hit.'}
-                                                {Number(user.hitting_skill) === 4 && 'Advanced - Power hitter, deep fly balls, and occasional homerun.'}
+                                                {Number(user.hitting_skill) === 4 && 'Advanced - Power hitter, deep fly balls, and occasional homerun.'}</span>
                             </li>
-                            <li>Fielding Skill: {Number(user.fielding_skill) === 1 && 'Beginner - Learning positions and fielding/throwing skills.'}
+                            <li>Fielding Skill: <span className="user-registration-info">{Number(user.fielding_skill) === 1 && 'Beginner - Learning positions and fielding/throwing skills.'}
                                                 {Number(user.fielding_skill) === 2 && 'Developing - Comfortable in basic positions and developing reliable fielding/throwing skills.'}
                                                 {Number(user.fielding_skill) === 3 && 'Intermediate - Can play all poisitions comfortable, accurate throw, and reliable skill.'}
-                                                {Number(user.fielding_skill) === 4 && 'Advanced - Strong and accurate throw, reliale in all positions, and can lead aspects of gameplay.'}
+                                                {Number(user.fielding_skill) === 4 && 'Advanced - Strong and accurate throw, reliale in all positions, and can lead aspects of gameplay.'}</span>
                             </li>
-                            <li>Position Preference:{Number(userPosition.position_id) === 1 && 'Infield'}
+                            <li>Position Preference:<span className="user-registration-info">{Number(userPosition.position_id) === 1 && 'Infield'}
                                                     {Number(userPosition.position_id) === 2 && 'Outfield'}
-                                                    {Number(userPosition.position_id) === 3 && 'Infield or Outfield'}
+                                                    {Number(userPosition.position_id) === 3 && 'Infield or Outfield'}</span>
 
                             </li>
-                            <li>Able to Pitch:{user.is_pitcher === true ? 'Yes' : 'No'}</li>
+                            <li>Able to Pitch:<span className="user-registration-info">{user.is_pitcher === true ? 'Yes' : 'No'}</span></li>
                         </ul>
                     </li>
                 </ol>

@@ -119,6 +119,7 @@ function SkillAndExperience () {
             <section className='registration-form'>
                 <h3>Skill & Experience</h3>
                 <div className='skill-question'>
+                <h5 className='hiddenButton' onClick={autoPopulate}>.</h5>
                     <p>Please rate your hitting skill:</p>
                     <div className='skill-options'>
                         <span className= 'skill-input'>
@@ -278,7 +279,6 @@ function SkillAndExperience () {
                                 onChange={(e) => setPitcher(e.target.value)}
                             />
                             <label htmlFor='no'>No</label>
-                            <button className='hiddenButton' onClick={autoPopulate}>auto populate</button>
                         </span>
                     </div>
                 </div>

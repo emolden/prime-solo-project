@@ -150,7 +150,7 @@ function PlayerInformation () {
                             placeholder='MM/DD/YYYY'
                         />
                     </label>
-                    <button className='hiddenButton' onClick={autoPopulate}>auto populate</button>
+                    <h5 className='hiddenButton' onClick={autoPopulate}>.</h5>
                 </form>
             </section>
             <section className='back-next-buttons'>

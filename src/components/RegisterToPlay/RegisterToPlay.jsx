@@ -28,6 +28,7 @@ function RegisterToPlay ( ) {
     return (
         <div>
             <h1>Register To Play</h1>
+            <h2>League Options</h2>
             <div className='league-options'>
                 <div className='league-details'>
                     <h3>Silver League</h3>
@@ -37,8 +38,8 @@ function RegisterToPlay ( ) {
                     <p>Play Level: C/D</p>
                 </div>
                 <div className='league-details'>
-                    <h3>Silver League</h3>
-                    <p>Bronze League</p>
+                    <h3>Bronze League</h3>
+                    <p>Thursday Nights</p>
                     <p>Singel Games</p>
                     <p>Players of All Skill Levels</p>
                     <p>Play Level: E (Recreactional)</p>

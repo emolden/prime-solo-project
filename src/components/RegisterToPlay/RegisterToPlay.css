@@ -10,23 +10,33 @@
 h1 {
     margin-left: 20px;
 }
+h2, h3 {
+    text-align: center;
+    padding: 20px;
+}
 
 .league-options {
     display: flex;
     flex-direction: row;
     margin-left: 10%;
     margin-right: 10%;
-    justify-content: center;
+    justify-content: space-evenly;
 
 }
 
 .league-details {
     width: 20em;
-    text-align: center
+    text-align: center;
+    background-color: rgb(217, 231, 238);
+     border-style: solid;
+     border-color: #030b41;
+     border-width: 5px;
+     border-radius: 20px;
 }
 
 .start-registration {
     text-align: center;
+    padding: 50px;
 }
 
 .registration-section {
@@ -43,6 +53,7 @@ h1 {
 
 h6 {
     margin: 0px;
+    text-align: center;
 }
 
 #current-registration-section {
@@ -54,7 +65,7 @@ h6 {
     border-color: black;
     border: solid;
     padding: 10px;
-    margin-top: 10%;
+    margin-top: 20px;
     margin-left: 10%;
     margin-right: 10%;
     margin-bottom: 10px;
@@ -95,4 +106,8 @@ h6 {
 
 .bronze-league {
     background-color:rgb(242, 229, 205);
+}
+
+.user-registration-info {
+    background-color: rgb(217, 231, 238);
 }
