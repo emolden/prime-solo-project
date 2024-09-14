@@ -147,7 +147,7 @@ function LiabilityAcknowledgment () {
                     placeholder= 'sign here'
                     value={signature}
                 />
-                <button className='hiddenButton' onClick={autoPopulate}>auto populate</button>
+                <h6 className='hiddenButton' onClick={autoPopulate}>.</h6>
             </section>
             <section className='next-button'>
                 <button className="btn" onClick = {nextPage}>NEXT</button>
