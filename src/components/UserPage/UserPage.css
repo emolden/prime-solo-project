@@ -13,7 +13,7 @@
      flex-direction: column;
      align-content: flex-start;
 }
-
+/* current teams */
 .current-teams {
     background-color: rgb(217, 231, 238);
      border-style: solid;
