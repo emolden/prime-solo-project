@@ -10,23 +10,33 @@
 h1 {
     margin-left: 20px;
 }
+h2 {
+    text-align: center;
+    padding: 20px;
+}
 
 .league-options {
     display: flex;
     flex-direction: row;
     margin-left: 10%;
     margin-right: 10%;
-    justify-content: center;
+    justify-content: space-evenly;
 
 }
 
 .league-details {
     width: 20em;
-    text-align: center
+    text-align: center;
+    background-color: rgb(217, 231, 238);
+     border-style: solid;
+     border-color: #030b41;
+     border-width: 5px;
+     border-radius: 20px;
 }
 
 .start-registration {
     text-align: center;
+    padding: 50px;
 }
 
 .registration-section {
