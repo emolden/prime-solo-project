@@ -3,6 +3,7 @@ import LogOutButton from '../LogOutButton/LogOutButton';
 import {useSelector, useDispatch} from 'react-redux';
 import { useEffect } from 'react';
 import convertISOtoDisplayable from '../../Helpers/dateFormatter';
+import './UserPage.css';
 // ???????????????????Upload Profile Picture???????????????????????????????
 function UserPage() {
   const dispatch = useDispatch();
@@ -58,12 +59,14 @@ function UserPage() {
   return (
     <div className="container">
       <h2>Welcome, {user.username}!</h2>
-      <section>
-        <div>
+      <div className="user-sections">
+      <div >
+        {/* <div>
           <img></img>
-        </div>
-        {!editForm &&
+        </div> */}
         <div>
+        {!editForm &&
+        <div className="user-profile">
           <h3>User Profile</h3>
           <p>Name: {user.name}</p>
           <p>Username: {user.username}</p>
@@ -74,40 +77,53 @@ function UserPage() {
           <button className="btn" onClick={enterEditForm}>Edit Profile Info</button>
         </div>
         }
-        {editForm &&
+        </div>
         <div>
+        {editForm &&
+        <div className='edit-user-profile'>
         <h3>User Profile</h3>
+        <span className="edit-inputs">
         <p>Name:</p> 
         <input
           value = {name}
           onChange={(e) => setName(e.target.value)} 
         />
+        </span>
+        <span className="edit-inputs">
         <p>Username:</p> 
         <input
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
+        </span>
+        <span className="edit-inputs">
         <p>Email:</p>
         <input
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
+        </span>
+        <span className="edit-inputs">
         <p>Phone Number:</p>
         <input
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
         />
+        </span>
+        <span className="edit-inputs">
         <p>Birthdate:</p>
         <input
           value={birthdate}
           onChange={(e) => setBirthdate(e.target.value)}
         />
+        </span>
         {/* need to give the user the ability to edit when button is clicked */}
         <button className="btn" onClick={leaveEditForm}>Save Profile Info</button>
       </div>
         }
-      </section>
-      <section>
+      </div>
+      </div>
+      <div className="current-teams">
         <h3>Your Current Teams</h3>
           {/* Will need to map through teams here */}
           {currentTeams.map((team) => {
@@ -125,7 +141,8 @@ function UserPage() {
               </div>
               )
           })}
-      </section>
+          </div>
+      </div>
       {/* <p>Your ID is: {user.id}</p> */}
       {/* <LogOutButton className="btn" /> */}
     </div>

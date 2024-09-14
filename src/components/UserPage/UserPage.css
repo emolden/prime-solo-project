@@ -1,0 +1,45 @@
+.user-profile,
+.edit-user-profile {
+     background-color: rgb(217, 231, 238);
+     border-style: solid;
+     border-color: #030b41;
+     border-width: 5px;
+     border-radius: 20px;
+     padding: 30px;
+     margin: 10px;
+     height: 400px;
+     width: 400px;
+     display: flex;
+     flex-direction: column;
+     align-content: flex-start;
+}
+
+.current-teams {
+    background-color: rgb(217, 231, 238);
+     border-style: solid;
+     border-color: #030b41;
+     border-width: 5px;
+     border-radius: 20px;
+    height: 400px;
+     width: 400px;
+     padding: 30px;
+     margin: 10px;
+}
+
+.user-sections {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+h3 {
+    text-align: center;
+}
+
+.edit-inputs {
+    display: flex;
+
+}
+li {
+    padding: 3px;
+}
