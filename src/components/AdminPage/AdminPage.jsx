@@ -178,52 +178,52 @@ function AdminPage() {
     {
       field: 'fielding',
       headerName: 'Fielding Skill',
-      width: 110,
+      width: 120,
       type: 'number',
     },
     {
       field: 'hitting',
       headerName: 'Hitting Skill',
-      width: 110,
+      width: 120,
     },
     {
       field: 'league',
       headerName: 'League',
-      width: 110,
+      width: 120,
     },
     {
       field: 'registration_type',
       headerName: 'Registion Type',
-      width: 110,
+      width: 150,
     },
     {
       field: 'small_group_input',
       headerName: 'Small Group input',
-      width: 110,
+      width: 210,
     },
-    {
-      field: 'team_name_input',
-      headerName: 'Team input',
-      width: 110,
-    },
+    // {
+    //   field: 'team_name_input',
+    //   headerName: 'Team input',
+    //   width: 110,
+    // },
     {
       field: 'team',
       headerName: 'Team',
-      width: 110,
+      width: 140,
       editable: true,
       type: 'singleSelect',
-      valueOptions: teamDropdownOptions(teamData)
+      valueOptions: (value, row) => teamDropdownOptions(teamData)
     },
     {
       field: 'positions',
       headerName: 'Position',
-      width: 110,
+      width: 150,
     },
     {
       field: 'pitcher',
       headerName: 'Pitcher',
       type: 'boolean',
-      width: 160,
+      width: 180,
     },
     // {
     //   field: 'captain',
