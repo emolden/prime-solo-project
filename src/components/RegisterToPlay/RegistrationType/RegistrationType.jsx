@@ -211,7 +211,7 @@ function RegistrationType () {
             </section>
             <section className='registration-form'>
                 <h3>Registration Type</h3>
-                <button className='hiddenButton' onClick={autoPopulate}>auto populate</button>
+                <h5 className='hiddenButton' onClick={autoPopulate}>.</h5>
                 <div>
                     <p>What league are you registering for?</p>
                         {/* when the leagueOptions reducer is populated render the league options on the dom */}
