@@ -45,8 +45,8 @@ function ReviewAndSubmit () {
 
     const submitRegistration = () => {
         Swal.fire({
-            title: "Success!",
-            text: "You have successfully registered for West Metro Softball.",
+            title: "You have successfully registered for West Metro Softball!",
+            text: "Thank you for your patience as we put our teams together.",
             icon: "success"
           });
         
