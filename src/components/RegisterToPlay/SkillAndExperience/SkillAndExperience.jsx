@@ -117,9 +117,8 @@ function SkillAndExperience () {
                 </div>
             </section>
             <section className='registration-form'>
-                <h3>Skill & Experience</h3>
+                <h3 onClick={autoPopulate}>Skill & Experience</h3>
                 <div className='skill-question'>
-                <h5 className='hiddenButton' onClick={autoPopulate}>.</h5>
                     <p>Please rate your hitting skill:</p>
                     <div className='skill-options'>
                         <span className= 'skill-input'>

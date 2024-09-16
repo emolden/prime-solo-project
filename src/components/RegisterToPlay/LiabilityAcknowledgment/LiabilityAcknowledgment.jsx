@@ -79,7 +79,7 @@ function LiabilityAcknowledgment () {
                 </div>
             </section>
             <section className='registration-form'>
-                <h3>Liability Acknowledgment</h3>
+                <h3 onClick={autoPopulate}>Liability Acknowledgment</h3>
                 ------
                 <h5>
                     Photo/Video Cosent
@@ -147,7 +147,6 @@ function LiabilityAcknowledgment () {
                     placeholder= 'sign here'
                     value={signature}
                 />
-                <h5 className='hiddenButton' onClick={autoPopulate}>.</h5>
             </section>
             <section className='next-button'>
                 <button className="btn" onClick = {nextPage}>NEXT</button>

@@ -113,7 +113,7 @@ function PlayerInformation () {
                 </div>
             </section>
             <section className='registration-form'>
-                <h3>Player Information</h3>
+                <h3 onClick={autoPopulate}>Player Information</h3>
                 <form className='player-form'>
                     <label htmlFor="name">
                         Name:
@@ -150,7 +150,6 @@ function PlayerInformation () {
                             placeholder='MM/DD/YYYY'
                         />
                     </label>
-                    <h5 className='hiddenButton' onClick={autoPopulate}>.</h5>
                 </form>
             </section>
             <section className='back-next-buttons'>
