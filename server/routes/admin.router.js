@@ -1,10 +1,13 @@
 const express = require('express');
+const {
+	rejectUnauthenticated,
+  } = require('../modules/authentication-middleware');
 const pool = require('../modules/pool');
 const router = express.Router();
 
 //GET route requests the league data and team data from the database
 //route sends an array of objects back to the admin saga
-router.get('/leaguedata', async (req, res) => {
+router.get('/leaguedata', rejectUnauthenticated, async (req, res) => {
     console.log('in the GET route of /api/admin/leaguedata');
 	let connection;
 
@@ -79,7 +82,7 @@ router.get('/leaguedata', async (req, res) => {
 
 //POST route sends an INSERT query to the ult_team table
 // route comes from 
-router.post ('/playerteam', async (req, res) => {
+router.post ('/playerteam', rejectUnauthenticated, async (req, res) => {
 	console.log('in POST /api/admin/playerteam and req.body is: ', req.body);
 	let connection;
 	try {
@@ -129,7 +132,7 @@ router.post ('/playerteam', async (req, res) => {
 });
 
 //DELETE route sends a DELETE query to the ult_team table
-router.delete('/playerteam/:id', (req, res) => {
+router.delete('/playerteam/:id', rejectUnauthenticated, (req, res) => {
 	console.log('in /api/admin/playerteam DELETE route and the param is: ', req.params)
 
 	const teamToDelete = req.params.id;
@@ -153,7 +156,7 @@ router.delete('/playerteam/:id', (req, res) => {
 })
 
 //PUT route sends an UPDATE query to the ult_team table
-router.put('/playerteam/:id', async (req, res) => {
+router.put('/playerteam/:id', rejectUnauthenticated, async (req, res) => {
 	// console.log('/api/admin/palyerteam/:id has a request!: ', req.params, req.body);
 
 	const userLeagueTypeTeamId = req.params.id;
