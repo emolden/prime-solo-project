@@ -50,7 +50,7 @@ router.post('/logout', (req, res, next) => {
 });
 
 //request all the rows from the user_league_type table with which the user is associated
-router.get('/league_type/:id', (req, res) => {
+router.get('/league_type/:id', rejectUnauthenticated, (req, res) => {
   // console.log('in /api/user/league_type GET route and the param is: ', req.params)
 
   const userId = req.params.id;
@@ -72,7 +72,7 @@ router.get('/league_type/:id', (req, res) => {
     })
 })
 
-router.get('/position/:id', (req, res) => {
+router.get('/position/:id', rejectUnauthenticated, (req, res) => {
   // console.log('in /api/user/position GET route and the param is: ', req.params)
 
   const userId = req.params.id;
@@ -94,7 +94,7 @@ router.get('/position/:id', (req, res) => {
     })
 })
 
-router.get('/current_teams/:id', async (req, res) => {
+router.get('/current_teams/:id', rejectUnauthenticated, async (req, res) => {
   // console.log('/api/user/current_teams/:id received a request!')
 
   const userId = req.params.id;

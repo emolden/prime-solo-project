@@ -1,10 +1,13 @@
 const express = require('express');
+const {
+    rejectUnauthenticated,
+  } = require('../modules/authentication-middleware');
 const pool = require('../modules/pool');
 const router = express.Router();
 
 //PUT route updates the liability_acknowledgment cell in the user table
 // given the user id
-router.put('/liability_acknowledgment', (req, res) => {
+router.put('/liability_acknowledgment', rejectUnauthenticated, (req, res) => {
     // console.log('/api/player_registration/liability_acknowledgment PUT route received a request!', req.body)
 
     const { liability_acknowledgment, user_id } = req.body;
@@ -28,7 +31,7 @@ router.put('/liability_acknowledgment', (req, res) => {
 
 //PUT route updates the name, email, phone number, and birthdate cells in the user table
 // given the user id
-router.put('/player_information', (req, res) => {
+router.put('/player_information', rejectUnauthenticated, (req, res) => {
     // console.log('/api/player_registration/liability_acknowledgment PUT route received a request!', req.body)
 
     const { user_id, username, name, email, phone_number, birthdate } = req.body;
@@ -55,7 +58,7 @@ router.put('/player_information', (req, res) => {
 })
 
 //POST route either UPDATES or INSERTS row in the user_league_type table
-router.post('/league_registration', async (req, res) => {
+router.post('/league_registration', rejectUnauthenticated, async (req, res) => {
     console.log('playerRegistration router received a request via /api/player_registration/league_registration ', req.body)
 
     let connection;
@@ -131,7 +134,7 @@ router.post('/league_registration', async (req, res) => {
 
 //PUT route UPDATES the user table with the fielding_skill, hitting_skill, and is_pitcher
 // and either INSERTS or UPDATES the user_position table with the user_id and position_id
-router.put('/skill_and_experience', async (req, res) => {
+router.put('/skill_and_experience', rejectUnauthenticated, async (req, res) => {
     // console.log('playerRegistration router received a request via /api/player_registration/skill_and_experience ', req.body)
 
     const {user_id, hitting_skill, fielding_skill, is_pitcher, position_id} = req.body;

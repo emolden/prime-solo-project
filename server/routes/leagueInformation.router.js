@@ -1,9 +1,12 @@
 const express = require('express');
+const {
+    rejectUnauthenticated,
+  } = require('../modules/authentication-middleware');
 const pool = require('../modules/pool');
 const router = express.Router();
 
 //requests all the name and day options from the leagues table
-router.get('/league_options', (req, res) => {
+router.get('/league_options', rejectUnauthenticated, (req, res) => {
     // console.log('/api/league_information received a request!!')
 
     sqlText = `
@@ -21,7 +24,7 @@ router.get('/league_options', (req, res) => {
 })
 
 //requests all the registration types from the registration_type table
-router.get('/registration_types', (req, res) => {
+router.get('/registration_types', rejectUnauthenticated, (req, res) => {
     // console.log('/api/league_information received a request!!')
 
     sqlText = `
