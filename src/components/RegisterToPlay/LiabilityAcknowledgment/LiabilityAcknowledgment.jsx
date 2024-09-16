@@ -36,7 +36,7 @@ function LiabilityAcknowledgment () {
     }
 
     const autoPopulate = () => {
-        setSignature('Ella')
+        setSignature('Ella Martinez')
     }
 
     return (
