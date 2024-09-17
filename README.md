@@ -16,7 +16,6 @@ Admins can view league data and update existing teams. This functionality stream
 
 ## Make a Plan
 1. First, I made wireframes to map out the functionality of the app.
-   ![image](https://github.com/user-attachments/assets/68dd7e18-c155-4896-9baa-d4441fb726c3)
    ![image](https://github.com/user-attachments/assets/310cbfe4-6ae9-4684-8326-b6efc625142c)
    ![image](https://github.com/user-attachments/assets/1a29e241-b957-43cd-b72c-d09b3ce0d5fa)
    ![image](https://github.com/user-attachments/assets/4e17cf3b-a748-4901-806f-47616cf680d6)
@@ -26,13 +25,11 @@ Admins can view league data and update existing teams. This functionality stream
 
 4. The first step in my creation process was to create my database, datatables, and dummy data.
 
-5. With the dummy data, I did a spike on MUI X Data Grid to make sure this would be a good resource for my League Data page. Currently, the admin can change the team each user is assigned to.
+5. With the dummy data, I did a spike on MUI X Data Grid to make sure this would be a good resource for my League Data page. 
+
+6. After my spike was successful, I finished my Register To Play pages and then my Home page.
    ![image](https://github.com/user-attachments/assets/f43248fc-ca69-4109-a345-001e10439d4e)
-
-6. Then, I created my Register To Play pages. To make the process as clear as possible, I used conditional rendering throughout the registration.
    ![image](https://github.com/user-attachments/assets/4826ec88-3cad-482b-b32a-d11170ef4ec5)
-
-7. After a user registers to play and the admin places them on a team, the user can see their teams on the Home page. Also on theHome page users can go to see and edit their personal information.
    ![image](https://github.com/user-attachments/assets/5cc9f263-c6e8-4aca-b941-a3b540bcb1a8)
 
 
@@ -56,7 +53,15 @@ Admins can view league data and update existing teams. This functionality stream
     password: pass123
 
 ## Usage
-1. First I created wireframes to plan the functionality of my app.
+1. Without being logged in, the user can see the login page or the About page.
+2. A user can register or login if they alreay have a username and password.
+3. Once logged in, a user can see additional pages: Home and Register To Play
+4. The Home page shows the user their personal information and the teams they are apart of.
+5. The user can edit their personal inforamtion on the Home page.
+6. On the Register To Play pages, the user can edit the input types, go back, or go forward.
+7. The Register To Play pages let the user know where they are in the process with the overhead bar.
+8. Once an admin is logged in, they have the additional page: League Data.
+9. The admin can delte, update, or insert a team into each registered users row. 
 
 
 ## Built With
