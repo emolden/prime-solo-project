@@ -265,7 +265,7 @@ function RegistrationType () {
                     {/* if a user slects 'small group' as a registration type, render the small group input on the dom */}
                     {silverRegistrationType === '2' &&
                     <div>
-                        <label htmlFor='smallGroup'> If you chose "small group", put the names of the players with which you are registering below.</label>
+                        <label htmlFor='smallGroup'> If you chose "small group", put the names of the players with which you are registering.</label>
                         <input 
                             id='smallGroup'
                             value={silverSmallGroup}
@@ -275,7 +275,7 @@ function RegistrationType () {
                      {/* if a user slects 'team' as a registration type, render the team input on the dom */}
                     {silverRegistrationType === '3' &&
                     <div>
-                        <label htmlFor='team'> If you chose "team", put the name of your team below.</label>
+                        <label htmlFor='team'> If you chose "team", put the name of your team.</label>
                         <input 
                             id='team'
                             value={silverTeam}
@@ -327,7 +327,7 @@ function RegistrationType () {
                     {/* if a user slects 'small group' as a registration type, render the small group input on the dom */}
                     {bronzeRegistrationType === '2' &&
                     <div>
-                        <label htmlFor='smallGroup'> If you chose "small group", put the names of the palyers with which you are registering below.</label>
+                        <label htmlFor='smallGroup'> If you chose "small group", put the names of the palyers with which you are registering.</label>
                         <input 
                             id='smallGroup'
                             value={bronzeSmallGroup}
@@ -337,7 +337,7 @@ function RegistrationType () {
                     {/* if a user slects  team' as a registration type, render the team input on the dom */}
                     {bronzeRegistrationType === '3' &&
                     <div>
-                        <label htmlFor='team'> If you chose "team", put the name of your team below.</label>
+                        <label htmlFor='team'> If you chose "team", put the name of your team.</label>
                         <input 
                             id='team'
                             value={bronzeTeam}

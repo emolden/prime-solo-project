@@ -42,7 +42,7 @@ function RegisterToPlay ( ) {
                     <p>Thursday Nights</p>
                     <p>Singel Games</p>
                     <p>Players of All Skill Levels</p>
-                    <p>Play Level: E (Recreactional)</p>
+                    <p>Play Level: E (Recreational)</p>
                 </div>
             </div>
             <div className='start-registration'>

@@ -142,8 +142,8 @@ function ReviewAndSubmit () {
                             </li>
                             <li>Fielding Skill: <span className="user-registration-info">{Number(user.fielding_skill) === 1 && 'Beginner - Learning positions and fielding/throwing skills.'}
                                                 {Number(user.fielding_skill) === 2 && 'Developing - Comfortable in basic positions and developing reliable fielding/throwing skills.'}
-                                                {Number(user.fielding_skill) === 3 && 'Intermediate - Can play all poisitions comfortable, accurate throw, and reliable skill.'}
-                                                {Number(user.fielding_skill) === 4 && 'Advanced - Strong and accurate throw, reliale in all positions, and can lead aspects of gameplay.'}</span>
+                                                {Number(user.fielding_skill) === 3 && 'Intermediate - Can play all positions comfortably, accurate throw, and reliable skill.'}
+                                                {Number(user.fielding_skill) === 4 && 'Advanced - Strong and accurate throw, reliable in all positions, and can lead aspects of gameplay.'}</span>
                             </li>
                             <li>Position Preference:<span className="user-registration-info">{Number(userPosition.position_id) === 1 && 'Infield'}
                                                     {Number(userPosition.position_id) === 2 && 'Outfield'}

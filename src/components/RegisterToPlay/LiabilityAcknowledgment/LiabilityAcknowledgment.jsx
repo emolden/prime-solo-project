@@ -82,7 +82,7 @@ function LiabilityAcknowledgment () {
                 <h3 onClick={autoPopulate}>Liability Acknowledgment</h3>
                 ------
                 <h5>
-                    Photo/Video Cosent
+                    Photo/Video Consent
                 </h5>
                 <p>
                     West Metro Softball frequently takes photos and/or videos at games, 
@@ -97,7 +97,7 @@ function LiabilityAcknowledgment () {
                 </p>
                 ------
                 <h5>
-                    Waiver of Liability and Assumption of Rist Agreement
+                    Waiver of Liability and Assumption of Risk Agreement
                 </h5>
                 <p>
                     I am the above-named player. I agree that I will comply with any and all 
