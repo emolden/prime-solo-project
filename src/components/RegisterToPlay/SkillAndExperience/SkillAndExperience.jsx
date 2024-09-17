@@ -201,7 +201,7 @@ function SkillAndExperience () {
                                 checked={fieldingSkill === '3' ? true : false}
                                 onChange={(e) => setFieldingSkill(e.target.value)}
                             />
-                            <label htmlFor='intermediateFielder'> Intermediate - Can play all poisitions comfortable, accurate throw, and reliable skill.</label>
+                            <label htmlFor='intermediateFielder'> Intermediate - Can play all positions comfortably, accurate throw, and reliable skill.</label>
                         </span>
                         <span>
                             <input
@@ -212,7 +212,7 @@ function SkillAndExperience () {
                                 checked={fieldingSkill === '4' ? true : false}
                                 onChange={(e) => setFieldingSkill(e.target.value)}
                             />
-                            <label htmlFor='advancedFielder'> Advanced - Strong and accurate throw, reliale in all positions, and can lead aspects of gameplay.</label>
+                            <label htmlFor='advancedFielder'> Advanced - Strong and accurate throw, reliable in all positions, and can lead aspects of gameplay.</label>
                         </span>
                     </div>
                 </div>
