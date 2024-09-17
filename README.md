@@ -15,6 +15,17 @@ With this app, users can log in, create an account, learn about the league, regi
 Admins can view league data and update existing teams. This functionality streamlines the team creation process by allowing admins to interact with the data while viewing it.
 
 ## Make a Plan
+1. First, I made wireframes to map out the functionality of the app.
+
+2. Then, I made a plan for my database.
+
+3. The first step in my creation process was to create my database, datatables, and dummy data.
+
+4. With the dummy data, I did a spike on MUI X Data Grid to make sure this would be a good resource for my League Data page. Currently, the admin can change the team each user is assigned to.
+
+5. Then, I created my Register To Play pages. To make the process as clear as possible, I used conditional rendering throughout the registration.
+
+6. After a user registers to play and the admin places them on a team, the user can see their teams on the Home page. Also on theHome page users can go to see and edit their personal information.
 
 
 ## Prerequisites
@@ -37,6 +48,8 @@ Admins can view league data and update existing teams. This functionality stream
     password: pass123
 
 ## Usage
+1. First I created wireframes to plan the functionality of my app.
+
 
 ## Built With
 - Node.js
