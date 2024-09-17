@@ -16,7 +16,7 @@ Admins can view league data and update existing teams. This functionality stream
 
 ## Make a Plan
 1. First, I made wireframes to map out the functionality of the app.
-   ![image](https://github.com/user-attachments/assets/68dd7e18-c155-4896-9baa-d4441fb726c3)
+   ![image](https://github.com/user-attachments/assets/w_300/68dd7e18-c155-4896-9baa-d4441fb726c3)
    ![image](https://github.com/user-attachments/assets/310cbfe4-6ae9-4684-8326-b6efc625142c)
    ![image](https://github.com/user-attachments/assets/1a29e241-b957-43cd-b72c-d09b3ce0d5fa)
    ![image](https://github.com/user-attachments/assets/4e17cf3b-a748-4901-806f-47616cf680d6)
