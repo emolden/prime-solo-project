@@ -265,7 +265,7 @@ function RegistrationType () {
                     {/* if a user slects 'small group' as a registration type, render the small group input on the dom */}
                     {silverRegistrationType === '2' &&
                     <div>
-                        <label htmlFor='smallGroup'> If you chose "small group", put the names of the palyers with which you are registering below.</label>
+                        <label htmlFor='smallGroup'> If you chose "small group", put the names of the players with which you are registering below.</label>
                         <input 
                             id='smallGroup'
                             value={silverSmallGroup}
