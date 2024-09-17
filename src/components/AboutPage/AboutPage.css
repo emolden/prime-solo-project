@@ -1,0 +1,19 @@
+.mission {
+    display: flex;
+    flex-direction: column;
+    
+}
+
+p {
+    text-align: center;
+}
+
+h4 {
+    text-align: center;
+}
+
+.leagues {
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 50px;
+}
