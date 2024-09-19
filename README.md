@@ -47,7 +47,7 @@ Admins can view league data and update existing teams. This functionality stream
    * I recommend using Postico to run those queries as that was used to create the queries
 5. Run `npm run server` in your terminal to start the Express server.
 6. Run `npm run client` in your terminal to start the Vite dev server (which servers the React app).
-7. Navigate to http://localhost:5173/.
+7. Navigate to http://localhost:5432/.
 8. You can login with the admin sandbox account:
     username: awalker92
     password: pass123
