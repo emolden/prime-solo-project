@@ -59,6 +59,10 @@ function ReviewAndSubmit () {
 
     return (
         <div>
+            {/*  🦄 REFACTOR
+                    current Register To Play page is bolded & 
+                    past pages are checked green 
+            */}
             <section className='registration-header'>
                 <div className='registration-section' >
                     <h6>1.</h6>
@@ -100,6 +104,7 @@ function ReviewAndSubmit () {
                     </div>
                 </div>
             </section>
+            {/*  🦄 */}
             <section className='registration-form'>
                 <h3>Review & Submit</h3>
                 <p>Please review the information below. If it is correct, hit "SUBMIT".</p>
@@ -156,6 +161,9 @@ function ReviewAndSubmit () {
                 </ol>
             </section>
             <section className='back-next-buttons'>
+                {/* 👻 REFACTOR
+                        next & back button as helper function
+                */}
                 <button className="btn" onClick={backPage}>BACK</button>
                 <button className="btn" onClick={submitRegistration}>SUBMIT</button>
             </section>

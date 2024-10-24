@@ -49,7 +49,8 @@ function RegistrationType () {
     //  team_name_input: Chaos
     //}
     const userLeagueType = useSelector(store => store.userLeagueType)
-    
+
+    // ??????????????????? 🔥Do I need useState? Should I update the reducer onChange? ????????????????????????????????
     const [silver, setSilver] = useState(false)
     const [bronze, setBronze] = useState(false)
     const [silverRegistrationType, setSilverRegistrationType] = useState('1')
@@ -73,7 +74,6 @@ function RegistrationType () {
         })
         //if the userLeagueType reducer has something in the array
         if (userLeagueType.length > 0) {
-            console.log('userLeagueType is populated')
             // loop through the userLeagueType array
             for (let league of userLeagueType) {
                 // if the league_id is 1 (Silver)
@@ -170,6 +170,10 @@ function RegistrationType () {
 
     return (
         <div>
+            {/*  🦄 REFACTOR
+                    current Register To Play page is bolded & 
+                    past pages are checked green 
+            */}
             <section className='registration-header'>
                 <div className='registration-section' >
                     <h6>1.</h6>
@@ -209,6 +213,7 @@ function RegistrationType () {
                     </div>
                 </div>
             </section>
+            {/*  🦄  */}
             <section className='registration-form'>
                 <h3 onClick={autoPopulate}>Registration Type</h3>
                 <div>
@@ -242,6 +247,7 @@ function RegistrationType () {
                         }
                 </div>
                 {/* if a user selects silver league to register, render the registration types on the dom */}
+                {/* 🍁 REFACTOR silver league registration options */}
                 {silver &&
                 <div className='silver-league'>
                     <h4>For {leagueOptions[0].name} League</h4>
@@ -310,6 +316,8 @@ function RegistrationType () {
                         </div>
                     </div>
                 </div> }
+                {/* 🍁  */}
+                {/* 🍁 REFACTOR bronze league registration options */}
                 {/* if a user selects bronze league to register, render the registration types on the dom */}
                 {bronze &&
                 <div className='bronze-league'>
@@ -372,8 +380,12 @@ function RegistrationType () {
                         </div>
                     </div>
                 </div> }
+                {/* 🍁 */}
             </section>
             <section className='back-next-buttons'>
+                {/* 👻 REFACTOR
+                        next & back button as helper function
+                */}
                 <button className="btn" onClick={backPage}>BACK</button>
                 <button className="btn" onClick={nextPage}>NEXT</button>
             </section>

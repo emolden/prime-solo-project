@@ -28,6 +28,13 @@ import RegistrationType from '../RegisterToPlay/RegistrationType/RegistrationTyp
 import SkillAndExperience from '../RegisterToPlay/SkillAndExperience/SkillAndExperience';
 import ReviewAndSubmit from '../RegisterToPlay/ReviewAndSubmit/ReviewAndSubmit';
 
+// 🦄 refactor Register to Play tracker -> new component?
+// 👻 refactor next and back buttons -> helper function?
+// 🍁 refactor section options -> new components?
+// 🔥 onChange dispatches reducer rather than updates state
+// user.id doesn't need to be sent to server -> req.user.id is accessable in the server
+// include skill descriptions in database
+
 function App() {
   const dispatch = useDispatch();
 

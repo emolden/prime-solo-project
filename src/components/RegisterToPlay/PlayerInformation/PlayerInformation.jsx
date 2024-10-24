@@ -29,6 +29,7 @@ function PlayerInformation () {
     //}
     const user = useSelector(store => store.user)
 
+    // ??????????????????? 🔥Do I need useState? Should I update the reducer onChange? ????????????????????????????????
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [phoneNumber, setPhoneNumber] = useState('')
@@ -38,7 +39,6 @@ function PlayerInformation () {
         setName(user.name);
         setEmail(user.email);
         setPhoneNumber(user.phone_number);
-        //?????????????????need to put this in the correct form?????????????????????
         setBirthdate(convertISOtoDisplayable(user.birthdate));
     }, []);
 
@@ -73,7 +73,10 @@ function PlayerInformation () {
 
     return (
         <div>
-    
+            {/*  🦄 REFACTOR
+                    current Register To Play page is bolded & 
+                    past pages are checked green 
+            */}
             <section className='registration-header'>
                 <div className='registration-section' >
                     <h6>1.</h6>
@@ -112,6 +115,7 @@ function PlayerInformation () {
                     </div>
                 </div>
             </section>
+            {/*  🦄 */}
             <section className='registration-form'>
                 <h3 onClick={autoPopulate}>Player Information</h3>
                 <form className='player-form'>
@@ -153,6 +157,9 @@ function PlayerInformation () {
                 </form>
             </section>
             <section className='back-next-buttons'>
+                {/* 👻 REFACTOR
+                        next & back button as helper function
+                */}
                 <button className="btn" onClick={backPage}>BACK</button>
                 <button className="btn" onClick={nextPage}>NEXT</button>
             </section>

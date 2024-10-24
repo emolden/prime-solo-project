@@ -10,6 +10,7 @@ function LiabilityAcknowledgment () {
     const user = useSelector(store => store.user)
 
     //stores the user's signature input as they type
+    // ??????????????????? 🔥Do I need useState? Should I update the reducer onChange? ????????????????????????????????
     const [signature, setSignature] = useState('')
 
     //useEffect sets the signature field to the conents from the database
@@ -23,7 +24,6 @@ function LiabilityAcknowledgment () {
     //and they will be brought to the player information page.
     const nextPage = () => {
 
-        // console.log('completed liability acknowledgment: ', signature);
         dispatch({
             type: 'UPDATE_LIABILITY_ACKNOWLEDGMENT',
             payload: {
@@ -41,6 +41,10 @@ function LiabilityAcknowledgment () {
 
     return (
         <div>
+            {/*  🦄 REFACTOR 
+                    current Register To Play page is bolded & 
+                    past pages are checked green 
+            */}
             <section className='registration-header'>
                 <div className='registration-section' id='current-registration-section'>
                     <h6>1.</h6>
@@ -78,6 +82,7 @@ function LiabilityAcknowledgment () {
                     </div>
                 </div>
             </section>
+            {/*  🦄  */}
             <section className='registration-form'>
                 <h3 onClick={autoPopulate}>Liability Acknowledgment</h3>
                 ------
@@ -149,6 +154,9 @@ function LiabilityAcknowledgment () {
                 />
             </section>
             <section className='next-button'>
+                {/* 👻 REFACTOR
+                        next & back button as helper function
+                */}
                 <button className="btn" onClick = {nextPage}>NEXT</button>
             </section>
         </div>
