@@ -29,6 +29,7 @@ function SkillAndExperience () {
     // userPosition is an object of the form: {id: 1, user_id: 5, position_id: 2}
     const userPosition = useSelector(store => store.userPosition)
 
+    // ??????????????????? 🔥Do I need useState? Should I update the reducer onChange? ????????????????????????????????
     const[hittingSkill, setHittingSkill] = useState('')
     const[fieldingSkill, setFieldingSkill] = useState('')
     const[position, setPosition] = useState('')
@@ -55,7 +56,6 @@ function SkillAndExperience () {
     }
 
     const nextPage = () => {
-        // console.log(hittingSkill, fieldingSkill, position, pitcher);
         //sends a dispatch to playerRegistration saga
         dispatch({
             type: 'UPDATE_SKILL_AND_EXPEREINCE',
@@ -76,6 +76,10 @@ function SkillAndExperience () {
 
     return (
         <div>
+            {/*  🦄 REFACTOR
+                    current Register To Play page is bolded & 
+                    past pages are checked green 
+            */}
             <section className='registration-header'>
                 <div className='registration-section' >
                     <h6>1.</h6>
@@ -116,9 +120,11 @@ function SkillAndExperience () {
                     </div>
                 </div>
             </section>
+            {/*  🦄 */}
             <section className='registration-form'>
                 <h3 onClick={autoPopulate}>Skill & Experience</h3>
                 <div className='skill-question'>
+                    {/* 🍁 REFACTOR hitting skill options */}
                     <p>Please rate your hitting skill:</p>
                     <div className='skill-options'>
                         <span className= 'skill-input'>
@@ -168,6 +174,7 @@ function SkillAndExperience () {
                     </div>
                 </div>
                 <div className='skill-question'>
+                    {/* 🍁 REFACTOR fielding skill options */}
                     <p>Please rate your fielding skill:</p>
                     <div className='skill-options'>
                         <span>
@@ -217,6 +224,7 @@ function SkillAndExperience () {
                     </div>
                 </div>
                 <div>
+                    {/* 🍁 REFACTOR position options */}
                     <p>Please select your position preference:</p>
                     <div className='skill-options'>
                         <span>
@@ -255,6 +263,7 @@ function SkillAndExperience () {
                     </div>
                 </div>
                 <div>
+                    {/* 🍁 REFACTOR pitching options */}
                     <p>Are you able/willing to pitch in a game?</p>
                     <div className='skill-options'>
                         <span>
@@ -283,6 +292,9 @@ function SkillAndExperience () {
                 </div>
             </section>
             <section className='back-next-buttons'>
+                {/* 👻 REFACTOR
+                        next & back button as helper function
+                */}
                 <button className="btn" onClick={backPage}>BACK</button>
                 <button className="btn" onClick={nextPage}>NEXT</button>
             </section>

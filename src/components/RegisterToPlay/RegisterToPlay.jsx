@@ -40,7 +40,7 @@ function RegisterToPlay ( ) {
                 <div className='league-details'>
                     <h3>Bronze League</h3>
                     <p>Thursday Nights</p>
-                    <p>Singel Games</p>
+                    <p>Single Games</p>
                     <p>Players of All Skill Levels</p>
                     <p>Play Level: E (Recreational)</p>
                 </div>
