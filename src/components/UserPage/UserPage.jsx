@@ -35,13 +35,15 @@ function UserPage() {
     })
   }, []);
 
+  // enters into editable form mode
   const enterEditForm = () => {
     setEditForm(!editForm);
   }
 
+  // leaves editable form mode
+  // saves the data in the database
   const leaveEditForm = () => {
     setEditForm(!editForm)
-    // console.log({name, username, email, phone, birthdate})
     //dispatch to the user saga
     dispatch({
       type: 'UPDATE_PLAYER_INFORMATION',
@@ -61,76 +63,74 @@ function UserPage() {
       <h2>Welcome, {user.username}!</h2>
       <div className="user-sections">
       <div >
-        {/* <div>
-          <img></img>
-        </div> */}
+
         <div>
-        {!editForm &&
-        <div className="user-profile">
-          <h3>User Profile</h3>
-          <p>Name: {user.name}</p>
-          <p>Username: {user.username}</p>
-          <p>Email: {user.email}</p>
-          <p>Phone Number: {user.phone_number}</p>
-          <p>Birthdate: {convertISOtoDisplayable(user.birthdate)}</p>
-          {/* need to give the user the ability to edit when button is clicked */}
-          <button className="btn" onClick={enterEditForm}>Edit Profile Info</button>
+          {/*********** user profile *****************/}
+          {!editForm &&
+            <div className="user-profile">
+              <h3>User Profile</h3>
+              <p>Name: {user.name}</p>
+              <p>Username: {user.username}</p>
+              <p>Email: {user.email}</p>
+              <p>Phone Number: {user.phone_number}</p>
+              <p>Birthdate: {convertISOtoDisplayable(user.birthdate)}</p>
+              <button className="btn" onClick={enterEditForm}>Edit Profile Info</button>
+            </div>
+          }
         </div>
-        }
-        </div>
+
         <div>
-        {editForm &&
-        <div className='edit-user-profile'>
-        <h3>User Profile</h3>
-        <span className="edit-inputs">
-        <p>Name:</p> 
-        <input
-          value = {name}
-          onChange={(e) => setName(e.target.value)} 
-        />
-        </span>
-        <span className="edit-inputs">
-        <p>Username:</p> 
-        <input
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        </span>
-        <span className="edit-inputs">
-        <p>Email:</p>
-        <input
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        </span>
-        <span className="edit-inputs">
-        <p>Phone Number:</p>
-        <input
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-        />
-        </span>
-        <span className="edit-inputs">
-        <p>Birthdate:</p>
-        <input
-          value={birthdate}
-          onChange={(e) => setBirthdate(e.target.value)}
-        />
-        </span>
-        {/* need to give the user the ability to edit when button is clicked */}
-        <button className="btn" onClick={leaveEditForm}>Save Profile Info</button>
+          {/*********** This is the editable version of the user profile *************/}
+          {editForm &&
+            <div className='edit-user-profile'>
+              <h3>User Profile</h3>
+              <span className="edit-inputs">
+                <p>Name:</p> 
+                <input
+                  value = {name}
+                  onChange={(e) => setName(e.target.value)} 
+                />
+              </span>
+              <span className="edit-inputs">
+                <p>Username:</p> 
+                <input
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              </span>
+              <span className="edit-inputs">
+                <p>Email:</p>
+                <input
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </span>
+              <span className="edit-inputs">
+                <p>Phone Number:</p>
+                <input
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                />
+              </span>
+              <span className="edit-inputs">
+                <p>Birthdate:</p>
+                <input
+                  value={birthdate}
+                  onChange={(e) => setBirthdate(e.target.value)}
+                />
+              </span>
+              <button className="btn" onClick={leaveEditForm}>Save Profile Info</button>
+            </div>
+          }
+        </div>
       </div>
-        }
-      </div>
-      </div>
+      {/*****Lists the current teams and players associated with the user *********************/}
       <div className="current-teams">
         <h3>Your Current Teams</h3>
-          {/* Will need to map through teams here */}
           {currentTeams.map((team) => {
             return(
               <div>
                 <h4>{team.teamName}</h4>
-                {/* will need to map thorugh player names here */}
                 <ol>
                   {team.players.map((player) => {
                     return (
@@ -143,8 +143,6 @@ function UserPage() {
           })}
           </div>
       </div>
-      {/* <p>Your ID is: {user.id}</p> */}
-      {/* <LogOutButton className="btn" /> */}
     </div>
   );
 }
